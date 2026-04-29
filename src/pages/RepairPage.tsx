@@ -97,7 +97,7 @@ export default function RepairPage() {
           </span>
           <h1
             ref={titleRef}
-            className="text-6xl md:text-9xl font-syne font-bold font-medium leading-[0.9] tracking-tight mb-12"
+            className="text-6xl md:text-9xl font-syne font-bold leading-[0.9] tracking-tight mb-12"
           >
             Mechanical <br />
             <span className="italic">Artistry.</span>

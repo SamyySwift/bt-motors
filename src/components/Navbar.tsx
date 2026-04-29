@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, X, Car, Search } from "lucide-react";
+import { Menu, X, Search } from "lucide-react";
 import { cn } from "../lib/utils";
 
 export default function Navbar() {

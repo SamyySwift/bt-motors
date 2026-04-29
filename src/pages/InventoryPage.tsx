@@ -3,10 +3,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import {
   X,
   SlidersHorizontal,
-  Info,
   ArrowUpRight,
   Search,
-  ChevronDown,
   Gauge,
 } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -122,8 +120,8 @@ export default function InventoryPage() {
       : inventory.filter((v) => v.make === activeFilter);
 
   return (
-    <div className="min-h-screen bg-white pt-48 pb-24 px-6 md:px-12 grainy-overlay">
-      <div className="container mx-auto max-w-7xl">
+    <div className="min-h-screen bg-white pt-48 pb-24 grainy-overlay">
+      <div className="container mx-auto max-w-[1600px] px-6 md:px-12">
         {/* Header */}
         <div className="flex flex-col md:flex-row justify-between items-end mb-24 gap-12">
           <div className="max-w-2xl">
@@ -151,90 +149,114 @@ export default function InventoryPage() {
           </div>
         </div>
 
-        {/* Filters - Apple Style Segmented */}
-        <div className="flex flex-wrap gap-3 mb-16 overflow-x-auto pb-4 no-scrollbar">
-          {[
-            "All",
-            "Porsche",
-            "McLaren",
-            "Ferrari",
-            "Lamborghini",
-            "Aston Martin",
-            "Bugatti",
-          ].map((make) => (
-            <button
-              key={make}
-              onClick={() => setActiveFilter(make)}
-              className={`px-8 py-3 rounded-full text-[10px] font-bold tracking-widest uppercase transition-all duration-500 ${
-                activeFilter === make
-                  ? "bg-bt-blue text-white shadow-xl"
-                  : "bg-f5f5f7 text-silver hover:bg-onyx hover:text-apple-black"
-              }`}
-            >
-              {make}
-            </button>
-          ))}
-        </div>
+        {/* Layout with Sidebar */}
+        <div className="flex gap-12">
+          {/* Sidebar Filters */}
+          <aside className="w-72 flex-shrink-0 sticky top-32 h-fit">
+            <div className="bg-f5f5f7/50 backdrop-blur-sm rounded-[2rem] p-8 border border-black/5">
+              <div className="flex items-center gap-3 mb-8">
+                <SlidersHorizontal size={20} className="text-bt-blue" />
+                <h3 className="text-sm font-bold tracking-widest uppercase">
+                  Filter By Make
+                </h3>
+              </div>
 
-        {/* Vehicle Grid */}
-        <main>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-            <AnimatePresence mode="popLayout">
-              {filteredInventory.map((vehicle, i) => (
-                <motion.div
-                  layout
-                  key={vehicle.id}
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.9 }}
-                  transition={{
-                    duration: 0.6,
-                    delay: i * 0.05,
-                    ease: [0.22, 1, 0.36, 1],
-                  }}
-                  className="group cursor-pointer relative interactive"
-                  onClick={() => setSelectedVehicle(vehicle)}
-                  data-cursor-text="Inspect"
-                >
-                  <div className="aspect-[4/3] rounded-[2.5rem] overflow-hidden bg-f5f5f7 mb-8 relative group-hover:shadow-2xl transition-all duration-700">
-                    <img
-                      src={vehicle.image}
-                      alt={vehicle.model}
-                      className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
-                    />
-                    <div className="absolute top-8 right-8 w-12 h-12 bg-white/90 backdrop-blur-md rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500 shadow-sm">
-                      <ArrowUpRight size={20} className="text-apple-black" />
-                    </div>
-                  </div>
+              <div className="space-y-3">
+                {[
+                  "All",
+                  "Porsche",
+                  "McLaren",
+                  "Ferrari",
+                  "Lamborghini",
+                  "Aston Martin",
+                  "Bugatti",
+                ].map((make) => (
+                  <button
+                    key={make}
+                    onClick={() => setActiveFilter(make)}
+                    className={`w-full text-left px-6 py-4 rounded-2xl text-sm font-medium transition-all duration-500 ${
+                      activeFilter === make
+                        ? "bg-bt-blue text-white shadow-lg scale-[1.02]"
+                        : "bg-white/50 text-apple-black hover:bg-white hover:shadow-md"
+                    }`}
+                  >
+                    {make}
+                    {activeFilter === make && (
+                      <span className="ml-2 inline-block w-2 h-2 bg-white rounded-full"></span>
+                    )}
+                  </button>
+                ))}
+              </div>
 
-                  <div className="px-4">
-                    <div className="flex justify-between items-start mb-4">
-                      <div>
-                        <p className="text-[10px] font-bold tracking-widest uppercase text-silver mb-1">
-                          {vehicle.make}
-                        </p>
-                        <h3 className="text-3xl font-syne font-bold tracking-tight text-apple-black">
-                          {vehicle.model}
-                        </h3>
+              <div className="mt-8 pt-8 border-t border-black/10">
+                <p className="text-xs text-silver font-medium">
+                  Showing {filteredInventory.length} of {inventory.length}{" "}
+                  vehicles
+                </p>
+              </div>
+            </div>
+          </aside>
+
+          {/* Vehicle Grid */}
+          <main className="flex-1">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+              <AnimatePresence mode="popLayout">
+                {filteredInventory.map((vehicle, i) => (
+                  <motion.div
+                    layout
+                    key={vehicle.id}
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.9 }}
+                    transition={{
+                      duration: 0.6,
+                      delay: i * 0.05,
+                      ease: [0.22, 1, 0.36, 1],
+                    }}
+                    className="group cursor-pointer relative interactive"
+                    onClick={() => setSelectedVehicle(vehicle)}
+                    data-cursor-text="Inspect"
+                  >
+                    <div className="aspect-[4/3] rounded-[2.5rem] overflow-hidden bg-f5f5f7 mb-8 relative group-hover:shadow-2xl transition-all duration-700">
+                      <img
+                        src={vehicle.image}
+                        alt={vehicle.model}
+                        className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
+                      />
+                      <div className="absolute top-8 right-8 w-12 h-12 bg-white/90 backdrop-blur-md rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500 shadow-sm">
+                        <ArrowUpRight size={20} className="text-apple-black" />
                       </div>
-                      <span className="text-xl font-syne font-bold text-apple-black/40">
-                        {vehicle.price}
-                      </span>
                     </div>
 
-                    <div className="flex items-center gap-6 text-[10px] font-bold text-silver tracking-widest uppercase pb-6 border-b border-black/[0.05]">
-                      <span>{vehicle.year}</span>
-                      <span className="w-1 h-1 bg-onyx rounded-full"></span>
-                      <span>{vehicle.mileage}</span>
-                      <span className="w-1 h-1 bg-onyx rounded-full"></span>
-                      <span>{vehicle.bodyStyle}</span>
+                    <div className="px-4">
+                      <div className="flex justify-between items-start mb-4">
+                        <div>
+                          <p className="text-[10px] font-bold tracking-widest uppercase text-silver mb-1">
+                            {vehicle.make}
+                          </p>
+                          <h3 className="text-3xl font-syne font-bold tracking-tight text-apple-black">
+                            {vehicle.model}
+                          </h3>
+                        </div>
+                        <span className="text-xl font-syne font-bold text-apple-black/40">
+                          {vehicle.price}
+                        </span>
+                      </div>
+
+                      <div className="flex items-center gap-6 text-[10px] font-bold text-silver tracking-widest uppercase pb-6 border-b border-black/[0.05]">
+                        <span>{vehicle.year}</span>
+                        <span className="w-1 h-1 bg-onyx rounded-full"></span>
+                        <span>{vehicle.mileage}</span>
+                        <span className="w-1 h-1 bg-onyx rounded-full"></span>
+                        <span>{vehicle.bodyStyle}</span>
+                      </div>
                     </div>
-                  </div>
-                </motion.div>
-              ))}
-            </AnimatePresence>
-          </div>
-        </main>
+                  </motion.div>
+                ))}
+              </AnimatePresence>
+            </div>
+          </main>
+        </div>
       </div>
 
       {/* Quick View Modal */}
