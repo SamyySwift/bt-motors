@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { MapPin, Phone, Clock, CheckCircle2, ArrowRight } from "lucide-react";
+import { MapPin, Phone, CheckCircle2, ArrowRight } from "lucide-react";
 import gsap from "gsap";
 import SplitType from "split-type";
 
