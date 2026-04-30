@@ -19,7 +19,7 @@
 
 @layer base {
   body {
-    @apply bg-white text-apple-black font-sans antialiased overflow-x-hidden selection:bg-bt-blue selection:text-white cursor-none;
+    @apply bg-white text-apple-black font-sans antialiased overflow-x-hidden selection:bg-bt-blue selection:text-white;
   }
 
   h1,

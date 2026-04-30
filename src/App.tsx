@@ -9,7 +9,6 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useEffect } from "react";
 
 import LenisProvider from "./components/LenisProvider";
-import CustomCursor from "./components/CustomCursor";
 import AmbientBackground from "./components/AmbientBackground";
 import Navbar from "./components/Navbar";
 
@@ -54,7 +53,6 @@ function App() {
   return (
     <Router>
       <LenisProvider>
-        <CustomCursor />
         <AmbientBackground />
 
         <div className="flex flex-col min-h-screen">
