@@ -57,7 +57,7 @@ const inventory = [
     id: 1,
     make: "Porsche",
     model: "911 GT3 RS",
-    price: "$225,000",
+    price: "Price on Request",
     image:
       "https://images.unsplash.com/photo-1614162692292-7ac56d7f7f1e?q=80&w=2070&auto=format&fit=crop",
   },
@@ -65,7 +65,7 @@ const inventory = [
     id: 2,
     make: "McLaren",
     model: "720S",
-    price: "$299,000",
+    price: "Price on Request",
     image:
       "https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?q=80&w=2070&auto=format&fit=crop",
   },
@@ -73,7 +73,7 @@ const inventory = [
     id: 3,
     make: "Ferrari",
     model: "F8 Tributo",
-    price: "$280,000",
+    price: "Price on Request",
     image:
       "https://images.unsplash.com/photo-1583121274602-3e2820c69888?q=80&w=2070&auto=format&fit=crop",
   },
@@ -81,7 +81,7 @@ const inventory = [
     id: 4,
     make: "Lamborghini",
     model: "Aventador SVJ",
-    price: "$517,000",
+    price: "Price on Request",
     image:
       "https://images.unsplash.com/photo-1544636331-e26879cd4d9b?q=80&w=2070&auto=format&fit=crop",
   },
@@ -89,7 +89,7 @@ const inventory = [
     id: 5,
     make: "Bugatti",
     model: "Chiron",
-    price: "$3,000,000",
+    price: "Price on Request",
     image:
       "https://images.unsplash.com/photo-1617814076367-b759c7d7e738?q=80&w=2070&auto=format&fit=crop",
   },
@@ -294,16 +294,16 @@ export default function LandingPage() {
               className="flex space-x-32 items-center text-silver/60 font-sans font-bold tracking-widest text-[9px] uppercase"
             >
               <span className="flex items-center gap-3">
-                <Star size={12} /> Certified Excellence
+                <Star size={12} /> Certified Quality
               </span>
               <span className="flex items-center gap-3">
-                <Globe size={12} /> Global Logistics
+                <Globe size={12} /> Efficient Delivery
               </span>
               <span className="flex items-center gap-3">
-                <Clock size={12} /> Bespoke Concierge
+                <Clock size={12} /> Personalized Service
               </span>
               <span className="flex items-center gap-3">
-                <ShieldCheck size={12} /> Guaranteed Provenance
+                <ShieldCheck size={12} /> Genuine Parts
               </span>
             </div>
           ))}
@@ -322,19 +322,19 @@ export default function LandingPage() {
                 transition={{ duration: 0.8, ease: "easeOut" }}
               >
                 <SectionHeading
-                  title="A legacy built on perfection."
-                  subtitle="THE HERITAGE"
+                  title="Vision & Mission."
+                  subtitle="OUR PURPOSE"
                   align="left"
                 />
               </motion.div>
 
               <CharacterReveal
-                text={`"We don't just sell cars. We curate masterpieces that bridge the gap between engineering and art."`}
+                text={`"To be a trusted and innovative automobile brand, redefining car ownership through quality vehicles, electric mobility, and world-class auto care."`}
                 className="text-2xl md:text-4xl font-syne font-bold text-apple-black leading-[1.1]"
               />
 
               <CharacterReveal
-                text={`Every vehicle that passes through our doors is treated with clinical precision and artistic reverence. We specialize in the rare, the exceptional, and the legendary.`}
+                text={`To provide exceptional value by selling quality brand-new, electric, and foreign-used vehicles, while delivering complete automotive services with integrity, innovation, and customer satisfaction at the core.`}
                 className="text-lg text-silver leading-relaxed font-medium max-w-lg"
               />
 
@@ -347,18 +347,18 @@ export default function LandingPage() {
               >
                 <div>
                   <h4 className="text-6xl font-syne font-bold text-apple-black mb-2">
-                    25+
+                    Quality
                   </h4>
                   <p className="text-[10px] text-silver font-bold tracking-[0.2em] uppercase">
-                    Years of mastery
+                    Guaranteed Selection
                   </p>
                 </div>
                 <div>
                   <h4 className="text-6xl font-syne font-bold text-apple-black mb-2">
-                    1.2k
+                    Expert
                   </h4>
                   <p className="text-[10px] text-silver font-bold tracking-[0.2em] uppercase">
-                    Legends delivered
+                    Auto Care Team
                   </p>
                 </div>
               </motion.div>
@@ -486,11 +486,11 @@ export default function LandingPage() {
                 viewport={{ once: true }}
                 className="text-[10px] font-bold tracking-[0.4em] uppercase text-silver/60 mb-6 font-geist"
               >
-                The Future of Motion
+                Our Services
               </motion.p>
               <h2 className="text-6xl font-geist font-medium tracking-tighter text-white leading-[0.9] mb-12 reveal-text">
-                Technology that makes <br />
-                the dream <span className="text-silver">possible</span>
+                Comprehensive Auto <br />
+                Care & <span className="text-silver">Sales</span>
               </h2>
 
               <MagneticButton>
@@ -503,18 +503,18 @@ export default function LandingPage() {
             <div className="lg:pl-32 space-y-12 border-l border-white/10 py-12">
               {[
                 {
-                  title: "Aerodynamic Design",
-                  desc: "Sleek lines and active elements that reduce drag and boost stability.",
+                  title: "Premium Car Sales & Imports",
+                  desc: "Brand New, Foreign Used, and Electric Cars sourced to your exact specifications.",
                   icon: <Zap size={20} />,
                 },
                 {
-                  title: "High-Performance Engines",
-                  desc: "Precision-tuned powertrains that deliver instant throttle response.",
+                  title: "Expert Servicing & Repairs",
+                  desc: "Complete car servicing, professional spraying, maintenance, and diagnostics.",
                   icon: <Gauge size={20} />,
                 },
                 {
-                  title: "Lightweight Materials",
-                  desc: "Advanced composites and alloys that cut weight without sacrificing strength.",
+                  title: "Flexible Delivery Options",
+                  desc: "Convenient pickup from our Headquarters or safe, insured delivery directly to you.",
                   icon: <Globe size={20} />,
                 },
               ].map((item, idx) => (
@@ -564,9 +564,8 @@ export default function LandingPage() {
           </MagneticButton>
         </div>
 
-        {/* Background Decorative Text */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[30vw] font-bold text-black/1 whitespace-nowrap pointer-events-none select-none uppercase font-syne">
-          BT MOTORS
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[15vw] font-bold text-black/1 whitespace-nowrap pointer-events-none select-none uppercase font-syne">
+          BEE TEE AUTOMOBILE
         </div>
       </section>
     </div>

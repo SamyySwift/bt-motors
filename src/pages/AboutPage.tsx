@@ -80,7 +80,7 @@ export default function AboutPage() {
             className="text-7xl md:text-[10vw] font-syne font-bold tracking-tighter leading-[0.85] text-center md:text-left mb-24"
           >
             About <br />
-            <span className="italic">BT.</span>
+            <span className="italic">BEE TEE.</span>
           </h1>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-24 items-center">
@@ -91,7 +91,7 @@ export default function AboutPage() {
                 is a testament to human ingenuity."
               </p>
               <p className="text-lg text-silver leading-relaxed font-medium">
-                BT Motors was founded on a simple premise: that the world's
+                BEE TEE AUTOMOBILE was founded on a simple premise: that the world's
                 finest automobiles deserve a home that matches their excellence.
                 From our clinical restoration labs to our bespoke delivery
                 logistics, every detail is engineered for perfection.
@@ -131,21 +131,18 @@ export default function AboutPage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="md:col-span-2 bg-f5f5f7 p-20 rounded-[4rem] flex flex-col justify-center">
               <h2 className="text-5xl font-syne font-bold mb-8 reveal-on-scroll">
-                The BT Heritage.
+                The BEE TEE Heritage.
               </h2>
               <p className="text-silver text-lg leading-relaxed max-w-xl">
-                Born in 2010 from a passion for racing pedigree, we have evolved
-                into a global authority on automotive provenance. Our team
-                consists of master technicians, former racers, and curators with
-                an obsessive eye for detail.
+                We are a premier automotive company dedicated to providing high-quality brand-new, foreign-used, and electric vehicles. Our expert team ensures that every vehicle we sell or service meets the highest standards of excellence and reliability.
               </p>
             </div>
             <div className="bg-bt-blue text-white p-20 rounded-[4rem] flex flex-col justify-between">
               <Heart size={48} className="text-white/20" />
               <div>
-                <h3 className="text-6xl font-syne font-bold mb-2">1,200+</h3>
+                <h3 className="text-6xl font-syne font-bold mb-2">5,000+</h3>
                 <p className="text-[10px] font-bold tracking-widest uppercase opacity-60">
-                  Legends Delivered
+                  Happy Clients
                 </p>
               </div>
             </div>
@@ -174,10 +171,10 @@ export default function AboutPage() {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex flex-col justify-end p-16">
                 <h3 className="text-3xl text-white font-syne font-bold">
-                  The Laboratory
+                  Service Center
                 </h3>
                 <p className="text-white/60 mt-4">
-                  Where every detail is verified under hospital-grade lighting.
+                  Where our expert technicians provide top-tier maintenance and repairs.
                 </p>
               </div>
             </div>
@@ -195,8 +192,8 @@ export default function AboutPage() {
                   Want to visit?
                 </h3>
                 <p className="text-silver mb-10">
-                  Our London showroom is open for private viewings by
-                  appointment only.
+                  Our showroom at PLOT 36 Wole Soyinka Way, Jahi, Abuja is open
+                  Mon - Saturdays for your visit.
                 </p>
                 <Link
                   to="/inquiry"

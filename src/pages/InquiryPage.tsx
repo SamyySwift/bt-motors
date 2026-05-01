@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { MapPin, Phone, CheckCircle2, ArrowRight } from "lucide-react";
+import { MapPin, Phone, CheckCircle2, ArrowRight, Clock } from "lucide-react";
 import gsap from "gsap";
 import SplitType from "split-type";
 
@@ -63,13 +63,13 @@ export default function InquiryPage() {
               <div className="w-12 h-12 rounded-full bg-soft-gray flex items-center justify-center mb-6 group-hover:bg-bt-blue group-hover:text-white transition-all duration-500">
                 <MapPin size={20} />
               </div>
-              <h3 className="font-syne font-bold text-xl mb-2">The Boutique</h3>
+              <h3 className="font-syne font-bold text-xl mb-2">Headquarters</h3>
               <p className="text-apple-black/50 font-light text-sm leading-relaxed">
-                1000 Exotic Way
+                PLOT 36 wole Soyinka way,
                 <br />
-                Automotive District
+                Cadestrial Zone B15,
                 <br />
-                Los Angeles, CA 90015
+                Jahi, Abuja
               </p>
             </div>
 
@@ -79,9 +79,20 @@ export default function InquiryPage() {
               </div>
               <h3 className="font-syne font-bold text-xl mb-2">Direct Line</h3>
               <p className="text-apple-black/50 font-light text-sm leading-relaxed">
-                Sales: +1 (800) 555-0199
+                Phone & WhatsApp: 09162228881 / 09077777211
                 <br />
-                Email: concierge@btmotors.com
+                Email: info@beeteeautomobile.com
+              </p>
+            </div>
+            <div className="group">
+              <div className="w-12 h-12 rounded-full bg-soft-gray flex items-center justify-center mb-6 group-hover:bg-bt-blue group-hover:text-white transition-all duration-500">
+                <Clock size={20} />
+              </div>
+              <h3 className="font-syne font-bold text-xl mb-2">Working Hours</h3>
+              <p className="text-apple-black/50 font-light text-sm leading-relaxed">
+                Mon - Saturdays
+                <br />
+                8:00 AM - 6:00 PM
               </p>
             </div>
           </div>
@@ -165,8 +176,8 @@ export default function InquiryPage() {
                         {[
                           "Acquisition",
                           "Divestment",
-                          "Master Service",
-                          "Advisory",
+                          "Car Servicing",
+                          "Spraying & Repairs",
                         ].map((interest) => (
                           <button
                             key={interest}
@@ -249,8 +260,8 @@ export default function InquiryPage() {
                       Request Sent.
                     </h3>
                     <p className="text-apple-black/60 font-light max-w-xs mx-auto">
-                      Thank you, {formData.name.split(" ")[0]}. An executive
-                      advisor will reach out to you within 24 hours.
+                      Thank you, {formData.name.split(" ")[0]}. Our representative
+                      will reach out to you within 24 hours.
                     </p>
                   </div>
                   <button

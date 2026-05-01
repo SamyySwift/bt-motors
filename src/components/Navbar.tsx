@@ -37,7 +37,7 @@ export default function Navbar() {
         <div className="container mx-auto px-8 md:px-16 flex justify-between items-center">
           {/* Logo */}
           <Link to="/" className="flex items-center z-50">
-            <img src="/logo.png" alt="BT Motors" className="h-12 w-auto" />
+            <img src="/logo.png" alt="BEE TEE AUTOMOBILE" className="h-12 w-auto" />
           </Link>
 
           {/* Desktop Nav */}
@@ -99,7 +99,7 @@ export default function Navbar() {
           onClick={() => setMenuOpen(false)}
           className="mt-8 px-10 py-4 rounded-full text-sm font-bold bg-bt-blue text-white hover:bg-bt-blue-dark transition-all"
         >
-          Contact an Advisor
+          Book Inspection
         </Link>
       </div>
     </>

@@ -10,14 +10,14 @@ const services = [
   {
     id: 1,
     number: "01",
-    title: "Bespoke Sourcing",
-    subtitle: "Global Acquisition Network",
-    desc: "Access our global network to find the rarest automotive masterpieces, from vintage legends to modern hypercars.",
+    title: "Car Sales & Imports",
+    subtitle: "Brand New, Foreign Used & Electric",
+    desc: "We provide exceptional value by selling quality brand-new, electric, and foreign-used vehicles.",
     features: [
-      "48-hour global vehicle location",
-      "Pre-purchase inspection coordination",
-      "Auction representation worldwide",
-      "Private collection access",
+      "Brand New Vehicles",
+      "Foreign Used Vehicles",
+      "Electric Vehicles",
+      "Custom Vehicle Importation",
     ],
     icon: <Globe size={28} />,
     image:
@@ -26,46 +26,46 @@ const services = [
   {
     id: 2,
     number: "02",
-    title: "Strategic Finance",
-    subtitle: "Wealth Preservation Solutions",
-    desc: "Tailored financial structures designed for high-net-worth acquisitions with absolute discretion.",
+    title: "Car Servicing",
+    subtitle: "Expert Diagnostics & Maintenance",
+    desc: "Comprehensive servicing and maintenance to ensure your vehicle remains in peak condition.",
     features: [
-      "Bespoke financing packages",
-      "International currency handling",
-      "Asset-backed lending",
-      "Tax-efficient structuring",
-    ],
-    icon: <Shield size={28} />,
-    image:
-      "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?q=80&w=2070&auto=format&fit=crop",
-  },
-  {
-    id: 3,
-    number: "03",
-    title: "Precision Detailing",
-    subtitle: "Museum-Grade Preservation",
-    desc: "Museum-grade preservation, ceramic protection, and bespoke paint correction in a clinical environment.",
-    features: [
-      "Nano-ceramic coating application",
-      "Paint correction & restoration",
-      "Interior preservation treatments",
-      "Concours-level preparation",
+      "Routine Maintenance",
+      "Computerized Diagnostics",
+      "Oil & Filter Changes",
+      "Brake Servicing",
     ],
     icon: <ShieldCheck size={28} />,
     image:
       "https://images.unsplash.com/photo-1601362840469-51e4d8d59085?q=80&w=2070&auto=format&fit=crop",
   },
   {
+    id: 3,
+    number: "03",
+    title: "Spraying & Bodywork",
+    subtitle: "Professional Auto Spraying",
+    desc: "High-quality auto spraying and body repairs to restore or enhance your vehicle's appearance.",
+    features: [
+      "Oven-Baked Spraying",
+      "Dent Repairs",
+      "Scratch Removal",
+      "Polishing & Detailing",
+    ],
+    icon: <Shield size={28} />,
+    image:
+      "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?q=80&w=2070&auto=format&fit=crop",
+  },
+  {
     id: 4,
     number: "04",
-    title: "Performance Calibration",
-    subtitle: "Engineering Excellence",
-    desc: "Engineered optimization for elite powertrains, balancing raw power with daily drivability.",
+    title: "Repairs & Maintenance",
+    subtitle: "Reliable Auto Repairs",
+    desc: "Expert mechanical and electrical repairs performed by our skilled technicians.",
     features: [
-      "ECU remapping & optimization",
-      "Exhaust system engineering",
-      "Suspension geometry tuning",
-      "Dyno-tested performance gains",
+      "Engine Repairs",
+      "Transmission Service",
+      "Electrical Repairs",
+      "Suspension & Steering",
     ],
     icon: <Zap size={28} />,
     image:
@@ -145,7 +145,7 @@ export default function ServicesPage() {
               className="text-silver text-xl max-w-3xl mx-auto leading-relaxed reveal-service"
             >
               Beyond the acquisition, we provide a holistic suite of services
-              designed to elevate and preserve your automotive legacy.
+              designed to elevate and maintain your vehicle to the highest standards.
             </motion.p>
 
             <motion.div
@@ -156,28 +156,28 @@ export default function ServicesPage() {
             >
               <div className="space-y-2">
                 <div className="text-5xl font-syne font-bold text-bt-blue">
-                  24/7
+                  10+
                 </div>
                 <p className="text-xs uppercase tracking-widest text-silver font-bold">
-                  Global Support
+                  Years of Trust
                 </p>
               </div>
               <div className="w-px h-16 bg-silver/20"></div>
               <div className="space-y-2">
                 <div className="text-5xl font-syne font-bold text-bt-blue">
-                  50+
+                  5K+
                 </div>
                 <p className="text-xs uppercase tracking-widest text-silver font-bold">
-                  Expert Specialists
+                  Happy Clients
                 </p>
               </div>
               <div className="w-px h-16 bg-silver/20"></div>
               <div className="space-y-2">
                 <div className="text-5xl font-syne font-bold text-bt-blue">
-                  15
+                  100%
                 </div>
                 <p className="text-xs uppercase tracking-widest text-silver font-bold">
-                  Countries
+                  Quality Assurance
                 </p>
               </div>
             </motion.div>

@@ -19,7 +19,7 @@ const inventory = [
     model: "911 GT3 RS",
     year: 2024,
     mileage: "500 mi",
-    price: "$225,000",
+    price: "Price on Request",
     bodyStyle: "Coupe",
     engine: "4.0L Flat-6",
     acceleration: "2.7s",
@@ -32,7 +32,7 @@ const inventory = [
     model: "720S",
     year: 2023,
     mileage: "1,200 mi",
-    price: "$299,000",
+    price: "Price on Request",
     bodyStyle: "Coupe",
     engine: "4.0L V8",
     acceleration: "2.8s",
@@ -45,7 +45,7 @@ const inventory = [
     model: "Huracan Evo",
     year: 2022,
     mileage: "3,400 mi",
-    price: "$260,000",
+    price: "Price on Request",
     bodyStyle: "Coupe",
     engine: "5.2L V10",
     acceleration: "2.9s",
@@ -58,7 +58,7 @@ const inventory = [
     model: "F8 Tributo",
     year: 2023,
     mileage: "800 mi",
-    price: "$280,000",
+    price: "Price on Request",
     bodyStyle: "Coupe",
     engine: "3.9L V8",
     acceleration: "2.9s",
@@ -71,7 +71,7 @@ const inventory = [
     model: "DBS Volante",
     year: 2024,
     mileage: "150 mi",
-    price: "$350,000",
+    price: "Price on Request",
     bodyStyle: "Convertible",
     engine: "5.2L V12",
     acceleration: "3.4s",
@@ -84,7 +84,7 @@ const inventory = [
     model: "Chiron Pur Sport",
     year: 2021,
     mileage: "4,000 mi",
-    price: "$3,500,000",
+    price: "Price on Request",
     bodyStyle: "Coupe",
     engine: "8.0L W16",
     acceleration: "2.3s",
@@ -311,7 +311,7 @@ export default function InventoryPage() {
                   <h2 className="text-5xl md:text-6xl font-syne font-bold text-apple-black mb-4 tracking-tighter">
                     {selectedVehicle.model}
                   </h2>
-                  <div className="text-3xl font-syne font-bold text-apple-black mb-12">
+                  <div className="text-xl font-syne font-bold text-apple-black mb-12">
                     {selectedVehicle.price}
                   </div>
 
@@ -354,7 +354,7 @@ export default function InventoryPage() {
                     Experience the pinnacle of {selectedVehicle.make}{" "}
                     engineering. This {selectedVehicle.model} represents a
                     perfect marriage of performance and luxury, meticulously
-                    maintained and certified by BT Motors.
+                    maintained and certified by BEE TEE AUTOMOBILE.
                   </p>
                 </div>
 
@@ -364,12 +364,15 @@ export default function InventoryPage() {
                       to="/inquiry"
                       className="w-full py-6 bg-bt-blue text-white text-center rounded-full font-bold uppercase text-[10px] tracking-[0.2em] hover:bg-bt-blue-dark transition-all shadow-xl"
                     >
-                      Request Private Showing
+                      Request Information
                     </Link>
                   </MagneticButton>
-                  <button className="w-full py-6 text-center border border-bt-blue/30 text-apple-black rounded-full font-bold uppercase text-[10px] tracking-[0.2em] hover:bg-bt-blue hover:text-white hover:border-bt-blue transition-all">
-                    Calculate Financing
-                  </button>
+                  <Link
+                    to="/inquiry"
+                    className="w-full py-6 text-center border border-bt-blue/30 text-apple-black rounded-full font-bold uppercase text-[10px] tracking-[0.2em] hover:bg-bt-blue hover:text-white hover:border-bt-blue transition-all"
+                  >
+                    Contact Sales Advisor
+                  </Link>
                 </div>
               </div>
             </motion.div>
