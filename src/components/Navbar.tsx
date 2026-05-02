@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X, Search } from "lucide-react";
 import { cn } from "../lib/utils";
