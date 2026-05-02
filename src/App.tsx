@@ -3,7 +3,6 @@ import {
   Routes,
   Route,
   useLocation,
-  Link,
 } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect } from "react";

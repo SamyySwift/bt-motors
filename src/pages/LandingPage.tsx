@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import SplitType from "split-type";
@@ -30,7 +30,13 @@ const CharacterReveal = ({
   const ref = useRef<HTMLParagraphElement>(null);
   const { scrollYProgress } = useScroll({
     target: ref,
-    offset: ["start 0.8", "start 0.3"],
+    offset: ["start 0.9", "start 0.4"],
+  });
+
+  const smoothProgress = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001
   });
 
   const characters = text.split("");
@@ -40,7 +46,7 @@ const CharacterReveal = ({
       {characters.map((char, index) => {
         const start = index / characters.length;
         const end = start + 1 / characters.length;
-        const opacity = useTransform(scrollYProgress, [start, end], [0.2, 1]);
+        const opacity = useTransform(smoothProgress, [start, end], [0.1, 1]);
 
         return (
           <motion.span key={index} style={{ opacity }}>
@@ -52,48 +58,7 @@ const CharacterReveal = ({
   );
 };
 
-const inventory = [
-  {
-    id: 1,
-    make: "Porsche",
-    model: "911 GT3 RS",
-    price: "Price on Request",
-    image:
-      "https://images.unsplash.com/photo-1614162692292-7ac56d7f7f1e?q=80&w=2070&auto=format&fit=crop",
-  },
-  {
-    id: 2,
-    make: "McLaren",
-    model: "720S",
-    price: "Price on Request",
-    image:
-      "https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?q=80&w=2070&auto=format&fit=crop",
-  },
-  {
-    id: 3,
-    make: "Ferrari",
-    model: "F8 Tributo",
-    price: "Price on Request",
-    image:
-      "https://images.unsplash.com/photo-1583121274602-3e2820c69888?q=80&w=2070&auto=format&fit=crop",
-  },
-  {
-    id: 4,
-    make: "Lamborghini",
-    model: "Aventador SVJ",
-    price: "Price on Request",
-    image:
-      "https://images.unsplash.com/photo-1544636331-e26879cd4d9b?q=80&w=2070&auto=format&fit=crop",
-  },
-  {
-    id: 5,
-    make: "Bugatti",
-    model: "Chiron",
-    price: "Price on Request",
-    image:
-      "https://images.unsplash.com/photo-1617814076367-b759c7d7e738?q=80&w=2070&auto=format&fit=crop",
-  },
-];
+import { inventory } from "../data/inventory";
 
 export default function LandingPage() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -108,8 +73,14 @@ export default function LandingPage() {
     offset: ["start start", "end start"],
   });
 
-  const heroOpacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
-  const heroScale = useTransform(scrollYProgress, [0, 1], [1, 0.9]);
+  const smoothScrollY = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001,
+  });
+
+  const heroOpacity = useTransform(smoothScrollY, [0, 0.5], [1, 0]);
+  const heroScale = useTransform(smoothScrollY, [0, 1], [1, 0.9]);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -123,13 +94,19 @@ export default function LandingPage() {
     offset: ["start end", "end start"],
   });
 
+  const smoothInnovationProgress = useSpring(innovationProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001,
+  });
+
   const innovationImgY = useTransform(
-    innovationProgress,
+    smoothInnovationProgress,
     [0, 1],
     ["-20%", "20%"],
   );
   const innovationBorderRadius = useTransform(
-    innovationProgress,
+    smoothInnovationProgress,
     [0, 0.5],
     ["0rem", "5rem"],
   );
@@ -169,7 +146,7 @@ export default function LandingPage() {
             trigger: boutiqueRef.current,
             start: "top top",
             end: () => `+=${boutiqueWidth}`,
-            scrub: 1,
+            scrub: 2.5,
             pin: true,
             invalidateOnRefresh: true,
           },
@@ -185,7 +162,7 @@ export default function LandingPage() {
             trigger: img,
             start: "top bottom",
             end: "bottom top",
-            scrub: true,
+            scrub: 1.5,
           },
         });
       });
@@ -234,7 +211,7 @@ export default function LandingPage() {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1 }}
-            className="text-[10px] font-bold tracking-[0.5em] uppercase text-silver mb-8"
+            className="text-[10px] font-bold tracking-[0.5em] uppercase text-white mb-8"
           >
             THE PINNACLE OF AUTOMOTIVE MASTERY
           </motion.p>
@@ -408,28 +385,40 @@ export default function LandingPage() {
                 className="min-w-[450px] group interactive"
                 data-cursor-text="View"
               >
-                <div className="aspect-[4/5] bg-f5f5f7 rounded-[3rem] overflow-hidden mb-8 relative group-hover:shadow-2xl transition-all duration-700">
+                <div className="aspect-[4/5] bg-f5f5f7 rounded-[3rem] overflow-hidden mb-8 relative group-hover:shadow-[0_30px_60px_rgba(0,0,0,0.12)] transition-all duration-700">
                   <img
                     src={car.image}
                     alt={car.model}
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000"
                   />
-                  <div className="absolute top-8 right-8 w-12 h-12 bg-white rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                    <ArrowUpRight size={20} className="text-apple-black" />
+                  
+                  {/* Condition Badge */}
+                  <div className="absolute top-8 left-8 px-5 py-2.5 rounded-full bg-white/90 backdrop-blur-md text-[10px] font-bold uppercase tracking-[0.2em] text-apple-black z-10">
+                    {car.condition}
                   </div>
+
+                  <div className="absolute top-8 right-8 w-12 h-12 bg-white/90 backdrop-blur-md rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500 shadow-sm z-10">
+                    <ArrowUpRight size={22} className="text-apple-black" />
+                  </div>
+
+                  {/* Visual Gradient Bottom */}
+                  <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
                 </div>
+                
                 <div className="flex justify-between items-end px-4">
                   <div>
-                    <h4 className="text-2xl font-bold tracking-tight mb-1">
-                      {car.make} {car.model}
-                    </h4>
-                    <p className="text-silver text-xs font-bold uppercase tracking-widest">
-                      Premium Collection
+                    <p className="text-[10px] font-bold tracking-[0.4em] uppercase text-silver mb-3">
+                      {car.make}
                     </p>
+                    <h4 className="text-3xl font-syne font-bold tracking-tight mb-1">
+                      {car.model}
+                    </h4>
                   </div>
-                  <span className="text-xl font-syne font-bold text-apple-black">
-                    {car.price}
-                  </span>
+                  <div className="text-right">
+                    <span className="text-xl font-syne font-bold text-bt-blue">
+                      {car.price}
+                    </span>
+                  </div>
                 </div>
               </div>
             ))}
@@ -469,7 +458,7 @@ export default function LandingPage() {
             className="absolute inset-0 scale-125"
           >
             <img
-              src="/premium auto.png"
+              src="/avatr2.jpg"
               alt="Premium Automotive Detail"
               className="w-full h-full object-cover brightness-[0.7]"
             />
@@ -480,17 +469,9 @@ export default function LandingPage() {
         <div className="container mx-auto px-6 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
             <div className="max-w-4xl">
-              <motion.p
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                className="text-[10px] font-bold tracking-[0.4em] uppercase text-silver/60 mb-6 font-geist"
-              >
-                Our Services
-              </motion.p>
-              <h2 className="text-6xl font-geist font-medium tracking-tighter text-white leading-[0.9] mb-12 reveal-text">
-                Comprehensive Auto <br />
-                Care & <span className="text-silver">Sales</span>
+              <h2 className="text-5xl font-geist font-medium tracking-tighter text-white leading-[0.9] mb-12 reveal-text">
+                Premium cars that <br />
+                meet every expectation
               </h2>
 
               <MagneticButton>
@@ -528,7 +509,7 @@ export default function LandingPage() {
                 >
                   <div className="flex items-center gap-4 text-white/40 mb-3 group-hover:text-white transition-colors">
                     {item.icon}
-                    <h4 className="text-[10px] font-bold tracking-[0.2em] uppercase">
+                    <h4 className="text-[10px] text-white font-bold tracking-[0.2em] uppercase">
                       {item.title}
                     </h4>
                   </div>

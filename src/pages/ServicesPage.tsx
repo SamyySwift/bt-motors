@@ -21,7 +21,7 @@ const services = [
     ],
     icon: <Globe size={28} />,
     image:
-      "https://images.unsplash.com/photo-1542282088-fe8426682b8f?q=80&w=2070&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1552519507-da3b142c6e3d?q=80&w=2070&auto=format&fit=crop",
   },
   {
     id: 2,
@@ -37,7 +37,7 @@ const services = [
     ],
     icon: <ShieldCheck size={28} />,
     image:
-      "https://images.unsplash.com/photo-1601362840469-51e4d8d59085?q=80&w=2070&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1530046339160-ce3e5b0c7a2f?q=80&w=2070&auto=format&fit=crop",
   },
   {
     id: 3,
@@ -53,7 +53,7 @@ const services = [
     ],
     icon: <Shield size={28} />,
     image:
-      "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?q=80&w=2070&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1599256621730-535171e28e50?q=80&w=2070&auto=format&fit=crop",
   },
   {
     id: 4,

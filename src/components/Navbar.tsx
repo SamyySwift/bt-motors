@@ -1,20 +1,37 @@
 import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X, Search } from "lucide-react";
 import { cn } from "../lib/utils";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
+  const [visible, setVisible] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
   const [menuOpen, setMenuOpen] = useState(false);
   const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
+      const currentScrollY = window.scrollY;
+      
+      if (currentScrollY < 10) {
+        setVisible(true);
+      } else if (currentScrollY > lastScrollY) {
+        // Scrolling down -> Show (as per user request)
+        setVisible(true);
+      } else if (currentScrollY < lastScrollY) {
+        // Scrolling up -> Hide (as per user request)
+        setVisible(false);
+      }
+      
+      setLastScrollY(currentScrollY);
+      setScrolled(currentScrollY > 50);
     };
-    window.addEventListener("scroll", handleScroll);
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [lastScrollY]);
 
   const navLinks = [
     { name: "CAR", path: "/inventory" },
@@ -26,9 +43,12 @@ export default function Navbar() {
 
   return (
     <>
-      <nav
+      <motion.nav
+        initial={{ y: 0 }}
+        animate={{ y: visible ? 0 : -100 }}
+        transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
         className={cn(
-          "fixed top-0 left-0 right-0 z-50 transition-all duration-500",
+          "fixed top-0 left-0 right-0 z-50",
           scrolled
             ? "py-4 bg-white/70 backdrop-blur-md border-b border-black/[0.03]"
             : "py-8",
@@ -73,7 +93,7 @@ export default function Navbar() {
             {menuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>
-      </nav>
+      </motion.nav>
 
       {/* Mobile Menu */}
       <div

@@ -12,86 +12,7 @@ import gsap from "gsap";
 import SplitType from "split-type";
 import MagneticButton from "../components/MagneticButton";
 
-const inventory = [
-  {
-    id: 1,
-    make: "Porsche",
-    model: "911 GT3 RS",
-    year: 2024,
-    mileage: "500 mi",
-    price: "Price on Request",
-    bodyStyle: "Coupe",
-    engine: "4.0L Flat-6",
-    acceleration: "2.7s",
-    image:
-      "https://images.unsplash.com/photo-1614162692292-7ac56d7f7f1e?q=80&w=2070&auto=format&fit=crop",
-  },
-  {
-    id: 2,
-    make: "McLaren",
-    model: "720S",
-    year: 2023,
-    mileage: "1,200 mi",
-    price: "Price on Request",
-    bodyStyle: "Coupe",
-    engine: "4.0L V8",
-    acceleration: "2.8s",
-    image:
-      "https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?q=80&w=2070&auto=format&fit=crop",
-  },
-  {
-    id: 3,
-    make: "Lamborghini",
-    model: "Huracan Evo",
-    year: 2022,
-    mileage: "3,400 mi",
-    price: "Price on Request",
-    bodyStyle: "Coupe",
-    engine: "5.2L V10",
-    acceleration: "2.9s",
-    image:
-      "https://images.unsplash.com/photo-1544829099-b9a0c07fad1a?q=80&w=2071&auto=format&fit=crop",
-  },
-  {
-    id: 4,
-    make: "Ferrari",
-    model: "F8 Tributo",
-    year: 2023,
-    mileage: "800 mi",
-    price: "Price on Request",
-    bodyStyle: "Coupe",
-    engine: "3.9L V8",
-    acceleration: "2.9s",
-    image:
-      "https://images.unsplash.com/photo-1583121274602-3e2820c69888?q=80&w=2070&auto=format&fit=crop",
-  },
-  {
-    id: 5,
-    make: "Aston Martin",
-    model: "DBS Volante",
-    year: 2024,
-    mileage: "150 mi",
-    price: "Price on Request",
-    bodyStyle: "Convertible",
-    engine: "5.2L V12",
-    acceleration: "3.4s",
-    image:
-      "https://images.unsplash.com/photo-1617814076367-b759c7d7e738?q=80&w=2070&auto=format&fit=crop",
-  },
-  {
-    id: 6,
-    make: "Bugatti",
-    model: "Chiron Pur Sport",
-    year: 2021,
-    mileage: "4,000 mi",
-    price: "Price on Request",
-    bodyStyle: "Coupe",
-    engine: "8.0L W16",
-    acceleration: "2.3s",
-    image:
-      "https://images.unsplash.com/photo-1600712242805-5f78671b24da?q=80&w=2070&auto=format&fit=crop",
-  },
-];
+import { inventory } from "../data/inventory";
 
 type Vehicle = (typeof inventory)[0];
 
@@ -169,7 +90,7 @@ export default function InventoryPage() {
                   "Ferrari",
                   "Lamborghini",
                   "Aston Martin",
-                  "Bugatti",
+                  "Tesla",
                 ].map((make) => (
                   <button
                     key={make}
@@ -217,37 +138,64 @@ export default function InventoryPage() {
                     onClick={() => setSelectedVehicle(vehicle)}
                     data-cursor-text="Inspect"
                   >
-                    <div className="aspect-[4/3] rounded-[2.5rem] overflow-hidden bg-f5f5f7 mb-8 relative group-hover:shadow-2xl transition-all duration-700">
+                    <div className="aspect-[4/3] rounded-[2.5rem] overflow-hidden bg-f5f5f7 mb-8 relative group-hover:shadow-[0_20px_50px_rgba(0,0,0,0.1)] transition-all duration-700">
                       <img
                         src={vehicle.image}
                         alt={vehicle.model}
                         className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
                       />
-                      <div className="absolute top-8 right-8 w-12 h-12 bg-white/90 backdrop-blur-md rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500 shadow-sm">
-                        <ArrowUpRight size={20} className="text-apple-black" />
+                      
+                      {/* Condition Badge */}
+                      <div className="absolute top-6 left-6 px-4 py-2 rounded-full bg-white/90 backdrop-blur-md text-[9px] font-bold uppercase tracking-widest text-apple-black z-10">
+                        {vehicle.condition}
+                      </div>
+
+                      {/* Specs Overlay - Awwwards Level */}
+                      <div className="absolute inset-0 bg-bt-blue/80 opacity-0 group-hover:opacity-100 transition-all duration-500 flex flex-col justify-end p-10 transform translate-y-4 group-hover:translate-y-0">
+                        <div className="grid grid-cols-2 gap-6 text-white">
+                          <div>
+                            <p className="text-[8px] uppercase tracking-widest text-white/50 mb-1">Engine</p>
+                            <p className="text-sm font-bold truncate">{vehicle.engine}</p>
+                          </div>
+                          <div>
+                            <p className="text-[8px] uppercase tracking-widest text-white/50 mb-1">0-60</p>
+                            <p className="text-sm font-bold">{vehicle.acceleration}</p>
+                          </div>
+                        </div>
+                        <div className="mt-6 pt-6 border-t border-white/10 flex justify-between items-center">
+                          <span className="text-[10px] font-bold uppercase tracking-widest">View Specs</span>
+                          <ArrowUpRight size={20} />
+                        </div>
+                      </div>
+
+                      <div className="absolute top-6 right-6 w-10 h-10 bg-white/90 backdrop-blur-md rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500 shadow-sm z-10">
+                        <ArrowUpRight size={18} className="text-apple-black" />
                       </div>
                     </div>
 
-                    <div className="px-4">
-                      <div className="flex justify-between items-start mb-4">
+                    <div className="px-2">
+                      <div className="flex justify-between items-end mb-4">
                         <div>
-                          <p className="text-[10px] font-bold tracking-widest uppercase text-silver mb-1">
+                          <p className="text-[9px] font-bold tracking-[0.3em] uppercase text-silver mb-2">
                             {vehicle.make}
                           </p>
                           <h3 className="text-3xl font-syne font-bold tracking-tight text-apple-black">
                             {vehicle.model}
                           </h3>
                         </div>
-                        <span className="text-xl font-syne font-bold text-apple-black/40">
-                          {vehicle.price}
-                        </span>
+                        <div className="text-right">
+                          <p className="text-[9px] font-bold tracking-widest uppercase text-silver mb-1">{vehicle.fuel}</p>
+                          <p className="text-lg font-syne font-bold text-bt-blue">
+                            {vehicle.price}
+                          </p>
+                        </div>
                       </div>
 
-                      <div className="flex items-center gap-6 text-[10px] font-bold text-silver tracking-widest uppercase pb-6 border-b border-black/[0.05]">
+                      <div className="flex items-center gap-4 text-[9px] font-bold text-silver/60 tracking-[0.2em] uppercase pt-4 border-t border-black/[0.03]">
                         <span>{vehicle.year}</span>
-                        <span className="w-1 h-1 bg-onyx rounded-full"></span>
+                        <div className="w-1 h-1 bg-silver/30 rounded-full" />
                         <span>{vehicle.mileage}</span>
-                        <span className="w-1 h-1 bg-onyx rounded-full"></span>
+                        <div className="w-1 h-1 bg-silver/30 rounded-full" />
                         <span>{vehicle.bodyStyle}</span>
                       </div>
                     </div>
@@ -318,17 +266,17 @@ export default function InventoryPage() {
                   <div className="grid grid-cols-2 gap-x-12 gap-y-8 mb-16">
                     <div>
                       <p className="text-[10px] font-bold text-silver uppercase tracking-widest mb-2 flex items-center gap-2">
-                        <Gauge size={12} /> Acceleration
+                        <Gauge size={12} className="text-bt-blue" /> Acceleration
                       </p>
-                      <p className="text-xl font-medium">
-                        {selectedVehicle.acceleration} (0-60)
+                      <p className="text-2xl font-syne font-bold text-apple-black">
+                        {selectedVehicle.acceleration} <span className="text-xs text-silver font-sans">(0-60)</span>
                       </p>
                     </div>
                     <div>
                       <p className="text-[10px] font-bold text-silver uppercase tracking-widest mb-2">
                         Engine
                       </p>
-                      <p className="text-xl font-medium">
+                      <p className="text-2xl font-syne font-bold text-apple-black">
                         {selectedVehicle.engine}
                       </p>
                     </div>
@@ -336,16 +284,16 @@ export default function InventoryPage() {
                       <p className="text-[10px] font-bold text-silver uppercase tracking-widest mb-2">
                         Mileage
                       </p>
-                      <p className="text-xl font-medium">
+                      <p className="text-2xl font-syne font-bold text-apple-black">
                         {selectedVehicle.mileage}
                       </p>
                     </div>
                     <div>
                       <p className="text-[10px] font-bold text-silver uppercase tracking-widest mb-2">
-                        Year
+                        Condition
                       </p>
-                      <p className="text-xl font-medium">
-                        {selectedVehicle.year}
+                      <p className="text-2xl font-syne font-bold text-apple-black">
+                        {selectedVehicle.condition}
                       </p>
                     </div>
                   </div>
