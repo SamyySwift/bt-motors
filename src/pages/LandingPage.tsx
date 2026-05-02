@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
-import { motion, useScroll, useTransform, useSpring } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import SplitType from "split-type";
@@ -30,13 +30,7 @@ const CharacterReveal = ({
   const ref = useRef<HTMLParagraphElement>(null);
   const { scrollYProgress } = useScroll({
     target: ref,
-    offset: ["start 0.9", "start 0.4"],
-  });
-
-  const smoothProgress = useSpring(scrollYProgress, {
-    stiffness: 100,
-    damping: 30,
-    restDelta: 0.001
+    offset: ["start 0.8", "start 0.3"],
   });
 
   const characters = text.split("");
@@ -46,7 +40,7 @@ const CharacterReveal = ({
       {characters.map((char, index) => {
         const start = index / characters.length;
         const end = start + 1 / characters.length;
-        const opacity = useTransform(smoothProgress, [start, end], [0.1, 1]);
+        const opacity = useTransform(scrollYProgress, [start, end], [0.2, 1]);
 
         return (
           <motion.span key={index} style={{ opacity }}>
@@ -73,14 +67,8 @@ export default function LandingPage() {
     offset: ["start start", "end start"],
   });
 
-  const smoothScrollY = useSpring(scrollYProgress, {
-    stiffness: 100,
-    damping: 30,
-    restDelta: 0.001,
-  });
-
-  const heroOpacity = useTransform(smoothScrollY, [0, 0.5], [1, 0]);
-  const heroScale = useTransform(smoothScrollY, [0, 1], [1, 0.9]);
+  const heroOpacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
+  const heroScale = useTransform(scrollYProgress, [0, 1], [1, 0.9]);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -94,19 +82,13 @@ export default function LandingPage() {
     offset: ["start end", "end start"],
   });
 
-  const smoothInnovationProgress = useSpring(innovationProgress, {
-    stiffness: 100,
-    damping: 30,
-    restDelta: 0.001,
-  });
-
   const innovationImgY = useTransform(
-    smoothInnovationProgress,
+    innovationProgress,
     [0, 1],
     ["-20%", "20%"],
   );
   const innovationBorderRadius = useTransform(
-    smoothInnovationProgress,
+    innovationProgress,
     [0, 0.5],
     ["0rem", "5rem"],
   );
@@ -146,7 +128,7 @@ export default function LandingPage() {
             trigger: boutiqueRef.current,
             start: "top top",
             end: () => `+=${boutiqueWidth}`,
-            scrub: 2.5,
+            scrub: 1,
             pin: true,
             invalidateOnRefresh: true,
           },
@@ -162,7 +144,7 @@ export default function LandingPage() {
             trigger: img,
             start: "top bottom",
             end: "bottom top",
-            scrub: 1.5,
+            scrub: true,
           },
         });
       });
@@ -471,7 +453,7 @@ export default function LandingPage() {
             <div className="max-w-4xl">
               <h2 className="text-5xl font-geist font-medium tracking-tighter text-white leading-[0.9] mb-12 reveal-text">
                 Premium cars that <br />
-                meet every expectation
+                meets every expectation
               </h2>
 
               <MagneticButton>
