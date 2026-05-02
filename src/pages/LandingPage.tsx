@@ -60,6 +60,7 @@ export default function LandingPage() {
   const boutiqueRef = useRef<HTMLDivElement>(null);
   const boutiqueContentRef = useRef<HTMLDivElement>(null);
   const innovationRef = useRef<HTMLDivElement>(null);
+  const servicesRef = useRef<HTMLDivElement>(null);
   const [currentCarIndex, setCurrentCarIndex] = useState(0);
 
   const { scrollYProgress } = useScroll({
@@ -148,6 +149,53 @@ export default function LandingPage() {
           },
         });
       });
+      
+      // Sticky Stacking Services
+      if (servicesRef.current) {
+        const cards = gsap.utils.toArray(".service-card");
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: servicesRef.current,
+            start: "top top",
+            end: () => `+=${cards.length * 100}%`,
+            pin: true,
+            scrub: 1,
+            invalidateOnRefresh: true,
+          },
+        });
+
+        cards.forEach((card: any, i: number) => {
+          // Initial state: hidden and below
+          gsap.set(card, {
+            yPercent: 150,
+            opacity: 0,
+            scale: 0.8,
+            rotate: 10,
+          });
+
+          // Animation for the card coming in
+          tl.to(card, {
+            yPercent: 0,
+            opacity: 1,
+            scale: 1,
+            rotate: 0,
+            ease: "power3.out",
+            duration: 1,
+          }, i);
+
+          // Animation for the card already in, as the NEXT card comes in
+          if (i < cards.length - 1) {
+            tl.to(card, {
+              scale: 0.95,
+              yPercent: -15,
+              opacity: 0.5,
+              filter: "blur(4px)",
+              ease: "none",
+              duration: 1,
+            }, i + 0.8);
+          }
+        });
+      }
     });
 
     return () => ctx.revert();
@@ -328,12 +376,12 @@ export default function LandingPage() {
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: false, amount: 0.3 }}
               transition={{ duration: 1, ease: "easeOut" }}
-              className="relative aspect-square rounded-[4rem] overflow-hidden bg-white shadow-2xl"
+              className="relative aspect-square rounded-[4rem] overflow-hidden shadow-2xl"
             >
               <img
-                src="https://images.unsplash.com/photo-1614162692292-7ac56d7f7f1e?q=80&w=1200&auto=format&fit=crop"
+                src="/garage.jpg"
                 alt="Craftsmanship"
-                className="parallax-img w-full h-full object-cover scale-110"
+                className="w-full h-full object-cover scale-110"
               />
             </motion.div>
           </div>
@@ -448,60 +496,136 @@ export default function LandingPage() {
           </motion.div>
         </motion.div>
 
-        <div className="container mx-auto px-6 relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
-            <div className="max-w-4xl">
-              <h2 className="text-5xl font-geist font-medium tracking-tighter text-white leading-[0.9] mb-12 reveal-text">
-                Premium cars that <br />
-                meets every expectation
-              </h2>
+        <div className="container mx-auto px-6 relative z-10 text-center">
+          <div className="max-w-5xl mx-auto">
+            <h2 className="text-[clamp(3.5rem,10vw,8rem)] font-syne font-bold tracking-tighter text-white leading-[0.85] mb-16 reveal-text">
+              Performance <br />
+              meets <span className="text-white/20 italic">pure</span> <br />
+              perfection.
+            </h2>
 
-              <MagneticButton>
-                <button className="px-12 py-5 bg-bt-blue text-white rounded-full font-bold text-xs tracking-widest uppercase transition-all hover:bg-bt-blue-dark interactive shadow-2xl">
-                  Explore
-                </button>
-              </MagneticButton>
-            </div>
-
-            <div className="lg:pl-32 space-y-12 border-l border-white/10 py-12">
-              {[
-                {
-                  title: "Premium Car Sales & Imports",
-                  desc: "Brand New, Foreign Used, and Electric Cars sourced to your exact specifications.",
-                  icon: <Zap size={20} />,
-                },
-                {
-                  title: "Expert Servicing & Repairs",
-                  desc: "Complete car servicing, professional spraying, maintenance, and diagnostics.",
-                  icon: <Gauge size={20} />,
-                },
-                {
-                  title: "Flexible Delivery Options",
-                  desc: "Convenient pickup from our Headquarters or safe, insured delivery directly to you.",
-                  icon: <Globe size={20} />,
-                },
-              ].map((item, idx) => (
-                <motion.div
-                  key={idx}
-                  initial={{ opacity: 0, x: 50 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: idx * 0.2 }}
-                  className="group"
-                >
-                  <div className="flex items-center gap-4 text-white/40 mb-3 group-hover:text-white transition-colors">
-                    {item.icon}
-                    <h4 className="text-[10px] text-white font-bold tracking-[0.2em] uppercase">
-                      {item.title}
-                    </h4>
+            <MagneticButton>
+              <button className="px-16 py-8 bg-bt-blue text-white rounded-full font-bold text-xs tracking-widest uppercase transition-all hover:bg-bt-blue-dark interactive shadow-2xl shadow-bt-blue/30">
+                Discover Innovation
+              </button>
+            </MagneticButton>
+          </div>
+        </div>
+      </section>
+      
+      {/* Services Section */}
+      <section ref={servicesRef} className="bg-apple-black relative overflow-hidden">
+        <div className="min-h-screen flex items-center justify-center py-24 relative overflow-hidden">
+          <div className="container mx-auto px-6 relative z-10">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-24 items-start h-full">
+              {/* Left Side: Sticky Info */}
+              <div className="lg:sticky lg:top-24">
+                <p className="text-[10px] font-bold tracking-[0.5em] uppercase text-bt-blue mb-6">
+                  THE FULL SPECTRUM
+                </p>
+                <h2 className="text-5xl md:text-8xl font-syne font-bold text-white tracking-tighter leading-[0.85] reveal-text mb-12">
+                  World-Class <br />
+                  Automotive <br />
+                  Solutions.
+                </h2>
+                <p className="text-silver/40 text-lg max-w-sm leading-relaxed mb-12">
+                  From the initial sourcing to long-term maintenance, we ensure every aspect of your journey is handled with absolute precision.
+                </p>
+                
+                <div className="flex items-center gap-6">
+                  <div className="flex -space-x-4">
+                    {[1, 2, 3].map((i) => (
+                      <div key={i} className="w-12 h-12 rounded-full border-2 border-apple-black bg-bt-blue/20 flex items-center justify-center text-bt-blue font-bold text-xs backdrop-blur-sm">
+                        0{i}
+                      </div>
+                    ))}
                   </div>
-                  <p className="text-silver/80 text-lg font-medium leading-relaxed max-w-sm">
-                    {item.desc}
-                  </p>
-                </motion.div>
-              ))}
+                  <span className="text-[10px] font-bold tracking-widest text-silver/60 uppercase">
+                    Scroll to Explore
+                  </span>
+                </div>
+              </div>
+
+              {/* Right Side: Stacking Cards */}
+              <div className="relative pt-24 lg:pt-0 min-h-[600px]">
+                <div className="grid grid-cols-1 grid-rows-1 w-full h-full">
+                  {[
+                    {
+                      title: "Premium Car Sales & Imports",
+                      desc: "Brand New, Foreign Used, and Electric Cars sourced to your exact specifications.",
+                      icon: <Zap size={24} />,
+                      accent: "from-blue-500/20",
+                    },
+                    {
+                      title: "Expert Servicing & Repairs",
+                      desc: "Complete car servicing, professional spraying, maintenance, and diagnostics.",
+                      icon: <Gauge size={24} />,
+                      accent: "from-purple-500/20",
+                    },
+                    {
+                      title: "Flexible Delivery Options",
+                      desc: "Convenient pickup from our Headquarters or safe, insured delivery directly to you.",
+                      icon: <Globe size={24} />,
+                      accent: "from-emerald-500/20",
+                    },
+                  ].map((service, idx) => (
+                    <div
+                      key={idx}
+                      className="service-card col-start-1 row-start-1 group relative p-12 rounded-[3.5rem] bg-[#1a1a1c]/40 border border-white/10 hover:border-bt-blue/50 transition-all duration-700 interactive overflow-hidden backdrop-blur-3xl shadow-[0_50px_100px_-20px_rgba(0,0,0,0.8)]"
+                      style={{ 
+                        zIndex: idx,
+                      }}
+                    >
+                      {/* Decorative Background Glow */}
+                      <div className={`absolute -inset-24 bg-gradient-to-br ${service.accent} to-transparent opacity-0 group-hover:opacity-40 blur-[100px] transition-opacity duration-1000`} />
+                      
+                      {/* Index Number Background */}
+                      <div className="absolute -right-12 -top-12 text-[18rem] font-syne font-extrabold text-white/[0.02] group-hover:text-bt-blue/[0.05] transition-all duration-1000 pointer-events-none select-none tracking-tighter">
+                        0{idx + 1}
+                      </div>
+                      
+                      <div className="relative z-10 h-full flex flex-col justify-between">
+                        <div>
+                          <div className="w-24 h-24 rounded-[2rem] bg-white/5 flex items-center justify-center text-white/40 group-hover:bg-bt-blue group-hover:text-white group-hover:rotate-[360deg] transition-all duration-1000 mb-16 shadow-2xl border border-white/10 relative overflow-hidden">
+                            <div className="absolute inset-0 bg-gradient-to-tr from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                            {service.icon}
+                          </div>
+                          
+                          <h4 className="text-5xl font-syne font-bold text-white mb-8 tracking-tighter group-hover:text-bt-blue transition-colors duration-500 leading-tight">
+                            {service.title}
+                          </h4>
+                          <p className="text-silver/60 text-xl leading-relaxed group-hover:text-white transition-colors duration-500 max-w-md font-medium">
+                            {service.desc}
+                          </p>
+                        </div>
+
+                        <div className="mt-20 flex items-center justify-between">
+                          <div className="flex flex-col">
+                            <span className="text-[10px] font-bold tracking-[0.5em] uppercase text-silver/30 group-hover:text-bt-blue transition-colors mb-2">
+                              SERVICE DIVISION
+                            </span>
+                            <span className="text-xs font-syne font-bold text-white/20 uppercase tracking-widest">
+                              BEE TEE AUTOMOBILE
+                            </span>
+                          </div>
+                          <div className="w-16 h-16 rounded-full border border-white/10 flex items-center justify-center text-white group-hover:bg-white group-hover:text-apple-black group-hover:scale-110 transition-all duration-500 shadow-xl">
+                            <ArrowRight size={24} />
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Animated Border Bottom */}
+                      <div className="absolute bottom-0 left-0 h-2 bg-gradient-to-r from-bt-blue via-purple-500 to-bt-blue w-0 group-hover:w-full transition-all duration-1000 ease-in-out" />
+                    </div>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
+          
+          {/* Background Accents */}
+          <div className="absolute top-0 right-0 w-1/2 h-1/2 bg-bt-blue/5 blur-[160px] rounded-full -translate-y-1/2 translate-x-1/2 pointer-events-none" />
+          <div className="absolute bottom-0 left-0 w-1/2 h-1/2 bg-bt-blue/5 blur-[160px] rounded-full translate-y-1/2 -translate-x-1/2 pointer-events-none" />
         </div>
       </section>
 
