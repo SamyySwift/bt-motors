@@ -17,6 +17,7 @@ import {
 } from "lucide-react";
 import SectionHeading from "../components/SectionHeading";
 import MagneticButton from "../components/MagneticButton";
+import WhyBT from "../components/WhyBT";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -388,6 +389,9 @@ export default function LandingPage() {
         </div>
       </section>
 
+      {/* Philosophy Section */}
+      <WhyBT />
+
       {/* Horizontal Lineup Section */}
       <section
         ref={boutiqueRef}
@@ -521,7 +525,7 @@ export default function LandingPage() {
               {/* Left Side: Sticky Info */}
               <div className="lg:sticky lg:top-24">
                 <p className="text-[10px] font-bold tracking-[0.5em] uppercase text-bt-blue mb-6">
-                  THE FULL SPECTRUM
+                  OUR SERVICES
                 </p>
                 <h2 className="text-5xl md:text-8xl font-syne font-bold text-white tracking-tighter leading-[0.85] reveal-text mb-12">
                   World-Class <br />
