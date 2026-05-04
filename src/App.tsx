@@ -7,7 +7,7 @@ import {
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect } from "react";
 
-import LenisProvider from "./components/LenisProvider";
+// import LenisProvider from "./components/LenisProvider";
 import AmbientBackground from "./components/AmbientBackground";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
