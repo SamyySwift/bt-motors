@@ -15,9 +15,11 @@ import {
   Zap,
   Gauge,
 } from "lucide-react";
+import { cn } from "../lib/utils";
 import SectionHeading from "../components/SectionHeading";
 import MagneticButton from "../components/MagneticButton";
 import WhyBT from "../components/WhyBT";
+import { useMobile } from "../hooks/useMobile";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -63,6 +65,7 @@ export default function LandingPage() {
   const innovationRef = useRef<HTMLDivElement>(null);
   const servicesRef = useRef<HTMLDivElement>(null);
   const [currentCarIndex, setCurrentCarIndex] = useState(0);
+  const isMobile = useMobile();
 
   const { scrollYProgress } = useScroll({
     target: heroRef,
@@ -118,8 +121,8 @@ export default function LandingPage() {
         });
       });
 
-      // Horizontal Scroll for Boutique
-      if (boutiqueRef.current && boutiqueContentRef.current) {
+      // Horizontal Scroll for Boutique - Only on Desktop
+      if (boutiqueRef.current && boutiqueContentRef.current && !isMobile) {
         const boutiqueWidth = boutiqueContentRef.current.scrollWidth;
         const windowWidth = window.innerWidth;
 
@@ -151,8 +154,8 @@ export default function LandingPage() {
         });
       });
       
-      // Sticky Stacking Services
-      if (servicesRef.current) {
+      // Sticky Stacking Services - Only on Desktop
+      if (servicesRef.current && !isMobile) {
         const cards = gsap.utils.toArray(".service-card");
         const tl = gsap.timeline({
           scrollTrigger: {
@@ -200,14 +203,14 @@ export default function LandingPage() {
     });
 
     return () => ctx.revert();
-  }, []);
+  }, [isMobile]);
 
   return (
     <div ref={containerRef} className="bg-white grainy-overlay">
       {/* Hero Content Section */}
       <section
         ref={heroRef}
-        className="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden bg-dark-charcoal"
+        className="relative min-h-screen flex items-center justify-center overflow-hidden bg-dark-charcoal"
       >
         <motion.div
           className="absolute inset-0 z-0 overflow-hidden"
@@ -227,9 +230,9 @@ export default function LandingPage() {
               <motion.img
                 src={car.image}
                 alt={`${car.make} ${car.model}`}
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover object-[center_90%] md:object-bottom"
                 animate={{
-                  scale: currentCarIndex === index ? 1 : 1.1,
+                  scale: currentCarIndex === index ? 1 : 1.05,
                 }}
                 transition={{ duration: 1.5, ease: "easeInOut" }}
               />
@@ -237,26 +240,17 @@ export default function LandingPage() {
           ))}
         </motion.div>
 
-        <div className="container mx-auto z-10 text-center px-6">
-          <motion.p
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1 }}
-            className="text-[10px] font-bold tracking-[0.5em] uppercase text-white mb-8"
-          >
-            THE PINNACLE OF AUTOMOTIVE MASTERY
-          </motion.p>
-
-          <h1 className="text-[clamp(3.5rem,10vw,10rem)] text-white/80 font-syne font-bold tracking-tighter leading-[0.85] mb-16 select-none reveal-text">
+        <div className="container mx-auto z-10 text-center px-6 pt-24 md:pt-0">
+          <h1 className="text-[clamp(2.5rem,11vw,10rem)] text-white font-syne font-bold tracking-tighter leading-[0.85] mb-8 md:mb-16 select-none reveal-text">
             Crafting the <br />
-            <span className="text-white/80">Ultimate</span> Standard.
+            <span className="text-white">Ultimate</span> Standard.
           </h1>
 
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-10">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-6 md:gap-10">
             <MagneticButton>
               <Link
                 to="/inventory"
-                className="px-14 py-6 rounded-full bg-bt-blue text-white font-bold text-xs tracking-widest uppercase transition-all hover:bg-bt-blue-dark interactive shadow-2xl shadow-bt-blue/20"
+                className="w-full sm:w-auto px-10 md:px-14 py-5 md:py-6 rounded-full bg-bt-blue text-white font-bold text-[10px] md:text-xs tracking-widest uppercase transition-all hover:bg-bt-blue-dark interactive shadow-2xl shadow-bt-blue/20"
                 data-cursor-text="Explore"
               >
                 View Collection
@@ -264,15 +258,15 @@ export default function LandingPage() {
             </MagneticButton>
 
             <MagneticButton>
-              <button
-                className="group flex items-center gap-4 px-8 py-6 rounded-full border-2 border-white/30 text-white text-xs font-bold tracking-widest uppercase hover:bg-white hover:text-apple-black transition-all duration-500 interactive backdrop-blur-sm"
+              <Link to="/about"
+                className="group flex items-center gap-4 px-8 py-3 rounded-full border-2 border-white/30 text-white text-[10px] md:text-xs font-bold tracking-widest uppercase hover:bg-white hover:text-apple-black transition-all duration-500 interactive backdrop-blur-sm"
                 data-cursor-text="Play"
               >
-                <span className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center group-hover:bg-bt-blue group-hover:text-white transition-all duration-500">
-                  <Play className="w-4 h-4 fill-current" />
+                <span className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-white/10 flex items-center justify-center group-hover:bg-bt-blue group-hover:text-white transition-all duration-500">
+                  <Play className="w-3 h-3 md:w-4 md:h-4 fill-current" />
                 </span>
                 The Vision
-              </button>
+              </Link>
             </MagneticButton>
           </div>
         </div>
@@ -280,26 +274,32 @@ export default function LandingPage() {
         <motion.div
           animate={{ y: [0, 15, 0] }}
           transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-4"
+          className="absolute bottom-8 md:bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 md:gap-4"
         >
-          <span className="text-[10px] font-bold tracking-widest uppercase text-silver/40">
+          <span className="text-[9px] md:text-[10px] font-bold tracking-widest uppercase text-silver/40">
             Scroll
           </span>
-          <div className="w-[1px] h-12 bg-gradient-to-b from-black/20 to-transparent" />
+          <div className="w-[1px] h-8 md:h-12 bg-gradient-to-b from-black/20 to-transparent" />
         </motion.div>
       </section>
 
       {/* Trust Ticker - Minimalist */}
-      <div className="w-full bg-white py-12 overflow-hidden relative z-10 border-y border-black/[0.03]">
+      <div className="w-full bg-white py-8 md:py-12 overflow-hidden relative z-10 border-y border-black/[0.03]">
         <motion.div
           animate={{ x: ["0%", "-50%"] }}
           transition={{ ease: "linear", duration: 45, repeat: Infinity }}
-          className="flex whitespace-nowrap space-x-32 px-8 items-center"
+          className={cn(
+            "flex whitespace-nowrap items-center",
+            isMobile ? "space-x-12 px-4" : "space-x-32 px-8"
+          )}
         >
           {[...Array(2)].map((_, i) => (
             <div
               key={i}
-              className="flex space-x-32 items-center text-silver/60 font-sans font-bold tracking-widest text-[9px] uppercase"
+              className={cn(
+                "flex items-center text-silver/60 font-sans font-bold tracking-widest text-[9px] uppercase",
+                isMobile ? "space-x-12" : "space-x-32"
+              )}
             >
               <span className="flex items-center gap-3">
                 <Star size={12} /> Certified Quality
@@ -319,10 +319,10 @@ export default function LandingPage() {
       </div>
 
       {/* Narrative Section - Legacy */}
-      <section className="py-48 px-6 bg-f5f5f7 relative overflow-hidden rounded-[5rem] mx-6">
+      <section className="py-24 md:py-48 px-6 bg-f5f5f7 relative overflow-hidden rounded-[2.5rem] md:rounded-[5rem] mx-2 md:mx-6">
         <div className="container mx-auto max-w-7xl">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-32 items-center">
-            <div className="space-y-12">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-32 items-center">
+            <div className="space-y-6 md:space-y-12">
               <motion.div
                 initial={{ opacity: 0, y: 40 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -343,7 +343,7 @@ export default function LandingPage() {
 
               <CharacterReveal
                 text={`To provide exceptional value by selling quality brand-new, electric, and foreign-used vehicles, while delivering complete automotive services with integrity, innovation, and customer satisfaction at the core.`}
-                className="text-lg text-silver leading-relaxed font-medium max-w-lg"
+                className="text-base md:text-lg text-silver leading-relaxed font-medium max-w-lg"
               />
 
               <motion.div
@@ -351,21 +351,21 @@ export default function LandingPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: false, amount: 0.5 }}
                 transition={{ duration: 0.8, delay: 0.6, ease: "easeOut" }}
-                className="flex gap-16 pt-8"
+                className="flex flex-wrap gap-8 md:gap-16 pt-4 md:pt-8"
               >
                 <div>
-                  <h4 className="text-6xl font-syne font-bold text-apple-black mb-2">
+                  <h4 className="text-3xl md:text-6xl font-syne font-bold text-apple-black mb-1 md:mb-2">
                     Quality
                   </h4>
-                  <p className="text-[10px] text-silver font-bold tracking-[0.2em] uppercase">
+                  <p className="text-[9px] md:text-[10px] text-silver font-bold tracking-[0.2em] uppercase">
                     Guaranteed Selection
                   </p>
                 </div>
                 <div>
-                  <h4 className="text-6xl font-syne font-bold text-apple-black mb-2">
+                  <h4 className="text-3xl md:text-6xl font-syne font-bold text-apple-black mb-1 md:mb-2">
                     Expert
                   </h4>
-                  <p className="text-[10px] text-silver font-bold tracking-[0.2em] uppercase">
+                  <p className="text-[9px] md:text-[10px] text-silver font-bold tracking-[0.2em] uppercase">
                     Auto Care Team
                   </p>
                 </div>
@@ -377,7 +377,7 @@ export default function LandingPage() {
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: false, amount: 0.3 }}
               transition={{ duration: 1, ease: "easeOut" }}
-              className="relative aspect-square rounded-[4rem] overflow-hidden shadow-2xl"
+              className="relative aspect-[4/3] md:aspect-square rounded-[1.5rem] md:rounded-[4rem] overflow-hidden shadow-2xl"
             >
               <img
                 src="/garage.jpg"
@@ -395,15 +395,15 @@ export default function LandingPage() {
       {/* Horizontal Lineup Section */}
       <section
         ref={boutiqueRef}
-        className="h-screen bg-white overflow-hidden flex items-center"
+        className="h-auto md:h-screen bg-white overflow-hidden flex items-center py-20 md:py-0"
       >
         <div className="w-full">
-          <div className="container mx-auto px-6 mb-16 flex justify-between items-end">
+          <div className="container mx-auto px-6 mb-10 md:mb-16 flex justify-between items-end">
             <div>
-              <p className="text-[10px] font-bold tracking-[0.4em] uppercase text-silver mb-4">
+              <p className="text-[10px] font-bold tracking-[0.4em] uppercase text-silver mb-3 md:mb-4">
                 Curated Fleet
               </p>
-              <h2 className="text-6xl md:text-8xl font-syne font-bold tracking-tighter reveal-text">
+              <h2 className="text-4xl md:text-8xl font-syne font-bold tracking-tighter reveal-text">
                 The Showroom.
               </h2>
             </div>
@@ -411,15 +411,21 @@ export default function LandingPage() {
 
           <div
             ref={boutiqueContentRef}
-            className="flex gap-12 px-6 cursor-grab active:cursor-grabbing"
+            className={cn(
+              "flex px-6 cursor-grab active:cursor-grabbing",
+              isMobile ? "flex-col gap-10" : "flex-row gap-12"
+            )}
           >
-            {inventory.map((car) => (
+            {(isMobile ? inventory.slice(0, 6) : inventory).map((car) => (
               <div
                 key={car.id}
-                className="min-w-[450px] group interactive"
+                className={cn(
+                  "group interactive",
+                  isMobile ? "w-full" : "min-w-[450px]"
+                )}
                 data-cursor-text="View"
               >
-                <div className="aspect-[4/5] bg-f5f5f7 rounded-[3rem] overflow-hidden mb-8 relative group-hover:shadow-[0_30px_60px_rgba(0,0,0,0.12)] transition-all duration-700">
+                <div className="aspect-[4/5] bg-f5f5f7 rounded-[1.5rem] md:rounded-[3rem] overflow-hidden mb-6 md:mb-8 relative group-hover:shadow-[0_30px_60px_rgba(0,0,0,0.12)] transition-all duration-700">
                   <img
                     src={car.image}
                     alt={car.model}
@@ -427,29 +433,29 @@ export default function LandingPage() {
                   />
                   
                   {/* Condition Badge */}
-                  <div className="absolute top-8 left-8 px-5 py-2.5 rounded-full bg-white/90 backdrop-blur-md text-[10px] font-bold uppercase tracking-[0.2em] text-apple-black z-10">
+                  <div className="absolute top-5 left-5 md:top-8 md:left-8 px-3.5 py-1.5 md:px-5 md:py-2.5 rounded-full bg-white/90 backdrop-blur-md text-[8px] md:text-[10px] font-bold uppercase tracking-[0.2em] text-apple-black z-10">
                     {car.condition}
                   </div>
 
-                  <div className="absolute top-8 right-8 w-12 h-12 bg-white/90 backdrop-blur-md rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500 shadow-sm z-10">
-                    <ArrowUpRight size={22} className="text-apple-black" />
+                  <div className="absolute top-5 right-5 md:top-8 md:right-8 w-9 h-9 md:w-12 md:h-12 bg-white/90 backdrop-blur-md rounded-full flex items-center justify-center opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-500 shadow-sm z-10">
+                    <ArrowUpRight size={18} className="text-apple-black" />
                   </div>
 
                   {/* Visual Gradient Bottom */}
                   <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
                 </div>
                 
-                <div className="flex justify-between items-end px-4">
+                <div className="flex justify-between items-end px-2 md:px-4">
                   <div>
-                    <p className="text-[10px] font-bold tracking-[0.4em] uppercase text-silver mb-3">
+                    <p className="text-[8px] md:text-[10px] font-bold tracking-[0.4em] uppercase text-silver mb-2 md:mb-3">
                       {car.make}
                     </p>
-                    <h4 className="text-3xl font-syne font-bold tracking-tight mb-1">
+                    <h4 className="text-xl md:text-3xl font-syne font-bold tracking-tight mb-1">
                       {car.model}
                     </h4>
                   </div>
                   <div className="text-right">
-                    <span className="text-xl font-syne font-bold text-bt-blue">
+                    <span className="text-base md:text-xl font-syne font-bold text-bt-blue">
                       {car.price}
                     </span>
                   </div>
@@ -457,17 +463,20 @@ export default function LandingPage() {
               </div>
             ))}
 
-            <div className="min-w-[450px] flex items-center justify-center">
+            <div className={cn(
+              "flex items-center justify-center",
+              isMobile ? "w-full pt-6" : "min-w-[450px]"
+            )}>
               <MagneticButton>
                 <Link to="/inventory">
                   <div
-                    className="w-48 h-48 rounded-full border border-bt-blue/30 flex flex-col items-center justify-center gap-2 hover:bg-bt-blue hover:text-white transition-all duration-700 interactive"
+                    className="w-32 h-32 md:w-48 md:h-48 rounded-full border border-bt-blue/30 flex flex-col items-center justify-center gap-2 hover:bg-bt-blue hover:text-white transition-all duration-700 interactive"
                     data-cursor-text="Explore"
                   >
-                    <span className="text-[10px] font-bold tracking-[0.3em] uppercase">
+                    <span className="text-[9px] md:text-[10px] font-bold tracking-[0.3em] uppercase">
                       View All
                     </span>
-                    <ArrowRight size={16} />
+                    <ArrowRight size={14} md:size={16} />
                   </div>
                 </Link>
               </MagneticButton>
@@ -478,17 +487,17 @@ export default function LandingPage() {
 
       <section
         ref={innovationRef}
-        className="relative h-[120vh] overflow-hidden flex items-center justify-center w-full"
+        className="relative h-[70vh] md:h-[120vh] overflow-hidden flex items-center justify-center w-full"
       >
         <motion.div
           style={{
-            borderTopLeftRadius: innovationBorderRadius,
-            borderTopRightRadius: innovationBorderRadius,
+            borderTopLeftRadius: isMobile ? "2rem" : innovationBorderRadius,
+            borderTopRightRadius: isMobile ? "2rem" : innovationBorderRadius,
           }}
           className="absolute inset-0 bg-dark-charcoal overflow-hidden"
         >
           <motion.div
-            style={{ y: innovationImgY }}
+            style={{ y: isMobile ? 0 : innovationImgY }}
             className="absolute inset-0 scale-125"
           >
             <img
@@ -502,14 +511,14 @@ export default function LandingPage() {
 
         <div className="container mx-auto px-6 relative z-10 text-center">
           <div className="max-w-5xl mx-auto">
-            <h2 className="text-[clamp(3.5rem,10vw,8rem)] font-syne font-bold tracking-tighter text-white leading-[0.85] mb-16 reveal-text">
+            <h2 className="text-[clamp(2.25rem,8vw,8rem)] font-syne font-bold tracking-tighter text-white leading-[0.85] mb-8 md:mb-16 reveal-text">
               Performance <br />
               meets <span className="text-white/20 italic">pure</span> <br />
               perfection.
             </h2>
 
             <MagneticButton>
-              <button className="px-16 py-8 bg-bt-blue text-white rounded-full font-bold text-xs tracking-widest uppercase transition-all hover:bg-bt-blue-dark interactive shadow-2xl shadow-bt-blue/30">
+              <button className="px-8 py-5 md:px-16 md:py-8 bg-bt-blue text-white rounded-full font-bold text-[9px] md:text-xs tracking-widest uppercase transition-all hover:bg-bt-blue-dark interactive shadow-2xl shadow-bt-blue/30">
                 Discover Innovation
               </button>
             </MagneticButton>
@@ -519,40 +528,43 @@ export default function LandingPage() {
       
       {/* Services Section */}
       <section ref={servicesRef} className="bg-apple-black relative overflow-hidden">
-        <div className="min-h-screen flex items-center justify-center py-24 relative overflow-hidden">
+        <div className="min-h-screen flex items-center justify-center py-16 md:py-24 relative overflow-hidden">
           <div className="container mx-auto px-6 relative z-10">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-24 items-start h-full">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-24 items-start h-full">
               {/* Left Side: Sticky Info */}
               <div className="lg:sticky lg:top-24">
-                <p className="text-[10px] font-bold tracking-[0.5em] uppercase text-bt-blue mb-6">
+                <p className="text-[9px] md:text-[10px] font-bold tracking-[0.5em] uppercase text-bt-blue mb-4 md:6">
                   OUR SERVICES
                 </p>
-                <h2 className="text-5xl md:text-8xl font-syne font-bold text-white tracking-tighter leading-[0.85] reveal-text mb-12">
+                <h2 className="text-4xl md:text-8xl font-syne font-bold text-white tracking-tighter leading-[0.85] reveal-text mb-8 md:mb-12">
                   World-Class <br />
                   Automotive <br />
                   Solutions.
                 </h2>
-                <p className="text-silver/40 text-lg max-w-sm leading-relaxed mb-12">
+                <p className="text-silver/40 text-sm md:text-lg max-w-sm leading-relaxed mb-8 md:mb-12">
                   From the initial sourcing to long-term maintenance, we ensure every aspect of your journey is handled with absolute precision.
                 </p>
                 
                 <div className="flex items-center gap-6">
                   <div className="flex -space-x-4">
                     {[1, 2, 3].map((i) => (
-                      <div key={i} className="w-12 h-12 rounded-full border-2 border-apple-black bg-bt-blue/20 flex items-center justify-center text-bt-blue font-bold text-xs backdrop-blur-sm">
+                      <div key={i} className="w-8 h-8 md:w-12 md:h-12 rounded-full border-2 border-apple-black bg-bt-blue/20 flex items-center justify-center text-bt-blue font-bold text-[9px] md:text-xs backdrop-blur-sm">
                         0{i}
                       </div>
                     ))}
                   </div>
-                  <span className="text-[10px] font-bold tracking-widest text-silver/60 uppercase">
-                    Scroll to Explore
+                  <span className="text-[9px] md:text-[10px] font-bold tracking-widest text-silver/60 uppercase">
+                    {isMobile ? "Discover Our Expertise" : "Scroll to Explore"}
                   </span>
                 </div>
               </div>
 
               {/* Right Side: Stacking Cards */}
-              <div className="relative pt-24 lg:pt-0 min-h-[600px]">
-                <div className="grid grid-cols-1 grid-rows-1 w-full h-full">
+              <div className="relative pt-6 md:pt-24 lg:pt-0 min-h-[400px] md:min-h-[600px]">
+                <div className={cn(
+                  "grid grid-cols-1 w-full h-full",
+                  isMobile ? "gap-6" : "grid-rows-1"
+                )}>
                   {[
                     {
                       title: "Premium Car Sales & Imports",
@@ -575,7 +587,10 @@ export default function LandingPage() {
                   ].map((service, idx) => (
                     <div
                       key={idx}
-                      className="service-card col-start-1 row-start-1 group relative p-12 rounded-[3.5rem] bg-[#1a1a1c]/40 border border-white/10 hover:border-bt-blue/50 transition-all duration-700 interactive overflow-hidden backdrop-blur-3xl shadow-[0_50px_100px_-20px_rgba(0,0,0,0.8)]"
+                      className={cn(
+                        "service-card group relative p-8 md:p-12 rounded-[2rem] md:rounded-[3.5rem] bg-[#1a1a1c]/40 border border-white/10 hover:border-bt-blue/50 transition-all duration-700 interactive overflow-hidden backdrop-blur-3xl shadow-[0_50px_100px_-20px_rgba(0,0,0,0.8)]",
+                        !isMobile && "col-start-1 row-start-1"
+                      )}
                       style={{ 
                         zIndex: idx,
                       }}
@@ -584,42 +599,42 @@ export default function LandingPage() {
                       <div className={`absolute -inset-24 bg-gradient-to-br ${service.accent} to-transparent opacity-0 group-hover:opacity-40 blur-[100px] transition-opacity duration-1000`} />
                       
                       {/* Index Number Background */}
-                      <div className="absolute -right-12 -top-12 text-[18rem] font-syne font-extrabold text-white/[0.02] group-hover:text-bt-blue/[0.05] transition-all duration-1000 pointer-events-none select-none tracking-tighter">
+                      <div className="absolute -right-8 -top-8 text-[8rem] md:text-[18rem] font-syne font-extrabold text-white/[0.02] group-hover:text-bt-blue/[0.05] transition-all duration-1000 pointer-events-none select-none tracking-tighter">
                         0{idx + 1}
                       </div>
                       
                       <div className="relative z-10 h-full flex flex-col justify-between">
                         <div>
-                          <div className="w-24 h-24 rounded-[2rem] bg-white/5 flex items-center justify-center text-white/40 group-hover:bg-bt-blue group-hover:text-white group-hover:rotate-[360deg] transition-all duration-1000 mb-16 shadow-2xl border border-white/10 relative overflow-hidden">
+                          <div className="w-16 h-16 md:w-24 md:h-24 rounded-[1.2rem] md:rounded-[2rem] bg-white/5 flex items-center justify-center text-white/40 group-hover:bg-bt-blue group-hover:text-white group-hover:rotate-[360deg] transition-all duration-1000 mb-8 md:mb-16 shadow-2xl border border-white/10 relative overflow-hidden">
                             <div className="absolute inset-0 bg-gradient-to-tr from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
                             {service.icon}
                           </div>
                           
-                          <h4 className="text-5xl font-syne font-bold text-white mb-8 tracking-tighter group-hover:text-bt-blue transition-colors duration-500 leading-tight">
+                          <h4 className="text-3xl md:text-5xl font-syne font-bold text-white mb-4 md:mb-8 tracking-tighter group-hover:text-bt-blue transition-colors duration-500 leading-[1.1]">
                             {service.title}
                           </h4>
-                          <p className="text-silver/60 text-xl leading-relaxed group-hover:text-white transition-colors duration-500 max-w-md font-medium">
+                          <p className="text-silver/60 text-base md:text-xl leading-relaxed group-hover:text-white transition-colors duration-500 max-w-md font-medium">
                             {service.desc}
                           </p>
                         </div>
 
-                        <div className="mt-20 flex items-center justify-between">
+                        <div className="mt-8 md:mt-20 flex items-center justify-between">
                           <div className="flex flex-col">
-                            <span className="text-[10px] font-bold tracking-[0.5em] uppercase text-silver/30 group-hover:text-bt-blue transition-colors mb-2">
+                            <span className="text-[8px] md:text-[10px] font-bold tracking-[0.5em] uppercase text-silver/30 group-hover:text-bt-blue transition-colors mb-2">
                               SERVICE DIVISION
                             </span>
-                            <span className="text-xs font-syne font-bold text-white/20 uppercase tracking-widest">
+                            <span className="text-[9px] md:text-xs font-syne font-bold text-white/20 uppercase tracking-widest">
                               BEE TEE AUTOMOBILE
                             </span>
                           </div>
-                          <div className="w-16 h-16 rounded-full border border-white/10 flex items-center justify-center text-white group-hover:bg-white group-hover:text-apple-black group-hover:scale-110 transition-all duration-500 shadow-xl">
-                            <ArrowRight size={24} />
+                          <div className="w-12 h-12 md:w-16 md:h-16 rounded-full border border-white/10 flex items-center justify-center text-white group-hover:bg-white group-hover:text-apple-black group-hover:scale-110 transition-all duration-500 shadow-xl">
+                            <ArrowRight size={18} />
                           </div>
                         </div>
                       </div>
 
                       {/* Animated Border Bottom */}
-                      <div className="absolute bottom-0 left-0 h-2 bg-gradient-to-r from-bt-blue via-purple-500 to-bt-blue w-0 group-hover:w-full transition-all duration-1000 ease-in-out" />
+                      <div className="absolute bottom-0 left-0 h-1 bg-gradient-to-r from-bt-blue via-purple-500 to-bt-blue w-0 group-hover:w-full transition-all duration-1000 ease-in-out" />
                     </div>
                   ))}
                 </div>
@@ -634,12 +649,12 @@ export default function LandingPage() {
       </section>
 
       {/* Final CTA */}
-      <section className="py-64 bg-white relative overflow-hidden">
+      <section className="py-32 md:py-64 bg-white relative overflow-hidden">
         <div className="container mx-auto px-6 text-center relative z-10">
-          <p className="text-[10px] font-bold tracking-[0.5em] uppercase text-silver mb-12">
+          <p className="text-[9px] md:text-[10px] font-bold tracking-[0.5em] uppercase text-silver mb-8 md:mb-12">
             THE NEXT CHAPTER
           </p>
-          <h2 className="text-[clamp(3.5rem,10vw,10rem)] leading-[0.85] font-syne font-bold tracking-tighter mb-20 select-none reveal-text">
+          <h2 className="text-[clamp(2.5rem,12vw,10rem)] leading-[0.85] font-syne font-bold tracking-tighter mb-12 md:mb-20 select-none reveal-text">
             Your Legend <br />
             Starts Beyond.
           </h2>
@@ -647,7 +662,7 @@ export default function LandingPage() {
           <MagneticButton>
             <Link
               to="/inquiry"
-              className="px-20 py-8 bg-bt-blue text-white rounded-full font-bold text-xs tracking-widest uppercase transition-all hover:bg-bt-blue-dark interactive shadow-2xl shadow-bt-blue/30"
+              className="px-12 py-6 md:px-20 md:py-8 bg-bt-blue text-white rounded-full font-bold text-[10px] md:text-xs tracking-widest uppercase transition-all hover:bg-bt-blue-dark interactive shadow-2xl shadow-bt-blue/30"
               data-cursor-text="Contact"
             >
               Start Conversation
@@ -655,7 +670,7 @@ export default function LandingPage() {
           </MagneticButton>
         </div>
 
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[15vw] font-bold text-black/1 whitespace-nowrap pointer-events-none select-none uppercase font-syne">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[12vw] font-bold text-black/[0.02] whitespace-nowrap pointer-events-none select-none uppercase font-syne">
           BEE TEE AUTOMOBILE
         </div>
       </section>

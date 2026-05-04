@@ -77,7 +77,7 @@ export default function AboutPage() {
           </p>
           <h1
             ref={heroHeadingRef}
-            className="text-7xl md:text-[10vw] font-syne font-bold tracking-tighter leading-[0.85] text-center md:text-left mb-24"
+            className="text-7xl md:text-[8vw] font-syne font-bold tracking-tighter leading-[0.85] text-center md:text-left mb-24"
           >
             About <br />
             <span className="italic">BEE TEE.</span>
@@ -118,7 +118,7 @@ export default function AboutPage() {
 
             <div className="relative aspect-[4/5] rounded-[4rem] overflow-hidden order-1 md:order-2 shadow-2xl">
               <img
-                src="https://images.unsplash.com/photo-1562426509-5044a121aa49?q=80&w=2070&auto=format&fit=crop"
+                src="/IMG_6374.jpg"
                 alt="Showroom"
                 className="w-full h-full object-cover parallax-about scale-110"
               />
@@ -165,7 +165,7 @@ export default function AboutPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 h-[120vh]">
             <div className="relative rounded-[4rem] overflow-hidden group shadow-xl">
               <img
-                src="https://images.unsplash.com/photo-1605810230434-7631ac76ec81?q=80&w=2070&auto=format&fit=crop"
+                src="/IMG_7810.jpg"
                 alt="Technical"
                 className="w-full h-full object-cover parallax-about scale-110"
               />
@@ -181,7 +181,7 @@ export default function AboutPage() {
             <div className="grid grid-rows-2 gap-8">
               <div className="relative rounded-[4rem] overflow-hidden group shadow-xl">
                 <img
-                  src="https://images.unsplash.com/photo-1611821064430-0d402209f3e4?q=80&w=1974&auto=format&fit=crop"
+                  src="/IMG_6373.jpg"
                   alt="Lounge"
                   className="w-full h-full object-cover"
                 />
@@ -214,7 +214,7 @@ export default function AboutPage() {
           </h2>
           <div className="mt-12 w-20 h-[1px] bg-apple-black/10 mx-auto"></div>
           <p className="mt-8 text-[10px] font-bold tracking-[0.4em] uppercase text-silver">
-            Samuel Swift, Founder
+            BEE TEE AUTOMOBILE
           </p>
         </section>
       </div>

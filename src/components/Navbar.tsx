@@ -109,7 +109,7 @@ export default function Navbar() {
             key={navItem.name}
             to={navItem.path}
             onClick={() => setMenuOpen(false)}
-            className="text-4xl font-sans font-bold tracking-tight text-apple-black hover:opacity-50 transition-all"
+            className="text-[clamp(2rem,10vw,3.5rem)] font-syne font-bold tracking-tighter text-apple-black hover:text-bt-blue transition-all"
           >
             {navItem.name}
           </Link>

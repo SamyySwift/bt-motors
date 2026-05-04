@@ -27,7 +27,7 @@ export default function SectionHeading({ title, subtitle, align = "center" }: Se
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.8, delay: 0.1 }}
-        className="text-4xl md:text-5xl font-sans font-bold tracking-tight text-apple-black"
+        className="text-[clamp(1.875rem,5vw,3rem)] font-sans font-bold tracking-tight text-apple-black leading-[1.1]"
       >
         {title}
       </motion.h2>
