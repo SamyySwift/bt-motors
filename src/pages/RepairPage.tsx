@@ -45,32 +45,10 @@ const pricingTiers = [
   },
 ];
 
-const carParts = [
-  {
-    id: "engine",
-    x: "50%",
-    y: "30%",
-    title: "The Heart",
-    desc: "Precision tuning, complete rebuilds, and routine telemetry checks.",
-  },
-  {
-    id: "brakes",
-    x: "25%",
-    y: "70%",
-    title: "The Anchor",
-    desc: "Carbon-ceramic rotor replacement, fluid flush, and caliper painting.",
-  },
-  {
-    id: "tires",
-    x: "75%",
-    y: "70%",
-    title: "The Contact",
-    desc: "Laser alignment, track-day tire mounting, and alloy repairs.",
-  },
-];
+const diagnosticSlides = ["/repair_1.jpeg", "/repair_2.jpeg", "/repair_3.jpeg"];
 
 export default function RepairPage() {
-  const [activePart, setActivePart] = useState<string | null>(null);
+  const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
   const titleRef = useRef(null);
 
   useEffect(() => {
@@ -87,10 +65,17 @@ export default function RepairPage() {
     }
   }, []);
 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentSlideIndex((prev) => (prev + 1) % diagnosticSlides.length);
+    }, 4000);
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <div className="min-h-screen pt-40 pb-32 bg-white text-apple-black overflow-hidden">
       {/* Hero Section */}
-      <section className="px-6 md:px-12 mb-32">
+      <section className="px-6 md:px-12 mb-20 md:mb-32">
         <div className="max-w-7xl mx-auto">
           <span className="inline-block px-4 py-1.5 rounded-full bg-soft-gray text-apple-black text-xs font-bold tracking-widest uppercase mb-8">
             Technical Excellence
@@ -106,6 +91,24 @@ export default function RepairPage() {
             A state-of-the-art facility dedicated to the preservation,
             restoration, and enhancement of automotive perfection.
           </p>
+        </div>
+      </section>
+
+      {/* Video Showcase Section */}
+      <section className="px-6 md:px-12 mb-32">
+        <div className="max-w-7xl mx-auto">
+          <div className="relative aspect-video rounded-[2rem] md:rounded-[40px] overflow-hidden bg-soft-gray shadow-2xl group border border-apple-black/5">
+            <video
+              className="w-full h-full object-cover"
+              autoPlay
+              muted
+              loop
+              playsInline
+            >
+              <source src="/repair.mp4" type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+          </div>
         </div>
       </section>
 
@@ -125,55 +128,26 @@ export default function RepairPage() {
           </div>
 
           <div className="relative aspect-[16/9] rounded-[40px] overflow-hidden bg-white border border-apple-black/5 p-4 group">
-            <img
-              src="https://images.unsplash.com/photo-1494976388531-d1058494cdd8?q=80&w=2070&auto=format&fit=crop"
-              alt="Car Diagram"
-              className="w-full h-full object-cover opacity-10 mix-blend-luminosity grayscale rounded-[32px]"
-            />
-
-            {carParts.map((part) => (
-              <div
-                key={part.id}
-                className="absolute"
-                style={{
-                  left: part.x,
-                  top: part.y,
-                  transform: "translate(-50%, -50%)",
+            {diagnosticSlides.map((slide, index) => (
+              <motion.div
+                key={index}
+                initial={false}
+                animate={{
+                  opacity: currentSlideIndex === index ? 1 : 0,
                 }}
+                transition={{ duration: 1.5, ease: "easeInOut" }}
+                className="absolute inset-0 p-4"
               >
-                <button
-                  onClick={() =>
-                    setActivePart(activePart === part.id ? null : part.id)
-                  }
-                  className={`w-4 h-4 rounded-full transition-all duration-500 z-20 relative ${
-                    activePart === part.id
-                      ? "bg-bt-blue scale-150"
-                      : "bg-bt-blue/20 hover:bg-bt-blue/40"
-                  }`}
-                >
-                  <div
-                    className={`absolute inset-0 rounded-full animate-ping bg-bt-blue opacity-20 ${activePart === part.id ? "hidden" : ""}`}
-                  ></div>
-                </button>
-
-                <AnimatePresence>
-                  {activePart === part.id && (
-                    <motion.div
-                      initial={{ opacity: 0, y: 10, scale: 0.95 }}
-                      animate={{ opacity: 1, y: 0, scale: 1 }}
-                      exit={{ opacity: 0, y: 10, scale: 0.95 }}
-                      className="absolute bottom-full left-1/2 -translate-x-1/2 mb-6 w-72 bg-white p-8 rounded-3xl shadow-2xl border border-apple-black/5 z-30"
-                    >
-                      <h3 className="text-xl font-syne font-bold mb-3">
-                        {part.title}
-                      </h3>
-                      <p className="text-sm text-apple-black/50 leading-relaxed font-light">
-                        {part.desc}
-                      </p>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </div>
+                <motion.img
+                  src={slide}
+                  alt={`Diagnostic Process ${index + 1}`}
+                  className="w-full h-full object-cover rounded-[32px]"
+                  animate={{
+                    scale: currentSlideIndex === index ? 1 : 1.05,
+                  }}
+                  transition={{ duration: 1.5, ease: "easeInOut" }}
+                />
+              </motion.div>
             ))}
           </div>
         </div>
