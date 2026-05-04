@@ -20,7 +20,7 @@ const services = [
       "Custom Vehicle Importation",
     ],
     icon: <Globe size={28} />,
-    image: "/avatr.jpg",
+    image: "/garage.jpg",
   },
   {
     id: 2,
