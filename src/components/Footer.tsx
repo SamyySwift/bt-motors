@@ -204,8 +204,9 @@ const Footer = () => {
             transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
             className="flex flex-col items-center"
           >
-            <h1 className="text-7xl font-syne font-black leading-none uppercase tracking-tighter text-white/40 select-none pointer-events-none whitespace-nowrap">
-              BEE TEE AUTOMOBILE
+            <h1 className="text-[7.5vw] text-center font-syne font-black leading-none uppercase tracking-tighter text-white/40 select-none pointer-events-none whitespace-nowrap">
+              BEE TEE <br />
+              AUTOMOBILE
             </h1>
           </motion.div>
 
