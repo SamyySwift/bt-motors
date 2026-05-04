@@ -168,7 +168,7 @@ export default function AboutPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:h-[120vh]">
             <div className="relative rounded-[4rem] overflow-hidden group shadow-xl aspect-[4/5] md:aspect-auto min-h-0">
               <img
-                src="/IMG_7810.jpg"
+                src="/repair_3.jpeg"
                 alt="Technical"
                 className="w-full h-full object-cover parallax-about scale-110 absolute inset-0"
               />

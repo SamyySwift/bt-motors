@@ -20,8 +20,7 @@ const services = [
       "Custom Vehicle Importation",
     ],
     icon: <Globe size={28} />,
-    image:
-      "https://images.unsplash.com/photo-1552519507-da3b142c6e3d?q=80&w=2070&auto=format&fit=crop",
+    image: "/avatr.jpg",
   },
   {
     id: 2,
@@ -36,8 +35,7 @@ const services = [
       "Brake Servicing",
     ],
     icon: <ShieldCheck size={28} />,
-    image:
-      "https://images.unsplash.com/photo-1530046339160-ce3e5b0c7a2f?q=80&w=2070&auto=format&fit=crop",
+    image: "/repair_2.jpeg",
   },
   {
     id: 3,
@@ -52,8 +50,7 @@ const services = [
       "Polishing & Detailing",
     ],
     icon: <Shield size={28} />,
-    image:
-      "https://images.unsplash.com/photo-1599256621730-535171e28e50?q=80&w=2070&auto=format&fit=crop",
+    image: "/repair_3.jpeg",
   },
   {
     id: 4,
@@ -68,8 +65,7 @@ const services = [
       "Suspension & Steering",
     ],
     icon: <Zap size={28} />,
-    image:
-      "https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?q=80&w=2083&auto=format&fit=crop",
+    image: "/repair_1.jpeg",
   },
 ];
 
@@ -145,7 +141,8 @@ export default function ServicesPage() {
               className="text-silver text-xl max-w-3xl mx-auto leading-relaxed reveal-service"
             >
               Beyond the acquisition, we provide a holistic suite of services
-              designed to elevate and maintain your vehicle to the highest standards.
+              designed to elevate and maintain your vehicle to the highest
+              standards.
             </motion.p>
 
             <motion.div
