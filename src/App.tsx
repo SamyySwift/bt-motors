@@ -52,16 +52,14 @@ function AnimatedRoutes() {
 function App() {
   return (
     <Router>
-      <LenisProvider>
-        <AmbientBackground />
+      <AmbientBackground />
 
-        <div className="flex flex-col min-h-screen">
-          <Navbar />
-          <AnimatedRoutes />
+      <div className="flex flex-col min-h-screen">
+        <Navbar />
+        <AnimatedRoutes />
 
-          <Footer />
-        </div>
-      </LenisProvider>
+        <Footer />
+      </div>
     </Router>
   );
 }
