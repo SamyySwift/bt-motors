@@ -67,6 +67,14 @@ export default function LandingPage() {
   const [currentCarIndex, setCurrentCarIndex] = useState(0);
   const isMobile = useMobile();
 
+  const HeroCarSlides = [
+    { image: "/slide_1.jpg" },
+    { image: "/slide_2.jpg" },
+    { image: "/slide_3.jpg" },
+    { image: "/slide_4.jpg" },
+    { image: "/slide_5.jpg" },
+  ];
+
   const { scrollYProgress } = useScroll({
     target: heroRef,
     offset: ["start start", "end start"],
@@ -77,7 +85,7 @@ export default function LandingPage() {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentCarIndex((prev) => (prev + 1) % inventory.length);
+      setCurrentCarIndex((prev) => (prev + 1) % HeroCarSlides.length);
     }, 5000);
     return () => clearInterval(interval);
   }, []);
@@ -225,9 +233,9 @@ export default function LandingPage() {
           style={{ opacity: heroOpacity, scale: heroScale }}
         >
           <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent z-10" />
-          {inventory.map((car, index) => (
+          {HeroCarSlides.map((slide, index) => (
             <motion.div
-              key={car.id}
+              key={index}
               initial={false}
               animate={{
                 opacity: currentCarIndex === index ? 1 : 0,
@@ -236,8 +244,8 @@ export default function LandingPage() {
               className="absolute inset-0"
             >
               <motion.img
-                src={car.image}
-                alt={`${car.make} ${car.model}`}
+                src={slide.image}
+                alt="Hero Slide"
                 className="w-full h-full object-cover object-[center_90%] md:object-bottom"
                 animate={{
                   scale: currentCarIndex === index ? 1 : 1.05,
