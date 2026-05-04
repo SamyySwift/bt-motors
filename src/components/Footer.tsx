@@ -37,7 +37,13 @@ const Footer = () => {
       name: "Instagram",
       url: "https://www.instagram.com/beeteeautos?igsh=MTZjMXQwYXpnZ2R4dw%3D%3D&utm_source=qr",
       icon: (
-        <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
+        <svg
+          className="w-5 h-5"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.5"
+          viewBox="0 0 24 24"
+        >
           <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
           <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
           <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
@@ -48,7 +54,13 @@ const Footer = () => {
       name: "Twitter",
       url: "https://x.com/beeteeautos?s=21",
       icon: (
-        <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
+        <svg
+          className="w-5 h-5"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.5"
+          viewBox="0 0 24 24"
+        >
           <path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"></path>
         </svg>
       ),
@@ -57,7 +69,13 @@ const Footer = () => {
       name: "Facebook",
       url: "https://www.facebook.com/share/1DNqQr1V5u/?mibextid=wwXIfr",
       icon: (
-        <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
+        <svg
+          className="w-5 h-5"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.5"
+          viewBox="0 0 24 24"
+        >
           <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
         </svg>
       ),
@@ -66,7 +84,13 @@ const Footer = () => {
       name: "TikTok",
       url: "https://www.tiktok.com/@beeteeautomobile",
       icon: (
-        <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
+        <svg
+          className="w-5 h-5"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.5"
+          viewBox="0 0 24 24"
+        >
           <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"></path>
         </svg>
       ),
@@ -88,9 +112,15 @@ const Footer = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
             >
-              <img src="/logo.png" alt="BEE TEE AUTOMOBILE" className="h-12 w-auto mb-10 opacity-90" />
+              <img
+                src="/logo.png"
+                alt="BEE TEE AUTOMOBILE"
+                className="h-12 w-auto mb-10 opacity-90"
+              />
               <h2 className="text-3xl md:text-4xl font-syne font-bold leading-tight mb-8 max-w-md">
-                Elevating the automotive experience through <span className="text-white/40 italic">unmatched</span> standards.
+                Elevating the automotive experience through{" "}
+                <span className="text-white/40 italic">unmatched</span>{" "}
+                standards.
               </h2>
               <div className="flex items-center gap-4 text-xs font-bold tracking-[0.2em] uppercase text-white/40">
                 <span>Abuja, Nigeria</span>
@@ -174,14 +204,15 @@ const Footer = () => {
             transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
             className="flex flex-col items-center"
           >
-            <h1 className="text-[clamp(3rem,15vw,18rem)] font-syne font-black leading-none uppercase tracking-tighter text-white/40 select-none pointer-events-none whitespace-nowrap">
+            <h1 className="text-7xl font-syne font-black leading-none uppercase tracking-tighter text-white/40 select-none pointer-events-none whitespace-nowrap">
               BEE TEE AUTOMOBILE
             </h1>
           </motion.div>
 
           <div className="flex flex-col md:flex-row justify-between items-center gap-6 mt-10">
             <p className="text-white/30 text-[10px] tracking-widest uppercase font-bold">
-              &copy; {new Date().getFullYear()} BEE TEE AUTOMOBILE. All rights reserved.
+              &copy; {new Date().getFullYear()} BEE TEE AUTOMOBILE. All rights
+              reserved.
             </p>
             <div className="flex gap-12">
               <Link

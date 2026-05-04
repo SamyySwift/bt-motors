@@ -91,10 +91,10 @@ export default function AboutPage() {
                 is a testament to human ingenuity."
               </p>
               <p className="text-lg text-silver leading-relaxed font-medium">
-                BEE TEE AUTOMOBILE was founded on a simple premise: that the world's
-                finest automobiles deserve a home that matches their excellence.
-                From our clinical restoration labs to our bespoke delivery
-                logistics, every detail is engineered for perfection.
+                BEE TEE AUTOMOBILE was founded on a simple premise: that the
+                world's finest automobiles deserve a home that matches their
+                excellence. From our clinical restoration labs to our bespoke
+                delivery logistics, every detail is engineered for perfection.
               </p>
               <div className="flex gap-12 pt-8">
                 <div className="flex items-center gap-3">
@@ -134,7 +134,10 @@ export default function AboutPage() {
                 The BEE TEE Heritage.
               </h2>
               <p className="text-silver text-lg leading-relaxed max-w-xl">
-                We are a premier automotive company dedicated to providing high-quality brand-new, foreign-used, and electric vehicles. Our expert team ensures that every vehicle we sell or service meets the highest standards of excellence and reliability.
+                We are a premier automotive company dedicated to providing
+                high-quality brand-new, foreign-used, and electric vehicles. Our
+                expert team ensures that every vehicle we sell or service meets
+                the highest standards of excellence and reliability.
               </p>
             </div>
             <div className="bg-bt-blue text-white p-20 rounded-[4rem] flex flex-col justify-between">
@@ -162,32 +165,33 @@ export default function AboutPage() {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 h-[120vh]">
-            <div className="relative rounded-[4rem] overflow-hidden group shadow-xl">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:h-[120vh]">
+            <div className="relative rounded-[4rem] overflow-hidden group shadow-xl aspect-[4/5] md:aspect-auto min-h-0">
               <img
                 src="/IMG_7810.jpg"
                 alt="Technical"
-                className="w-full h-full object-cover parallax-about scale-110"
+                className="w-full h-full object-cover parallax-about scale-110 absolute inset-0"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex flex-col justify-end p-16">
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex flex-col justify-end p-12 md:p-16">
                 <h3 className="text-3xl text-white font-syne font-bold">
                   Service Center
                 </h3>
                 <p className="text-white/60 mt-4">
-                  Where our expert technicians provide top-tier maintenance and repairs.
+                  Where our expert technicians provide top-tier maintenance and
+                  repairs.
                 </p>
               </div>
             </div>
-            <div className="grid grid-rows-2 gap-8">
-              <div className="relative rounded-[4rem] overflow-hidden group shadow-xl">
+            <div className="grid grid-rows-2 gap-8 min-h-0">
+              <div className="relative rounded-[4rem] overflow-hidden group shadow-xl aspect-[4/5] md:aspect-auto min-h-0">
                 <img
                   src="/IMG_6373.jpg"
                   alt="Lounge"
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover absolute inset-0"
                 />
                 <div className="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition-colors duration-500"></div>
               </div>
-              <div className="relative rounded-[4rem] overflow-hidden group bg-f5f5f7 flex flex-col items-center justify-center p-20 text-center">
+              <div className="relative rounded-[4rem] overflow-hidden group bg-f5f5f7 flex flex-col items-center justify-center p-12 md:p-20 text-center min-h-0 py-20 md:py-0">
                 <h3 className="text-4xl font-syne font-bold mb-6">
                   Want to visit?
                 </h3>

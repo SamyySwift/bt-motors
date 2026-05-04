@@ -153,7 +153,7 @@ export default function LandingPage() {
           },
         });
       });
-      
+
       // Sticky Stacking Services - Only on Desktop
       if (servicesRef.current && !isMobile) {
         const cards = gsap.utils.toArray(".service-card");
@@ -178,25 +178,33 @@ export default function LandingPage() {
           });
 
           // Animation for the card coming in
-          tl.to(card, {
-            yPercent: 0,
-            opacity: 1,
-            scale: 1,
-            rotate: 0,
-            ease: "power3.out",
-            duration: 1,
-          }, i);
+          tl.to(
+            card,
+            {
+              yPercent: 0,
+              opacity: 1,
+              scale: 1,
+              rotate: 0,
+              ease: "power3.out",
+              duration: 1,
+            },
+            i,
+          );
 
           // Animation for the card already in, as the NEXT card comes in
           if (i < cards.length - 1) {
-            tl.to(card, {
-              scale: 0.95,
-              yPercent: -15,
-              opacity: 0.5,
-              filter: "blur(4px)",
-              ease: "none",
-              duration: 1,
-            }, i + 0.8);
+            tl.to(
+              card,
+              {
+                scale: 0.95,
+                yPercent: -15,
+                opacity: 0.5,
+                filter: "blur(4px)",
+                ease: "none",
+                duration: 1,
+              },
+              i + 0.8,
+            );
           }
         });
       }
@@ -258,7 +266,8 @@ export default function LandingPage() {
             </MagneticButton>
 
             <MagneticButton>
-              <Link to="/about"
+              <Link
+                to="/about"
                 className="group flex items-center gap-4 px-8 py-3 rounded-full border-2 border-white/30 text-white text-[10px] md:text-xs font-bold tracking-widest uppercase hover:bg-white hover:text-apple-black transition-all duration-500 interactive backdrop-blur-sm"
                 data-cursor-text="Play"
               >
@@ -290,7 +299,7 @@ export default function LandingPage() {
           transition={{ ease: "linear", duration: 45, repeat: Infinity }}
           className={cn(
             "flex whitespace-nowrap items-center",
-            isMobile ? "space-x-12 px-4" : "space-x-32 px-8"
+            isMobile ? "space-x-12 px-4" : "space-x-32 px-8",
           )}
         >
           {[...Array(2)].map((_, i) => (
@@ -298,7 +307,7 @@ export default function LandingPage() {
               key={i}
               className={cn(
                 "flex items-center text-silver/60 font-sans font-bold tracking-widest text-[9px] uppercase",
-                isMobile ? "space-x-12" : "space-x-32"
+                isMobile ? "space-x-12" : "space-x-32",
               )}
             >
               <span className="flex items-center gap-3">
@@ -413,7 +422,7 @@ export default function LandingPage() {
             ref={boutiqueContentRef}
             className={cn(
               "flex px-6 cursor-grab active:cursor-grabbing",
-              isMobile ? "flex-col gap-10" : "flex-row gap-12"
+              isMobile ? "flex-col gap-10" : "flex-row gap-12",
             )}
           >
             {(isMobile ? inventory.slice(0, 6) : inventory).map((car) => (
@@ -421,7 +430,7 @@ export default function LandingPage() {
                 key={car.id}
                 className={cn(
                   "group interactive",
-                  isMobile ? "w-full" : "min-w-[450px]"
+                  isMobile ? "w-full" : "min-w-[450px]",
                 )}
                 data-cursor-text="View"
               >
@@ -431,7 +440,7 @@ export default function LandingPage() {
                     alt={car.model}
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000"
                   />
-                  
+
                   {/* Condition Badge */}
                   <div className="absolute top-5 left-5 md:top-8 md:left-8 px-3.5 py-1.5 md:px-5 md:py-2.5 rounded-full bg-white/90 backdrop-blur-md text-[8px] md:text-[10px] font-bold uppercase tracking-[0.2em] text-apple-black z-10">
                     {car.condition}
@@ -444,7 +453,7 @@ export default function LandingPage() {
                   {/* Visual Gradient Bottom */}
                   <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
                 </div>
-                
+
                 <div className="flex justify-between items-end px-2 md:px-4">
                   <div>
                     <p className="text-[8px] md:text-[10px] font-bold tracking-[0.4em] uppercase text-silver mb-2 md:mb-3">
@@ -463,10 +472,12 @@ export default function LandingPage() {
               </div>
             ))}
 
-            <div className={cn(
-              "flex items-center justify-center",
-              isMobile ? "w-full pt-6" : "min-w-[450px]"
-            )}>
+            <div
+              className={cn(
+                "flex items-center justify-center",
+                isMobile ? "w-full pt-6" : "min-w-[450px]",
+              )}
+            >
               <MagneticButton>
                 <Link to="/inventory">
                   <div
@@ -476,7 +487,7 @@ export default function LandingPage() {
                     <span className="text-[9px] md:text-[10px] font-bold tracking-[0.3em] uppercase">
                       View All
                     </span>
-                    <ArrowRight size={14} md:size={16} />
+                    <ArrowRight size={isMobile ? 14 : 16} />
                   </div>
                 </Link>
               </MagneticButton>
@@ -525,9 +536,12 @@ export default function LandingPage() {
           </div>
         </div>
       </section>
-      
+
       {/* Services Section */}
-      <section ref={servicesRef} className="bg-apple-black relative overflow-hidden">
+      <section
+        ref={servicesRef}
+        className="bg-apple-black relative overflow-hidden"
+      >
         <div className="min-h-screen flex items-center justify-center py-16 md:py-24 relative overflow-hidden">
           <div className="container mx-auto px-6 relative z-10">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-24 items-start h-full">
@@ -542,13 +556,18 @@ export default function LandingPage() {
                   Solutions.
                 </h2>
                 <p className="text-silver/40 text-sm md:text-lg max-w-sm leading-relaxed mb-8 md:mb-12">
-                  From the initial sourcing to long-term maintenance, we ensure every aspect of your journey is handled with absolute precision.
+                  From the initial sourcing to long-term maintenance, we ensure
+                  every aspect of your journey is handled with absolute
+                  precision.
                 </p>
-                
+
                 <div className="flex items-center gap-6">
                   <div className="flex -space-x-4">
                     {[1, 2, 3].map((i) => (
-                      <div key={i} className="w-8 h-8 md:w-12 md:h-12 rounded-full border-2 border-apple-black bg-bt-blue/20 flex items-center justify-center text-bt-blue font-bold text-[9px] md:text-xs backdrop-blur-sm">
+                      <div
+                        key={i}
+                        className="w-8 h-8 md:w-12 md:h-12 rounded-full border-2 border-apple-black bg-bt-blue/20 flex items-center justify-center text-bt-blue font-bold text-[9px] md:text-xs backdrop-blur-sm"
+                      >
                         0{i}
                       </div>
                     ))}
@@ -561,10 +580,12 @@ export default function LandingPage() {
 
               {/* Right Side: Stacking Cards */}
               <div className="relative pt-6 md:pt-24 lg:pt-0 min-h-[400px] md:min-h-[600px]">
-                <div className={cn(
-                  "grid grid-cols-1 w-full h-full",
-                  isMobile ? "gap-6" : "grid-rows-1"
-                )}>
+                <div
+                  className={cn(
+                    "grid grid-cols-1 w-full h-full",
+                    isMobile ? "gap-6" : "grid-rows-1",
+                  )}
+                >
                   {[
                     {
                       title: "Premium Car Sales & Imports",
@@ -589,27 +610,29 @@ export default function LandingPage() {
                       key={idx}
                       className={cn(
                         "service-card group relative p-8 md:p-12 rounded-[2rem] md:rounded-[3.5rem] bg-[#1a1a1c]/40 border border-white/10 hover:border-bt-blue/50 transition-all duration-700 interactive overflow-hidden backdrop-blur-3xl shadow-[0_50px_100px_-20px_rgba(0,0,0,0.8)]",
-                        !isMobile && "col-start-1 row-start-1"
+                        !isMobile && "col-start-1 row-start-1",
                       )}
-                      style={{ 
+                      style={{
                         zIndex: idx,
                       }}
                     >
                       {/* Decorative Background Glow */}
-                      <div className={`absolute -inset-24 bg-gradient-to-br ${service.accent} to-transparent opacity-0 group-hover:opacity-40 blur-[100px] transition-opacity duration-1000`} />
-                      
+                      <div
+                        className={`absolute -inset-24 bg-gradient-to-br ${service.accent} to-transparent opacity-0 group-hover:opacity-40 blur-[100px] transition-opacity duration-1000`}
+                      />
+
                       {/* Index Number Background */}
                       <div className="absolute -right-8 -top-8 text-[8rem] md:text-[18rem] font-syne font-extrabold text-white/[0.02] group-hover:text-bt-blue/[0.05] transition-all duration-1000 pointer-events-none select-none tracking-tighter">
                         0{idx + 1}
                       </div>
-                      
+
                       <div className="relative z-10 h-full flex flex-col justify-between">
                         <div>
                           <div className="w-16 h-16 md:w-24 md:h-24 rounded-[1.2rem] md:rounded-[2rem] bg-white/5 flex items-center justify-center text-white/40 group-hover:bg-bt-blue group-hover:text-white group-hover:rotate-[360deg] transition-all duration-1000 mb-8 md:mb-16 shadow-2xl border border-white/10 relative overflow-hidden">
                             <div className="absolute inset-0 bg-gradient-to-tr from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
                             {service.icon}
                           </div>
-                          
+
                           <h4 className="text-3xl md:text-5xl font-syne font-bold text-white mb-4 md:mb-8 tracking-tighter group-hover:text-bt-blue transition-colors duration-500 leading-[1.1]">
                             {service.title}
                           </h4>
@@ -641,7 +664,7 @@ export default function LandingPage() {
               </div>
             </div>
           </div>
-          
+
           {/* Background Accents */}
           <div className="absolute top-0 right-0 w-1/2 h-1/2 bg-bt-blue/5 blur-[160px] rounded-full -translate-y-1/2 translate-x-1/2 pointer-events-none" />
           <div className="absolute bottom-0 left-0 w-1/2 h-1/2 bg-bt-blue/5 blur-[160px] rounded-full translate-y-1/2 -translate-x-1/2 pointer-events-none" />
