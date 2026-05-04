@@ -35,7 +35,7 @@ const services = [
       "Brake Servicing",
     ],
     icon: <ShieldCheck size={28} />,
-    image: "/repair_2.jpeg",
+    image: "/servicing.jpeg",
   },
   {
     id: 3,
