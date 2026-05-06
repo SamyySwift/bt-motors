@@ -233,7 +233,7 @@ export default function LandingPage() {
           className="absolute inset-0 z-0 overflow-hidden"
           style={{ opacity: heroOpacity, scale: heroScale }}
         >
-          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent z-10" />
+          <div className="absolute inset-0 bg-linear-to-t from-black/60 via-black/20 to-transparent z-10" />
           {HeroCarSlides.map((slide, index) => (
             <motion.div
               key={index}
@@ -297,12 +297,12 @@ export default function LandingPage() {
           <span className="text-[9px] md:text-[10px] font-bold tracking-widest uppercase text-silver/40">
             Scroll
           </span>
-          <div className="w-[1px] h-8 md:h-12 bg-gradient-to-b from-black/20 to-transparent" />
+          <div className="w-px h-8 md:h-12 bg-linear-to-b from-black/20 to-transparent" />
         </motion.div>
       </section>
 
       {/* Trust Ticker - Minimalist */}
-      <div className="w-full bg-white py-8 md:py-12 overflow-hidden relative z-10 border-y border-black/[0.03]">
+      <div className="w-full bg-white py-8 md:py-12 overflow-hidden relative z-10 border-y border-black/3">
         <motion.div
           animate={{ x: ["0%", "-50%"] }}
           transition={{ ease: "linear", duration: 45, repeat: Infinity }}
@@ -337,7 +337,7 @@ export default function LandingPage() {
       </div>
 
       {/* Narrative Section - Legacy */}
-      <section className="py-24 md:py-48 px-6 bg-f5f5f7 relative overflow-hidden rounded-[2.5rem] md:rounded-[5rem] mx-2 md:mx-6">
+      <section className="py-24 md:py-48 px-6 bg-f5f5f7 relative overflow-hidden rounded-4xl md:rounded-5xl mx-2 md:mx-6">
         <div className="container mx-auto max-w-7xl">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-32 items-center">
             <div className="space-y-6 md:space-y-12">
@@ -395,7 +395,7 @@ export default function LandingPage() {
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: false, amount: 0.3 }}
               transition={{ duration: 1, ease: "easeOut" }}
-              className="relative aspect-[4/3] md:aspect-square rounded-[1.5rem] md:rounded-[4rem] overflow-hidden shadow-2xl"
+              className="relative aspect-4/3 rounded-3xl overflow-hidden shadow-2xl"
             >
               <img
                 src="/garage.jpg"
@@ -451,7 +451,7 @@ export default function LandingPage() {
                   }
                 }}
               >
-                <div className="aspect-[4/5] bg-f5f5f7 rounded-[1.5rem] md:rounded-[3rem] overflow-hidden mb-6 md:mb-8 relative group-hover:shadow-[0_30px_60px_rgba(0,0,0,0.12)] transition-all duration-700">
+                <div className="aspect-4/5 rounded-3xl overflow-hidden mb-6 md:mb-8 relative group-hover:shadow-[0_30px_60px_rgba(0,0,0,0.12)] transition-all duration-700">
                   <img
                     src={car.image}
                     alt={car.model}
@@ -468,7 +468,7 @@ export default function LandingPage() {
                   </div>
 
                   {/* Visual Gradient Bottom */}
-                  <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+                  <div className="absolute inset-x-0 bottom-0 h-1/3 bg-linear-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
                 </div>
 
                 <div className="flex justify-between items-end px-2 md:px-4">
@@ -533,7 +533,7 @@ export default function LandingPage() {
               alt="Premium Automotive Detail"
               className="w-full h-full object-cover brightness-[0.7]"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent"></div>
+            <div className="absolute inset-0 bg-linear-to-t from-black/90 via-black/30 to-transparent"></div>
           </motion.div>
         </motion.div>
 
@@ -626,7 +626,7 @@ export default function LandingPage() {
                     <div
                       key={idx}
                       className={cn(
-                        "service-card group relative p-8 md:p-12 rounded-[2rem] md:rounded-[3.5rem] bg-[#1a1a1c]/40 border border-white/10 hover:border-bt-blue/50 transition-all duration-700 interactive overflow-hidden backdrop-blur-3xl shadow-[0_50px_100px_-20px_rgba(0,0,0,0.8)]",
+                        "service-card group relative p-8 md:p-12 rounded-4xl bg-[#1a1a1c]/40 border border-white/10 hover:border-bt-blue/50 transition-all duration-700 interactive overflow-hidden backdrop-blur-3xl shadow-[0_50px_100px_-20px_rgba(0,0,0,0.8)]",
                         !isMobile && "col-start-1 row-start-1",
                       )}
                       style={{
@@ -635,18 +635,18 @@ export default function LandingPage() {
                     >
                       {/* Decorative Background Glow */}
                       <div
-                        className={`absolute -inset-24 bg-gradient-to-br ${service.accent} to-transparent opacity-0 group-hover:opacity-40 blur-[100px] transition-opacity duration-1000`}
+                        className={`absolute -inset-24 bg-linear-to-br ${service.accent} to-transparent opacity-0 group-hover:opacity-40 blur-[100px] transition-opacity duration-1000`}
                       />
 
                       {/* Index Number Background */}
-                      <div className="absolute -right-8 -top-8 text-[8rem] md:text-[18rem] font-syne font-extrabold text-white/[0.02] group-hover:text-bt-blue/[0.05] transition-all duration-1000 pointer-events-none select-none tracking-tighter">
+                      <div className="absolute -right-8 -top-8 text-[8rem] md:text-[18rem] font-syne font-extrabold text-white/2 group-hover:text-bt-blue/5 transition-all duration-1000 pointer-events-none select-none tracking-tighter">
                         0{idx + 1}
                       </div>
 
                       <div className="relative z-10 h-full flex flex-col justify-between">
                         <div>
-                          <div className="w-16 h-16 md:w-24 md:h-24 rounded-[1.2rem] md:rounded-[2rem] bg-white/5 flex items-center justify-center text-white/40 group-hover:bg-bt-blue group-hover:text-white group-hover:rotate-[360deg] transition-all duration-1000 mb-8 md:mb-16 shadow-2xl border border-white/10 relative overflow-hidden">
-                            <div className="absolute inset-0 bg-gradient-to-tr from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                          <div className="w-16 h-16 md:w-24 md:h-24 rounded-2xl md:rounded-4xl group-hover:rotate-360 transition-all duration-1000 mb-8 md:mb-16 shadow-2xl border border-white/10 relative overflow-hidden">
+                            <div className="absolute inset-0 bg-linear-to-tr from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
                             {service.icon}
                           </div>
 
@@ -674,7 +674,7 @@ export default function LandingPage() {
                       </div>
 
                       {/* Animated Border Bottom */}
-                      <div className="absolute bottom-0 left-0 h-1 bg-gradient-to-r from-bt-blue via-purple-500 to-bt-blue w-0 group-hover:w-full transition-all duration-1000 ease-in-out" />
+                      <div className="absolute bottom-0 left-0 h-1 bg-linear-to-r from-bt-blue via-purple-500 to-bt-blue w-0 group-hover:w-full transition-all duration-1000 ease-in-out" />
                     </div>
                   ))}
                 </div>
@@ -710,7 +710,7 @@ export default function LandingPage() {
           </MagneticButton>
         </div>
 
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[12vw] font-bold text-black/[0.02] whitespace-nowrap pointer-events-none select-none uppercase font-syne">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[12vw] font-bold text-black/2 whitespace-nowrap pointer-events-none select-none uppercase font-syne">
           BEE TEE AUTOMOBILE
         </div>
       </section>
