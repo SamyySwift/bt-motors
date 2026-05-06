@@ -11,6 +11,7 @@ import { Link } from "react-router-dom";
 import gsap from "gsap";
 import SplitType from "split-type";
 import MagneticButton from "../components/MagneticButton";
+import ContactOptions from "../components/ContactOptions";
 
 import { inventory } from "../data/inventory";
 
@@ -18,6 +19,7 @@ type Vehicle = (typeof inventory)[0];
 
 export default function InventoryPage() {
   const [selectedVehicle, setSelectedVehicle] = useState<Vehicle | null>(null);
+  const [showInquiryOptions, setShowInquiryOptions] = useState(false);
   const [activeFilter, setActiveFilter] = useState("All");
   const headingRef = useRef<HTMLHeadingElement>(null);
 
@@ -59,7 +61,7 @@ export default function InventoryPage() {
           </div>
 
           <div className="w-full md:w-auto flex flex-col gap-6">
-            <div className="flex items-center gap-4 bg-f5f5f7 p-2 rounded-full px-6 border border-black/[0.03]">
+            <div className="flex items-center gap-4 bg-f5f5f7 p-2 rounded-full px-6 border border-black/3">
               <Search size={16} className="text-silver" />
               <input
                 type="text"
@@ -73,8 +75,8 @@ export default function InventoryPage() {
         {/* Layout with Sidebar */}
         <div className="flex gap-12">
           {/* Sidebar Filters */}
-          <aside className="w-72 flex-shrink-0 sticky top-32 h-fit">
-            <div className="bg-f5f5f7/50 backdrop-blur-sm rounded-[2rem] p-8 border border-black/5">
+          <aside className="w-72 shrink-0 sticky top-32 h-fit">
+            <div className="bg-f5f5f7/50 backdrop-blur-sm rounded-4xl p-8 border border-black/5">
               <div className="flex items-center gap-3 mb-8">
                 <SlidersHorizontal size={20} className="text-bt-blue" />
                 <h3 className="text-sm font-bold tracking-widest uppercase">
@@ -123,8 +125,9 @@ export default function InventoryPage() {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
               <AnimatePresence mode="popLayout">
                 {filteredInventory.map((vehicle, i) => (
-                  <motion.div
+                  <motion.button
                     layout
+                    type="button"
                     key={vehicle.id}
                     initial={{ opacity: 0, scale: 0.9 }}
                     animate={{ opacity: 1, scale: 1 }}
@@ -134,11 +137,17 @@ export default function InventoryPage() {
                       delay: i * 0.05,
                       ease: [0.22, 1, 0.36, 1],
                     }}
-                    className="group cursor-pointer relative interactive"
-                    onClick={() => setSelectedVehicle(vehicle)}
-                    data-cursor-text="Inspect"
+                    className="group cursor-pointer relative interactive block w-full text-left bg-transparent border-none p-0"
+                    onClick={() => {
+                      if (vehicle.price === "Price on Request") {
+                        setShowInquiryOptions(true);
+                      } else {
+                        setSelectedVehicle(vehicle);
+                      }
+                    }}
+                    data-cursor-text={vehicle.price === "Price on Request" ? "Inquire" : "Inspect"}
                   >
-                    <div className="aspect-[4/3] rounded-[2.5rem] overflow-hidden bg-f5f5f7 mb-8 relative group-hover:shadow-[0_20px_50px_rgba(0,0,0,0.1)] transition-all duration-700">
+                    <div className="aspect-4/3 rounded-[2.5rem] overflow-hidden bg-f5f5f7 mb-8 relative group-hover:shadow-[0_20px_50px_rgba(0,0,0,0.1)] transition-all duration-700">
                       <img
                         src={vehicle.image}
                         alt={vehicle.model}
@@ -191,7 +200,7 @@ export default function InventoryPage() {
                         </div>
                       </div>
 
-                      <div className="flex items-center gap-4 text-[9px] font-bold text-silver/60 tracking-[0.2em] uppercase pt-4 border-t border-black/[0.03]">
+                      <div className="flex items-center gap-4 text-[9px] font-bold text-silver/60 tracking-[0.2em] uppercase pt-4 border-t border-black/3">
                         <span>{vehicle.year}</span>
                         <div className="w-1 h-1 bg-silver/30 rounded-full" />
                         <span>{vehicle.mileage}</span>
@@ -199,7 +208,7 @@ export default function InventoryPage() {
                         <span>{vehicle.bodyStyle}</span>
                       </div>
                     </div>
-                  </motion.div>
+                  </motion.button>
                 ))}
               </AnimatePresence>
             </div>
@@ -214,7 +223,7 @@ export default function InventoryPage() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-12 bg-white/90 backdrop-blur-2xl"
+            className="fixed inset-0 z-100 flex items-center justify-center p-4 md:p-12 bg-white/90 backdrop-blur-2xl"
           >
             <div
               className="absolute inset-0"
@@ -226,7 +235,7 @@ export default function InventoryPage() {
               animate={{ scale: 1, y: 0, opacity: 1 }}
               exit={{ scale: 0.9, y: 50, opacity: 0 }}
               transition={{ type: "spring", damping: 25, stiffness: 300 }}
-              className="bg-white w-full max-w-7xl h-[90vh] rounded-[4rem] overflow-hidden flex flex-col md:flex-row relative z-10 border border-black/[0.03] shadow-2xl"
+              className="bg-white w-full max-w-7xl h-[90vh] rounded-[4rem] overflow-hidden flex flex-col md:flex-row relative z-10 border border-black/3 shadow-2xl"
             >
               <button
                 onClick={() => setSelectedVehicle(null)}
@@ -252,7 +261,7 @@ export default function InventoryPage() {
               </div>
 
               <div className="w-full md:w-2/5 p-12 md:p-20 flex flex-col h-1/2 md:h-full overflow-y-auto">
-                <div className="flex-grow">
+                <div className="grow">
                   <p className="text-[10px] font-bold tracking-[0.5em] uppercase text-silver mb-4">
                     {selectedVehicle.make}
                   </p>
@@ -307,22 +316,74 @@ export default function InventoryPage() {
                 </div>
 
                 <div className="flex flex-col gap-4">
-                  <MagneticButton>
-                    <Link
-                      to="/inquiry"
-                      className="w-full py-6 bg-bt-blue text-white text-center rounded-full font-bold uppercase text-[10px] tracking-[0.2em] hover:bg-bt-blue-dark transition-all shadow-xl"
-                    >
-                      Request Information
-                    </Link>
-                  </MagneticButton>
-                  <Link
-                    to="/inquiry"
-                    className="w-full py-6 text-center border border-bt-blue/30 text-apple-black rounded-full font-bold uppercase text-[10px] tracking-[0.2em] hover:bg-bt-blue hover:text-white hover:border-bt-blue transition-all"
-                  >
-                    Contact Sales Advisor
-                  </Link>
+                  {selectedVehicle.price === "Price on Request" ? (
+                    <ContactOptions />
+                  ) : (
+                    <>
+                      <MagneticButton>
+                        <Link
+                          to="/inquiry"
+                          className="w-full py-6 bg-bt-blue text-white text-center rounded-full font-bold uppercase text-[10px] tracking-[0.2em] hover:bg-bt-blue-dark transition-all shadow-xl"
+                        >
+                          Request Information
+                        </Link>
+                      </MagneticButton>
+                      <Link
+                        to="/inquiry"
+                        className="w-full py-6 text-center border border-bt-blue/30 text-apple-black rounded-full font-bold uppercase text-[10px] tracking-[0.2em] hover:bg-bt-blue hover:text-white hover:border-bt-blue transition-all"
+                      >
+                        Contact Sales Advisor
+                      </Link>
+                    </>
+                  )}
                 </div>
               </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Inquiry Options Modal */}
+      <AnimatePresence>
+        {showInquiryOptions && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-110 flex items-center justify-center p-6 bg-white/90 backdrop-blur-2xl"
+          >
+            <div
+              className="absolute inset-0"
+              onClick={() => setShowInquiryOptions(false)}
+            ></div>
+
+            <motion.div
+              initial={{ scale: 0.9, y: 50, opacity: 0 }}
+              animate={{ scale: 1, y: 0, opacity: 1 }}
+              exit={{ scale: 0.9, y: 50, opacity: 0 }}
+              transition={{ type: "spring", damping: 25, stiffness: 300 }}
+              className="bg-white w-full max-w-xl rounded-[3rem] p-12 relative z-10 border border-black/3 shadow-2xl text-center"
+            >
+              <button
+                onClick={() => setShowInquiryOptions(false)}
+                className="absolute top-8 right-8 text-apple-black hover:bg-bt-blue hover:text-white transition-all z-20 bg-f5f5f7 p-2.5 rounded-full"
+              >
+                <X size={20} />
+              </button>
+
+              <div className="mb-10">
+                <span className="inline-block px-4 py-1.5 rounded-full bg-soft-gray text-apple-black text-[10px] font-bold tracking-widest uppercase mb-6">
+                  Inquiry Line
+                </span>
+                <h2 className="text-4xl font-syne font-bold text-apple-black mb-4 tracking-tighter">
+                  Connect with us.
+                </h2>
+                <p className="text-silver text-sm font-medium">
+                  Select your preferred method of communication to discuss pricing and details.
+                </p>
+              </div>
+
+              <ContactOptions />
             </motion.div>
           </motion.div>
         )}

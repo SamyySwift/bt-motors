@@ -10,6 +10,14 @@ export default function CustomCursor() {
   const springConfig = { damping: 25, stiffness: 250, mass: 0.5 };
   const smoothX = useSpring(mouseX, springConfig);
   const smoothY = useSpring(mouseY, springConfig);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -46,10 +54,12 @@ export default function CustomCursor() {
     };
   }, []);
 
+  if (isMobile) return null;
+
   return (
     <>
       <motion.div
-        className="fixed top-0 left-0 w-2.5 h-2.5 bg-apple-black rounded-full pointer-events-none z-[9999]"
+        className="fixed top-0 left-0 w-2.5 h-2.5 bg-apple-black rounded-full pointer-events-none z-9999"
         style={{
           x: smoothX,
           y: smoothY,
@@ -59,7 +69,7 @@ export default function CustomCursor() {
         }}
       />
       <motion.div
-        className="fixed top-0 left-0 w-12 h-12 border border-apple-black/20 rounded-full pointer-events-none z-[9998]"
+        className="fixed top-0 left-0 w-12 h-12 border border-apple-black/20 rounded-full pointer-events-none z-9998"
         animate={{
           scale: isHovering ? 1.5 : 0,
           opacity: isHovering ? 1 : 0,

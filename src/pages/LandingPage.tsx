@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { motion, useScroll, useTransform } from "framer-motion";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -66,6 +66,7 @@ export default function LandingPage() {
   const servicesRef = useRef<HTMLDivElement>(null);
   const [currentCarIndex, setCurrentCarIndex] = useState(0);
   const isMobile = useMobile();
+  const navigate = useNavigate();
 
   const HeroCarSlides = [
     { image: "/slide_1.jpg" },
@@ -429,18 +430,26 @@ export default function LandingPage() {
           <div
             ref={boutiqueContentRef}
             className={cn(
-              "flex px-6 cursor-grab active:cursor-grabbing",
-              isMobile ? "flex-col gap-10" : "flex-row gap-12",
+              "flex px-6",
+              isMobile ? "flex-col gap-10" : "flex-row gap-12 cursor-grab active:cursor-grabbing",
             )}
           >
             {(isMobile ? inventory.slice(0, 6) : inventory).map((car) => (
-              <div
+              <button
+                type="button"
                 key={car.id}
                 className={cn(
-                  "group interactive",
+                  "group interactive cursor-pointer relative z-10 block w-full text-left bg-transparent border-none p-0",
                   isMobile ? "w-full" : "min-w-[450px]",
                 )}
-                data-cursor-text="View"
+                data-cursor-text={car.price === "Price on Request" ? "Inquire" : "View"}
+                onClick={() => {
+                  if (car.price === "Price on Request") {
+                    navigate("/inquiry");
+                  } else {
+                    navigate("/inventory");
+                  }
+                }}
               >
                 <div className="aspect-[4/5] bg-f5f5f7 rounded-[1.5rem] md:rounded-[3rem] overflow-hidden mb-6 md:mb-8 relative group-hover:shadow-[0_30px_60px_rgba(0,0,0,0.12)] transition-all duration-700">
                   <img
@@ -477,7 +486,7 @@ export default function LandingPage() {
                     </span>
                   </div>
                 </div>
-              </div>
+              </button>
             ))}
 
             <div

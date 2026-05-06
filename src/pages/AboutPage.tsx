@@ -116,7 +116,7 @@ export default function AboutPage() {
               </div>
             </div>
 
-            <div className="relative aspect-[4/5] rounded-[4rem] overflow-hidden order-1 md:order-2 shadow-2xl">
+            <div className="relative aspect-4/5 rounded-[4rem] overflow-hidden order-1 md:order-2 shadow-2xl">
               <img
                 src="/IMG_6374.jpg"
                 alt="Showroom"
@@ -166,13 +166,13 @@ export default function AboutPage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:h-[120vh]">
-            <div className="relative rounded-[4rem] overflow-hidden group shadow-xl aspect-[4/5] md:aspect-auto min-h-0">
+            <div className="relative rounded-[4rem] overflow-hidden group shadow-xl aspect-4/5 md:aspect-auto min-h-0">
               <img
                 src="/repair_3.jpeg"
                 alt="Technical"
                 className="w-full h-full object-cover parallax-about scale-110 absolute inset-0"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex flex-col justify-end p-12 md:p-16">
+              <div className="absolute inset-0 bg-linear-to-t from-black/60 to-transparent flex flex-col justify-end p-12 md:p-16">
                 <h3 className="text-3xl text-white font-syne font-bold">
                   Service Center
                 </h3>
@@ -183,7 +183,7 @@ export default function AboutPage() {
               </div>
             </div>
             <div className="grid grid-rows-2 gap-8 min-h-0">
-              <div className="relative rounded-[4rem] overflow-hidden group shadow-xl aspect-[4/5] md:aspect-auto min-h-0">
+              <div className="relative rounded-[4rem] overflow-hidden group shadow-xl aspect-4/5 md:aspect-auto min-h-0">
                 <img
                   src="/IMG_6373.jpg"
                   alt="Lounge"
@@ -216,7 +216,7 @@ export default function AboutPage() {
             "We aren't just selling a car. We are inviting you into a legacy of
             performance and passion."
           </h2>
-          <div className="mt-12 w-20 h-[1px] bg-apple-black/10 mx-auto"></div>
+          <div className="mt-12 w-20 h-px bg-apple-black/10 mx-auto"></div>
           <p className="mt-8 text-[10px] font-bold tracking-[0.4em] uppercase text-silver">
             BEE TEE AUTOMOBILE
           </p>

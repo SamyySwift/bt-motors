@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { MapPin, Phone, CheckCircle2, ArrowRight, Clock } from "lucide-react";
 import gsap from "gsap";
 import SplitType from "split-type";
+import ContactOptions from "../components/ContactOptions";
 
 export default function InquiryPage() {
   const [step, setStep] = useState(1);
@@ -73,16 +74,12 @@ export default function InquiryPage() {
               </p>
             </div>
 
-            <div className="group">
+            <div id="inquiry-line" className="group col-span-1 md:col-span-2">
               <div className="w-12 h-12 rounded-full bg-soft-gray flex items-center justify-center mb-6 group-hover:bg-bt-blue group-hover:text-white transition-all duration-500">
                 <Phone size={20} />
               </div>
-              <h3 className="font-syne font-bold text-xl mb-2">Direct Line</h3>
-              <p className="text-apple-black/50 font-light text-sm leading-relaxed">
-                Phone & WhatsApp: 09162228881 / 09077777211
-                <br />
-                Email: info@beeteeautomobile.com
-              </p>
+              <h3 className="font-syne font-bold text-xl mb-6">Inquiry Line</h3>
+              <ContactOptions />
             </div>
             <div className="group">
               <div className="w-12 h-12 rounded-full bg-soft-gray flex items-center justify-center mb-6 group-hover:bg-bt-blue group-hover:text-white transition-all duration-500">
