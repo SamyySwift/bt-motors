@@ -155,20 +155,36 @@ const Footer = () => {
               <h4 className="text-[10px] font-bold tracking-[0.3em] uppercase text-white/30 mb-8">
                 Location
               </h4>
-              <p className="text-lg font-medium text-white/70 leading-relaxed max-w-[200px]">
-                Plot 36 Wole Soyinka Way, Jahi, Abuja
+              <p className="text-lg font-medium text-white/70 leading-relaxed max-w-[280px]">
+                Plot 36, Wole Soyinka Way, Cadastral Zone B15, Jahi, Abuja - FCT
               </p>
               <div className="mt-8">
                 <h4 className="text-[10px] font-bold tracking-[0.3em] uppercase text-white/30 mb-4">
                   Inquiries
                 </h4>
-                <a
-                  href="mailto:beeteeautomobile@gmail.com"
-                  className="group relative inline-block text-sm font-bold tracking-widest uppercase hover:text-white transition-colors"
-                >
-                  beeteeautomobile@gmail.com
-                  <span className="absolute -bottom-1 left-0 w-full h-[1px] bg-white/20 group-hover:bg-white transition-all" />
-                </a>
+                <div className="flex flex-col gap-2">
+                  <a
+                    href="mailto:beeteeautomobile@gmail.com"
+                    className="group relative inline-block text-sm font-bold tracking-widest uppercase hover:text-white transition-colors"
+                  >
+                    beeteeautomobile@gmail.com
+                    <span className="absolute -bottom-1 left-0 w-full h-[1px] bg-white/20 group-hover:bg-white transition-all" />
+                  </a>
+                  <div className="flex flex-col gap-1">
+                    <a
+                      href="tel:+2349077777211"
+                      className="text-white/70 hover:text-white text-sm transition-colors"
+                    >
+                      +234 907 777 7211
+                    </a>
+                    <a
+                      href="tel:+2349162228881"
+                      className="text-white/70 hover:text-white text-sm transition-colors"
+                    >
+                      +234 916 222 8881
+                    </a>
+                  </div>
+                </div>
               </div>
             </div>
 
@@ -204,7 +220,7 @@ const Footer = () => {
             transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
             className="flex flex-col items-center"
           >
-            <h1 className="text-[7.5vw] text-center font-syne font-black leading-none uppercase tracking-tighter text-white/40 select-none pointer-events-none whitespace-nowrap">
+            <h1 className="text-[7vw] text-center font-syne font-black leading-none uppercase tracking-tighter text-white/40 select-none pointer-events-none whitespace-nowrap">
               BEE TEE <br />
               AUTOMOBILE
             </h1>

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+
+  <!-- Homepage Images -->
+  <url>
+    <loc>https://www.beeteeautomobile.com/</loc>
+    <image:image>
+      <image:loc>https://www.beeteeautomobile.com/slide_1.jpg</image:loc>
+      <image:caption>Luxury cars for sale at BEE TEE Automobile showroom in Abuja, Nigeria</image:caption>
+      <image:title>BEE TEE Automobile Premium Showroom</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.beeteeautomobile.com/slide_2.jpg</image:loc>
+      <image:caption>Premium electric and luxury vehicles available in Nigeria</image:caption>
+      <image:title>Electric Cars Nigeria - BEE TEE Automobile</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.beeteeautomobile.com/avatr2.jpg</image:loc>
+      <image:caption>Avatr electric vehicle - luxury EV available in Abuja, Nigeria</image:caption>
+      <image:title>Avatr Electric Car Nigeria</image:title>
+    </image:image>
+  </url>
+
+  <!-- Inventory Page Images -->
+  <url>
+    <loc>https://www.beeteeautomobile.com/inventory</loc>
+    <image:image>
+      <image:loc>https://www.beeteeautomobile.com/IMG_4439.jpg</image:loc>
+      <image:caption>Tesla Cybertruck for sale in Nigeria - BEE TEE Automobile Abuja</image:caption>
+      <image:title>Buy Tesla Cybertruck Nigeria</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.beeteeautomobile.com/IMG_4543.jpeg</image:loc>
+      <image:caption>Tesla Model Y electric car available in Abuja, Nigeria</image:caption>
+      <image:title>Tesla Model Y Nigeria</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.beeteeautomobile.com/IMG_5833.jpg</image:loc>
+      <image:caption>Tesla Model S luxury electric sedan for sale in Nigeria</image:caption>
+      <image:title>Tesla Model S Nigeria</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.beeteeautomobile.com/IMG_6349.jpg</image:loc>
+      <image:caption>Tesla Model 3 electric car for sale in Abuja, Nigeria</image:caption>
+      <image:title>Tesla Model 3 Nigeria</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.beeteeautomobile.com/avatr.jpg</image:loc>
+      <image:caption>Avatr 12 luxury electric sedan available in Nigeria</image:caption>
+      <image:title>Avatr 12 Electric Car Nigeria</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.beeteeautomobile.com/IMG_4156.jpg</image:loc>
+      <image:caption>XPeng G9 electric SUV for sale in Abuja, Nigeria</image:caption>
+      <image:title>XPeng G9 Electric SUV Nigeria</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.beeteeautomobile.com/IMG_6833.jpg</image:loc>
+      <image:caption>BYD Atto 3 affordable electric car in Nigeria</image:caption>
+      <image:title>BYD Atto 3 Nigeria</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.beeteeautomobile.com/range.jpg</image:loc>
+      <image:caption>Range Rover Autobiography luxury SUV for sale in Abuja, Nigeria</image:caption>
+      <image:title>Range Rover Nigeria</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.beeteeautomobile.com/IMG_4530.jpeg</image:loc>
+      <image:caption>Lexus LX 600 luxury SUV for sale in Nigeria</image:caption>
+      <image:title>Lexus LX 600 Nigeria</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.beeteeautomobile.com/IMG_4492.jpeg</image:loc>
+      <image:caption>Toyota Land Cruiser LC300 for sale in Abuja, Nigeria</image:caption>
+      <image:title>Toyota Land Cruiser Nigeria</image:title>
+    </image:image>
+  </url>
+
+  <!-- About Page -->
+  <url>
+    <loc>https://www.beeteeautomobile.com/about</loc>
+    <image:image>
+      <image:loc>https://www.beeteeautomobile.com/IMG_6374.jpg</image:loc>
+      <image:caption>BEE TEE Automobile showroom - Nigeria's leading electric and luxury car dealer</image:caption>
+      <image:title>BEE TEE Automobile Showroom Abuja</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.beeteeautomobile.com/garage.jpg</image:loc>
+      <image:caption>Electric vehicle maintenance and luxury car servicing workshop in Abuja</image:caption>
+      <image:title>EV Service Center Nigeria</image:title>
+    </image:image>
+  </url>
+
+</urlset>

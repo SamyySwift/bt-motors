@@ -355,12 +355,12 @@ export default function LandingPage() {
               </motion.div>
 
               <CharacterReveal
-                text={`"To be a trusted and innovative automobile brand, redefining car ownership through quality vehicles, electric mobility, and world-class auto care."`}
+                text={`"To lead the future of smart, reliable and efficient automotive care where innovation meets elegance through technology, quality and customer-centric solutions."`}
                 className="text-2xl md:text-4xl font-syne font-bold text-apple-black leading-[1.1]"
               />
 
               <CharacterReveal
-                text={`To provide exceptional value by selling quality brand-new, electric, and foreign-used vehicles, while delivering complete automotive services with integrity, innovation, and customer satisfaction at the core.`}
+                text={`Our mission is to deliver top-notch automobiles, exceptional repair, detailing services, and reliable car care solutions. We are committed to enhancing customer satisfaction through professionalism and integrity.`}
                 className="text-base md:text-lg text-silver leading-relaxed font-medium max-w-lg"
               />
 
@@ -381,10 +381,10 @@ export default function LandingPage() {
                 </div>
                 <div>
                   <h4 className="text-3xl md:text-6xl font-syne font-bold text-apple-black mb-1 md:mb-2">
-                    Expert
+                    Integrity
                   </h4>
                   <p className="text-[9px] md:text-[10px] text-silver font-bold tracking-[0.2em] uppercase">
-                    Auto Care Team
+                    Professional Care
                   </p>
                 </div>
               </motion.div>

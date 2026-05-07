@@ -1,0 +1,28 @@
+# BEE TEE Automobile - Robots.txt
+# https://www.beeteeautomobile.com
+
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /admin/
+
+# Sitemaps
+Sitemap: https://www.beeteeautomobile.com/sitemap.xml
+Sitemap: https://www.beeteeautomobile.com/sitemap-images.xml
+
+# Crawl-delay for polite crawling
+Crawl-delay: 1
+
+# Google specific
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 0
+
+# Google Image Bot
+User-agent: Googlebot-Image
+Allow: /
+
+# Bing
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
