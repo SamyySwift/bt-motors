@@ -1,6 +1,6 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, RefObject } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import SplitType from "split-type";
@@ -164,60 +164,6 @@ export default function LandingPage() {
         });
       });
 
-      // Sticky Stacking Services - Only on Desktop
-      if (servicesRef.current && !isMobile) {
-        const cards = gsap.utils.toArray(".service-card");
-        const tl = gsap.timeline({
-          scrollTrigger: {
-            trigger: servicesRef.current,
-            start: "top top",
-            end: () => `+=${cards.length * 100}%`,
-            pin: true,
-            scrub: 1,
-            invalidateOnRefresh: true,
-          },
-        });
-
-        cards.forEach((card: any, i: number) => {
-          // Initial state: hidden and below
-          gsap.set(card, {
-            yPercent: 150,
-            opacity: 0,
-            scale: 0.8,
-            rotate: 10,
-          });
-
-          // Animation for the card coming in
-          tl.to(
-            card,
-            {
-              yPercent: 0,
-              opacity: 1,
-              scale: 1,
-              rotate: 0,
-              ease: "power3.out",
-              duration: 1,
-            },
-            i,
-          );
-
-          // Animation for the card already in, as the NEXT card comes in
-          if (i < cards.length - 1) {
-            tl.to(
-              card,
-              {
-                scale: 0.95,
-                yPercent: -15,
-                opacity: 0.5,
-                filter: "blur(4px)",
-                ease: "none",
-                duration: 1,
-              },
-              i + 0.8,
-            );
-          }
-        });
-      }
     });
 
     return () => ctx.revert();
@@ -563,138 +509,7 @@ export default function LandingPage() {
       </section>
 
       {/* Services Section */}
-      <section
-        ref={servicesRef}
-        className="bg-apple-black relative overflow-hidden"
-      >
-        <div className="min-h-screen flex items-center justify-center py-16 md:py-24 relative overflow-hidden">
-          <div className="container mx-auto px-6 relative z-10">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-24 items-start h-full">
-              {/* Left Side: Sticky Info */}
-              <div className="lg:sticky lg:top-24">
-                <p className="text-[9px] md:text-[10px] font-bold tracking-[0.5em] uppercase text-bt-blue mb-4 md:6">
-                  OUR SERVICES
-                </p>
-                <h2 className="text-4xl md:text-8xl font-syne font-bold text-white tracking-tighter leading-[0.85] reveal-text mb-8 md:mb-12">
-                  World-Class <br />
-                  Automotive <br />
-                  Solutions.
-                </h2>
-                <p className="text-silver/40 text-sm md:text-lg max-w-sm leading-relaxed mb-8 md:mb-12">
-                  From the initial sourcing to long-term maintenance, we ensure
-                  every aspect of your journey is handled with absolute
-                  precision.
-                </p>
-
-                <div className="flex items-center gap-6">
-                  <div className="flex -space-x-4">
-                    {[1, 2, 3].map((i) => (
-                      <div
-                        key={i}
-                        className="w-8 h-8 md:w-12 md:h-12 rounded-full border-2 border-apple-black bg-bt-blue/20 flex items-center justify-center text-bt-blue font-bold text-[9px] md:text-xs backdrop-blur-sm"
-                      >
-                        0{i}
-                      </div>
-                    ))}
-                  </div>
-                  <span className="text-[9px] md:text-[10px] font-bold tracking-widest text-silver/60 uppercase">
-                    {isMobile ? "Discover Our Expertise" : "Scroll to Explore"}
-                  </span>
-                </div>
-              </div>
-
-              {/* Right Side: Stacking Cards */}
-              <div className="relative pt-6 md:pt-24 lg:pt-0 min-h-[400px] md:min-h-[600px]">
-                <div
-                  className={cn(
-                    "grid grid-cols-1 w-full h-full",
-                    isMobile ? "gap-6" : "grid-rows-1",
-                  )}
-                >
-                  {[
-                    {
-                      title: "Premium Car Sales & Imports",
-                      desc: "Brand New, Foreign Used, and Electric Cars sourced to your exact specifications.",
-                      icon: <Zap size={24} />,
-                      accent: "from-blue-500/20",
-                    },
-                    {
-                      title: "Expert Servicing & Repairs",
-                      desc: "Complete car servicing, professional spraying, maintenance, and diagnostics.",
-                      icon: <Gauge size={24} />,
-                      accent: "from-purple-500/20",
-                    },
-                    {
-                      title: "Flexible Delivery Options",
-                      desc: "Convenient pickup from our Headquarters or safe, insured delivery directly to you.",
-                      icon: <Globe size={24} />,
-                      accent: "from-emerald-500/20",
-                    },
-                  ].map((service, idx) => (
-                    <div
-                      key={idx}
-                      className={cn(
-                        "service-card group relative p-8 md:p-12 rounded-4xl bg-[#1a1a1c]/40 border border-white/10 hover:border-bt-blue/50 transition-all duration-700 interactive overflow-hidden backdrop-blur-3xl shadow-[0_50px_100px_-20px_rgba(0,0,0,0.8)]",
-                        !isMobile && "col-start-1 row-start-1",
-                      )}
-                      style={{
-                        zIndex: idx,
-                      }}
-                    >
-                      {/* Decorative Background Glow */}
-                      <div
-                        className={`absolute -inset-24 bg-linear-to-br ${service.accent} to-transparent opacity-0 group-hover:opacity-40 blur-[100px] transition-opacity duration-1000`}
-                      />
-
-                      {/* Index Number Background */}
-                      <div className="absolute -right-8 -top-8 text-[8rem] md:text-[18rem] font-syne font-extrabold text-white/2 group-hover:text-bt-blue/5 transition-all duration-1000 pointer-events-none select-none tracking-tighter">
-                        0{idx + 1}
-                      </div>
-
-                      <div className="relative z-10 h-full flex flex-col justify-between">
-                        <div>
-                          <div className="w-16 h-16 md:w-24 md:h-24 rounded-2xl md:rounded-4xl group-hover:rotate-360 transition-all duration-1000 mb-8 md:mb-16 shadow-2xl border border-white/10 relative overflow-hidden">
-                            <div className="absolute inset-0 bg-linear-to-tr from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-                            {service.icon}
-                          </div>
-
-                          <h4 className="text-3xl md:text-5xl font-syne font-bold text-white mb-4 md:mb-8 tracking-tighter group-hover:text-bt-blue transition-colors duration-500 leading-[1.1]">
-                            {service.title}
-                          </h4>
-                          <p className="text-silver/60 text-base md:text-xl leading-relaxed group-hover:text-white transition-colors duration-500 max-w-md font-medium">
-                            {service.desc}
-                          </p>
-                        </div>
-
-                        <div className="mt-8 md:mt-20 flex items-center justify-between">
-                          <div className="flex flex-col">
-                            <span className="text-[8px] md:text-[10px] font-bold tracking-[0.5em] uppercase text-silver/30 group-hover:text-bt-blue transition-colors mb-2">
-                              SERVICE DIVISION
-                            </span>
-                            <span className="text-[9px] md:text-xs font-syne font-bold text-white/20 uppercase tracking-widest">
-                              BEE TEE AUTOMOBILE
-                            </span>
-                          </div>
-                          <div className="w-12 h-12 md:w-16 md:h-16 rounded-full border border-white/10 flex items-center justify-center text-white group-hover:bg-white group-hover:text-apple-black group-hover:scale-110 transition-all duration-500 shadow-xl">
-                            <ArrowRight size={18} />
-                          </div>
-                        </div>
-                      </div>
-
-                      {/* Animated Border Bottom */}
-                      <div className="absolute bottom-0 left-0 h-1 bg-linear-to-r from-bt-blue via-purple-500 to-bt-blue w-0 group-hover:w-full transition-all duration-1000 ease-in-out" />
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Background Accents */}
-          <div className="absolute top-0 right-0 w-1/2 h-1/2 bg-bt-blue/5 blur-[160px] rounded-full -translate-y-1/2 translate-x-1/2 pointer-events-none" />
-          <div className="absolute bottom-0 left-0 w-1/2 h-1/2 bg-bt-blue/5 blur-[160px] rounded-full translate-y-1/2 -translate-x-1/2 pointer-events-none" />
-        </div>
-      </section>
+      <ServicesSection containerRef={servicesRef} />
 
       {/* Final CTA */}
       <section className="py-32 md:py-64 bg-white relative overflow-hidden">
@@ -724,4 +539,106 @@ export default function LandingPage() {
       </section>
     </div>
   );
+}
+
+function ServicesSection({ containerRef }: { containerRef: RefObject<HTMLDivElement | null> }) {
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start end", "end start"]
+  });
+
+  const xParallax = useTransform(scrollYProgress, [0, 1], ["30%", "-30%"]);
+  const smoothX = useSpring(xParallax, { stiffness: 50, damping: 20 });
+
+  const services = [
+    {
+      title: "Premium Sales & Imports",
+      desc: "Brand New, Foreign Used, and Electric Cars sourced to your exact specifications with absolute transparency."
+    },
+    {
+      title: "Expert Servicing & Repairs",
+      desc: "Complete car servicing, professional spraying, maintenance, and diagnostics handled by certified technicians."
+    },
+    {
+      title: "Flexible Delivery Options",
+      desc: "Convenient pickup from our Headquarters or safe, insured delivery directly to your doorstep, nationwide."
+    }
+  ];
+
+  return (
+    <section ref={containerRef} className="min-h-screen bg-[#050505] text-white py-40 px-6 md:px-12 relative overflow-hidden z-20">
+      
+      {/* Parallax Background Text */}
+      <motion.div 
+        style={{ x: smoothX }}
+        className="absolute top-1/2 left-0 -translate-y-1/2 whitespace-nowrap pointer-events-none opacity-[0.03] select-none"
+      >
+        <h2 className="text-[25vw] font-black tracking-tighter leading-none font-syne uppercase">
+          Services Services Services
+        </h2>
+      </motion.div>
+
+      <div className="max-w-7xl mx-auto relative z-10">
+        <motion.h2 
+          initial={{ opacity: 0, scale: 0.95 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
+          className="text-4xl md:text-9xl font-bold mb-48 tracking-tighter text-center md:text-left font-syne"
+        >
+          WORLD-CLASS <br/> <span className="text-gray-700">SOLUTIONS.</span>
+        </motion.h2>
+
+        <div className="flex flex-col gap-32">
+          {services.map((s, i) => (
+            <FeatureItem key={i} title={s.title} desc={s.desc} index={i} />
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function FeatureItem({ title, desc, index }: { title: string, desc: string, index: number }) {
+    const itemRef = useRef<HTMLDivElement>(null);
+    const { scrollYProgress } = useScroll({
+        target: itemRef,
+        offset: ["start end", "center center", "end start"]
+    });
+
+    const scale = useTransform(scrollYProgress, [0, 0.5, 1], [0.9, 1, 0.9]);
+    const opacity = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [0, 1, 1, 0]);
+    const ySkew = useTransform(scrollYProgress, [0, 1], [5, -5]);
+    const brightness = useTransform(scrollYProgress, [0, 0.5, 1], ["brightness(0.3)", "brightness(1)", "brightness(0.3)"]);
+
+    return (
+        <motion.div 
+            ref={itemRef}
+            style={{ 
+                scale, 
+                opacity, 
+                filter: brightness,
+                rotateX: ySkew 
+            }}
+            className={`w-full max-w-4xl flex flex-col ${index % 2 === 0 ? 'ml-0' : 'ml-auto text-right'} group`}
+        >
+            <div className={`border-white/10 py-4 ${index % 2 === 0 ? 'border-l-2 pl-8' : 'border-r-2 pr-8 text-right'}`}>
+                <span className="text-xs font-bold tracking-[0.5em] text-gray-600 mb-4 block uppercase font-syne">
+                    0{index + 1} // Division
+                </span>
+                <h3 className="text-4xl md:text-7xl font-bold mb-6 tracking-tight font-syne uppercase leading-tight">
+                    {title}
+                </h3>
+                <p className={`text-base md:text-xl text-white/50 max-w-xl leading-relaxed ${index % 2 !== 0 ? 'ml-auto' : ''}`}>
+                    {desc}
+                </p>
+            </div>
+            
+            {/* Visual Line Accent */}
+            <motion.div 
+                className="h-[1px] bg-gradient-to-r from-transparent via-white/20 to-transparent w-full mt-8"
+                style={{ scaleX: scrollYProgress }}
+            />
+        </motion.div>
+    );
 }

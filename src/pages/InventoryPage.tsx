@@ -66,7 +66,7 @@ export default function InventoryPage() {
             </p>
             <h1
               ref={headingRef}
-              className="text-7xl md:text-9xl font-syne font-bold tracking-tighter leading-none"
+              className="text-5xl md:text-7xl font-syne font-bold tracking-tighter leading-none"
             >
               Explore <br />
               <span className="italic">The Fleet.</span>
@@ -86,10 +86,10 @@ export default function InventoryPage() {
         </div>
 
         {/* Layout with Sidebar */}
-        <div className="flex gap-12">
+        <div className="flex flex-col lg:flex-row gap-12">
           {/* Sidebar Filters */}
-          <aside className="w-72 shrink-0 sticky top-32 h-fit">
-            <div className="bg-f5f5f7/50 backdrop-blur-sm rounded-4xl p-8 border border-black/5">
+          <aside className="w-full lg:w-72 shrink-0 lg:sticky lg:top-32 h-fit z-20">
+            <div className="bg-f5f5f7/50 backdrop-blur-sm rounded-[2rem] lg:rounded-4xl p-6 lg:p-8 border border-black/5">
               <div className="flex items-center gap-3 mb-8">
                 <SlidersHorizontal size={20} className="text-bt-blue" />
                 <h3 className="text-sm font-bold tracking-widest uppercase">
@@ -97,7 +97,7 @@ export default function InventoryPage() {
                 </h3>
               </div>
 
-              <div className="space-y-3">
+              <div className="space-y-3 flex flex-row lg:flex-col gap-3 overflow-x-auto lg:overflow-x-visible pb-4 lg:pb-0 no-scrollbar">
                 {[
                   "All",
                   "Porsche",
@@ -110,7 +110,7 @@ export default function InventoryPage() {
                   <button
                     key={make}
                     onClick={() => setActiveFilter(make)}
-                    className={`w-full text-left px-6 py-4 rounded-2xl text-sm font-medium transition-all duration-500 ${
+                    className={`whitespace-nowrap px-6 py-4 rounded-2xl text-sm font-medium transition-all duration-500 ${
                       activeFilter === make
                         ? "bg-bt-blue text-white shadow-lg scale-[1.02]"
                         : "bg-white/50 text-apple-black hover:bg-white hover:shadow-md"
@@ -124,7 +124,7 @@ export default function InventoryPage() {
                 ))}
               </div>
 
-              <div className="mt-8 pt-8 border-t border-black/10">
+              <div className="mt-4 lg:mt-8 pt-4 lg:pt-8 border-t border-black/10">
                 <p className="text-xs text-silver font-medium">
                   Showing {filteredInventory.length} of {inventory.length}{" "}
                   vehicles
@@ -248,57 +248,57 @@ export default function InventoryPage() {
               animate={{ scale: 1, y: 0, opacity: 1 }}
               exit={{ scale: 0.9, y: 50, opacity: 0 }}
               transition={{ type: "spring", damping: 25, stiffness: 300 }}
-              className="bg-white w-full max-w-7xl h-[90vh] rounded-[4rem] overflow-hidden flex flex-col md:flex-row relative z-10 border border-black/3 shadow-2xl"
+              className="bg-white w-full max-w-7xl h-[95vh] md:h-[90vh] rounded-[2rem] md:rounded-[4rem] overflow-hidden flex flex-col md:flex-row relative z-10 border border-black/3 shadow-2xl"
             >
               <button
                 onClick={() => setSelectedVehicle(null)}
-                className="absolute top-10 right-10 text-apple-black hover:bg-bt-blue hover:text-white transition-all z-20 bg-f5f5f7 p-3 rounded-full"
+                className="absolute top-6 right-6 md:top-10 md:right-10 text-apple-black hover:bg-bt-blue hover:text-white transition-all z-30 bg-white/80 backdrop-blur-md md:bg-f5f5f7 p-2 md:p-3 rounded-full shadow-sm"
               >
-                <X size={24} />
+                <X size={20} className="md:w-6 md:h-6" />
               </button>
 
-              <div className="w-full md:w-3/5 relative bg-f5f5f7 h-1/2 md:h-full overflow-hidden">
+              <div className="w-full md:w-3/5 relative bg-f5f5f7 h-[40vh] md:h-full overflow-hidden shrink-0">
                 <img
                   src={selectedVehicle.image}
                   alt={`${selectedVehicle.year} ${selectedVehicle.make} ${selectedVehicle.model} — interior and exterior view at BEE TEE Automobile Abuja`}
                   className="w-full h-full object-cover"
                 />
-                <div className="absolute bottom-12 left-12 flex gap-4">
-                  <div className="px-6 py-3 rounded-full bg-white/80 backdrop-blur-md text-[10px] font-bold uppercase tracking-widest shadow-sm">
+                <div className="absolute bottom-6 left-6 md:bottom-12 md:left-12 flex gap-3 md:gap-4">
+                  <div className="px-4 py-2 md:px-6 md:py-3 rounded-full bg-white/80 backdrop-blur-md text-[8px] md:text-[10px] font-bold uppercase tracking-widest shadow-sm">
                     Exterior
                   </div>
-                  <div className="px-6 py-3 rounded-full bg-white/20 backdrop-blur-md text-[10px] font-bold uppercase tracking-widest text-apple-black/40">
+                  <div className="px-4 py-2 md:px-6 md:py-3 rounded-full bg-white/20 backdrop-blur-md text-[8px] md:text-[10px] font-bold uppercase tracking-widest text-apple-black/40">
                     Interior
                   </div>
                 </div>
               </div>
 
-              <div className="w-full md:w-2/5 p-12 md:p-20 flex flex-col h-1/2 md:h-full overflow-y-auto">
+              <div className="w-full md:w-2/5 p-8 md:p-16 lg:p-20 flex flex-col h-full overflow-y-auto">
                 <div className="grow">
-                  <p className="text-[10px] font-bold tracking-[0.5em] uppercase text-silver mb-4">
+                  <p className="text-[9px] md:text-[10px] font-bold tracking-[0.5em] uppercase text-silver mb-3 md:mb-4">
                     {selectedVehicle.make}
                   </p>
-                  <h2 className="text-5xl md:text-6xl font-syne font-bold text-apple-black mb-4 tracking-tighter">
+                  <h2 className="text-4xl md:text-6xl font-syne font-bold text-apple-black mb-3 md:mb-4 tracking-tighter">
                     {selectedVehicle.model}
                   </h2>
-                  <div className="text-xl font-syne font-bold text-apple-black mb-12">
+                  <div className="text-lg md:text-xl font-syne font-bold text-apple-black mb-8 md:mb-12">
                     {selectedVehicle.price}
                   </div>
 
-                  <div className="grid grid-cols-2 gap-x-12 gap-y-8 mb-16">
+                  <div className="grid grid-cols-2 gap-x-8 md:gap-x-12 gap-y-6 md:gap-y-8 mb-10 md:mb-16">
                     <div>
-                      <p className="text-[10px] font-bold text-silver uppercase tracking-widest mb-2 flex items-center gap-2">
+                      <p className="text-[9px] md:text-[10px] font-bold text-silver uppercase tracking-widest mb-1.5 md:mb-2 flex items-center gap-2">
                         <Gauge size={12} className="text-bt-blue" /> Acceleration
                       </p>
-                      <p className="text-2xl font-syne font-bold text-apple-black">
-                        {selectedVehicle.acceleration} <span className="text-xs text-silver font-sans">(0-60)</span>
+                      <p className="text-xl md:text-2xl font-syne font-bold text-apple-black">
+                        {selectedVehicle.acceleration} <span className="text-[10px] text-silver font-sans">(0-60)</span>
                       </p>
                     </div>
                     <div>
-                      <p className="text-[10px] font-bold text-silver uppercase tracking-widest mb-2">
+                      <p className="text-[9px] md:text-[10px] font-bold text-silver uppercase tracking-widest mb-1.5 md:mb-2">
                         Engine
                       </p>
-                      <p className="text-2xl font-syne font-bold text-apple-black">
+                      <p className="text-xl md:text-2xl font-syne font-bold text-apple-black">
                         {selectedVehicle.engine}
                       </p>
                     </div>
