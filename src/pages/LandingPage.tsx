@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, RefObject } from "react";
+import { useState, useEffect, useRef, type RefObject } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import gsap from "gsap";
@@ -12,8 +12,6 @@ import {
   Clock,
   ArrowUpRight,
   ShieldCheck,
-  Zap,
-  Gauge,
 } from "lucide-react";
 import { cn } from "../lib/utils";
 import SectionHeading from "../components/SectionHeading";
@@ -361,8 +359,10 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* Philosophy Section */}
-      <WhyBT />
+
+      {/* Services Section */}
+      <ServicesSection containerRef={servicesRef} />
+
 
       {/* Horizontal Lineup Section */}
       <section
@@ -501,15 +501,17 @@ export default function LandingPage() {
 
             <MagneticButton>
               <button className="px-8 py-5 md:px-16 md:py-8 bg-bt-blue text-white rounded-full font-bold text-[9px] md:text-xs tracking-widest uppercase transition-all hover:bg-bt-blue-dark interactive shadow-2xl shadow-bt-blue/30">
-                Discover Innovation
+                Explore Innovation
               </button>
             </MagneticButton>
           </div>
         </div>
       </section>
 
-      {/* Services Section */}
-      <ServicesSection containerRef={servicesRef} />
+      {/* Philosophy Section */}
+      <WhyBT />
+
+      
 
       {/* Final CTA */}
       <section className="py-32 md:py-64 bg-white relative overflow-hidden">
@@ -562,6 +564,14 @@ function ServicesSection({ containerRef }: { containerRef: RefObject<HTMLDivElem
     {
       title: "Flexible Delivery Options",
       desc: "Convenient pickup from our Headquarters or safe, insured delivery directly to your doorstep, nationwide."
+    },
+    {
+      title: "Auto Painting",
+      desc: "Specializing in premium resprays, from high-gloss to matte finishes, utilizing advanced spray booths for factory-grade results."
+    },
+    {
+      title: "Washing & Detailing",
+      desc: "Deep interior cleaning, paint enhancement, and protective treatments designed to maintain showroom standards."
     }
   ];
 
@@ -586,7 +596,7 @@ function ServicesSection({ containerRef }: { containerRef: RefObject<HTMLDivElem
           transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
           className="text-4xl md:text-9xl font-bold mb-48 tracking-tighter text-center md:text-left font-syne"
         >
-          WORLD-CLASS <br/> <span className="text-gray-700">SOLUTIONS.</span>
+          WORLD-CLASS <br/> <span className="text-gray-700">SERVICES.</span>
         </motion.h2>
 
         <div className="flex flex-col gap-32">
@@ -594,6 +604,23 @@ function ServicesSection({ containerRef }: { containerRef: RefObject<HTMLDivElem
             <FeatureItem key={i} title={s.title} desc={s.desc} index={i} />
           ))}
         </div>
+
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="mt-48 flex justify-center"
+        >
+          <MagneticButton>
+            <Link 
+              to="/services" 
+              className="px-16 py-8 bg-white text-apple-black rounded-full font-bold text-xs tracking-[0.3em] uppercase hover:bg-bt-blue hover:text-white transition-all duration-500 interactive shadow-2xl"
+              data-cursor-text="Explore"
+            >
+              View All Services
+            </Link>
+          </MagneticButton>
+        </motion.div>
       </div>
     </section>
   );
@@ -624,9 +651,12 @@ function FeatureItem({ title, desc, index }: { title: string, desc: string, inde
         >
             <div className={`border-white/10 py-4 ${index % 2 === 0 ? 'border-l-2 pl-8' : 'border-r-2 pr-8 text-right'}`}>
                 <span className="text-xs font-bold tracking-[0.5em] text-gray-600 mb-4 block uppercase font-syne">
-                    0{index + 1} // Division
+                  <div className="flex items-center justify-center bg-bt-blue border rounded-full w-10 h-10">
+                     0{index + 1} 
+                  </div>
+                   
                 </span>
-                <h3 className="text-4xl md:text-7xl font-bold mb-6 tracking-tight font-syne uppercase leading-tight">
+                <h3 className="text-3xl md:text-6xl text-white font-bold mb-6 tracking-tight font-syne uppercase leading-tight">
                     {title}
                 </h3>
                 <p className={`text-base md:text-xl text-white/50 max-w-xl leading-relaxed ${index % 2 !== 0 ? 'ml-auto' : ''}`}>
@@ -636,7 +666,7 @@ function FeatureItem({ title, desc, index }: { title: string, desc: string, inde
             
             {/* Visual Line Accent */}
             <motion.div 
-                className="h-[1px] bg-gradient-to-r from-transparent via-white/20 to-transparent w-full mt-8"
+                className="h-px bg-linear-to-r from-transparent via-white/20 to-transparent w-full mt-8"
                 style={{ scaleX: scrollYProgress }}
             />
         </motion.div>

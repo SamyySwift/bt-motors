@@ -22,6 +22,8 @@ export default function InventoryPage() {
   const [selectedVehicle, setSelectedVehicle] = useState<Vehicle | null>(null);
   const [showInquiryOptions, setShowInquiryOptions] = useState(false);
   const [activeFilter, setActiveFilter] = useState("All");
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 6;
   const headingRef = useRef<HTMLHeadingElement>(null);
 
   useEffect(() => {
@@ -38,15 +40,25 @@ export default function InventoryPage() {
     }
   }, []);
 
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [activeFilter]);
+
   const filteredInventory =
     activeFilter === "All"
       ? inventory
       : inventory.filter((v) => v.make === activeFilter);
 
+  const totalPages = Math.ceil(filteredInventory.length / itemsPerPage);
+  const paginatedInventory = filteredInventory.slice(
+    (currentPage - 1) * itemsPerPage,
+    currentPage * itemsPerPage
+  );
+
   const inventoryBrands = [...new Set(inventory.map(v => v.make))].join(", ");
 
   return (
-    <div className="min-h-screen bg-white pt-48 pb-24 grainy-overlay">
+    <div className="min-h-screen bg-white pt-32 md:pt-48 pb-24 grainy-overlay">
       <SEOHead
         title="Luxury & Electric Cars for Sale in Nigeria"
         description={`Browse our curated collection of luxury and electric vehicles available in Abuja, Nigeria. Featuring ${inventoryBrands} — brand new and foreign used. Price on request. Visit our Jahi showroom today.`}
@@ -59,7 +71,7 @@ export default function InventoryPage() {
       />
       <div className="container mx-auto max-w-[1600px] px-6 md:px-12">
         {/* Header */}
-        <div className="flex flex-col md:flex-row justify-between items-end mb-24 gap-12">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 md:mb-24 gap-12">
           <div className="max-w-2xl">
             <p className="text-[10px] font-bold tracking-[0.5em] uppercase text-silver mb-6">
               The Showroom
@@ -79,7 +91,7 @@ export default function InventoryPage() {
               <input
                 type="text"
                 placeholder="Search models..."
-                className="bg-transparent border-none outline-none text-sm font-medium w-48"
+                className="bg-transparent border-none outline-none text-sm font-medium w-full md:w-48"
               />
             </div>
           </div>
@@ -137,7 +149,7 @@ export default function InventoryPage() {
           <main className="flex-1">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
               <AnimatePresence mode="popLayout">
-                {filteredInventory.map((vehicle, i) => (
+                {paginatedInventory.map((vehicle, i) => (
                   <motion.button
                     layout
                     type="button"
@@ -160,7 +172,7 @@ export default function InventoryPage() {
                     }}
                     data-cursor-text={vehicle.price === "Price on Request" ? "Inquire" : "Inspect"}
                   >
-                    <div className="aspect-4/3 rounded-[2.5rem] overflow-hidden bg-f5f5f7 mb-8 relative group-hover:shadow-[0_20px_50px_rgba(0,0,0,0.1)] transition-all duration-700">
+                    <div className="aspect-[4/5] rounded-[2.5rem] overflow-hidden bg-f5f5f7 mb-8 relative group-hover:shadow-[0_20px_50px_rgba(0,0,0,0.1)] transition-all duration-700">
                       <img
                         src={vehicle.image}
                         alt={`${vehicle.year} ${vehicle.make} ${vehicle.model} for sale at BEE TEE Automobile Abuja Nigeria`}
@@ -225,6 +237,51 @@ export default function InventoryPage() {
                 ))}
               </AnimatePresence>
             </div>
+
+            {/* Pagination UI */}
+            {totalPages > 1 && (
+              <div className="mt-20 flex justify-center items-center gap-4">
+                <button
+                  onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
+                  disabled={currentPage === 1}
+                  className={`p-4 rounded-full border border-black/5 transition-all duration-300 ${
+                    currentPage === 1 
+                      ? "opacity-30 cursor-not-allowed" 
+                      : "hover:bg-bt-blue hover:text-white hover:border-bt-blue shadow-sm"
+                  }`}
+                >
+                  <ArrowUpRight className="rotate-[225deg]" size={20} />
+                </button>
+                
+                <div className="flex items-center gap-2">
+                  {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+                    <button
+                      key={page}
+                      onClick={() => setCurrentPage(page)}
+                      className={`w-12 h-12 rounded-full font-bold text-xs transition-all duration-500 ${
+                        currentPage === page
+                          ? "bg-bt-blue text-white shadow-lg scale-110"
+                          : "bg-f5f5f7 text-apple-black hover:bg-white border border-transparent hover:border-black/5"
+                      }`}
+                    >
+                      {page}
+                    </button>
+                  ))}
+                </div>
+
+                <button
+                  onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
+                  disabled={currentPage === totalPages}
+                  className={`p-4 rounded-full border border-black/5 transition-all duration-300 ${
+                    currentPage === totalPages 
+                      ? "opacity-30 cursor-not-allowed" 
+                      : "hover:bg-bt-blue hover:text-white hover:border-bt-blue shadow-sm"
+                  }`}
+                >
+                  <ArrowUpRight className="rotate-45" size={20} />
+                </button>
+              </div>
+            )}
           </main>
         </div>
       </div>
@@ -375,7 +432,7 @@ export default function InventoryPage() {
               animate={{ scale: 1, y: 0, opacity: 1 }}
               exit={{ scale: 0.9, y: 50, opacity: 0 }}
               transition={{ type: "spring", damping: 25, stiffness: 300 }}
-              className="bg-white w-full max-w-xl rounded-[3rem] p-12 relative z-10 border border-black/3 shadow-2xl text-center"
+              className="bg-white w-full max-w-xl rounded-[2rem] md:rounded-[3rem] p-8 md:p-12 relative z-10 border border-black/3 shadow-2xl text-center"
             >
               <button
                 onClick={() => setShowInquiryOptions(false)}

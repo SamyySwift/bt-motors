@@ -39,7 +39,7 @@ export default function InquiryPage() {
   };
 
   return (
-    <div className="min-h-screen pt-40 pb-24 bg-white text-apple-black overflow-hidden">
+    <div className="min-h-screen pt-32 md:pt-40 pb-24 bg-white text-apple-black overflow-hidden">
       <SEOHead
         title="Contact Us — Inquire About Electric & Luxury Cars"
         description="Get in touch with BEE TEE Automobile's private sales advisors. Inquire about Tesla, Range Rover, Lexus, BYD, and other luxury & electric vehicles. Visit our showroom at Plot 36, Wole Soyinka Way, Jahi, Abuja."
@@ -50,7 +50,7 @@ export default function InquiryPage() {
           { name: "Contact & Inquiry", url: "/inquiry" },
         ])}
       />
-      <div className="max-w-7xl mx-auto px-6 md:px-12 flex flex-col lg:flex-row gap-20">
+      <div className="max-w-7xl mx-auto px-6 md:px-12 flex flex-col lg:flex-row gap-12 lg:gap-20">
         {/* Content Column */}
         <div className="w-full lg:w-1/2">
           <div className="mb-12">
@@ -59,7 +59,7 @@ export default function InquiryPage() {
             </span>
             <h1
               ref={titleRef}
-              className="text-6xl md:text-8xl font-syne font-bold leading-[0.9] tracking-tight mb-8"
+              className="text-5xl md:text-8xl font-syne font-bold leading-[0.9] tracking-tight mb-8"
             >
               Begin Your <br />
               <span className="italic">Journey.</span>
@@ -108,7 +108,7 @@ export default function InquiryPage() {
 
         {/* Form Column */}
         <div className="w-full lg:w-1/2">
-          <div className="bg-soft-gray/50 rounded-[40px] p-8 md:p-16 relative overflow-hidden">
+          <div className="bg-soft-gray/50 rounded-[2.5rem] md:rounded-[40px] p-6 md:p-16 relative overflow-hidden">
             <AnimatePresence mode="wait">
               {!isSubmitted ? (
                 <motion.div
