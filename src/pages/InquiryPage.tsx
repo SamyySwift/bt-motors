@@ -4,6 +4,7 @@ import { MapPin, Phone, CheckCircle2, ArrowRight, Clock } from "lucide-react";
 import gsap from "gsap";
 import SplitType from "split-type";
 import ContactOptions from "../components/ContactOptions";
+import SEOHead, { getBreadcrumbSchema } from "../components/SEOHead";
 
 export default function InquiryPage() {
   const [step, setStep] = useState(1);
@@ -39,6 +40,16 @@ export default function InquiryPage() {
 
   return (
     <div className="min-h-screen pt-40 pb-24 bg-white text-apple-black overflow-hidden">
+      <SEOHead
+        title="Contact Us — Inquire About Electric & Luxury Cars"
+        description="Get in touch with BEE TEE Automobile's private sales advisors. Inquire about Tesla, Range Rover, Lexus, BYD, and other luxury & electric vehicles. Visit our showroom at Plot 36, Wole Soyinka Way, Jahi, Abuja."
+        canonicalUrl="/inquiry"
+        keywords="contact car dealer Abuja, buy car Nigeria inquiry, Tesla price Nigeria, luxury car quote Abuja, electric vehicle inquiry Nigeria, car showroom Abuja contact, BEE TEE Automobile phone number"
+        structuredData={getBreadcrumbSchema([
+          { name: "Home", url: "/" },
+          { name: "Contact & Inquiry", url: "/inquiry" },
+        ])}
+      />
       <div className="max-w-7xl mx-auto px-6 md:px-12 flex flex-col lg:flex-row gap-20">
         {/* Content Column */}
         <div className="w-full lg:w-1/2">

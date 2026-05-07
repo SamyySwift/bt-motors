@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import gsap from "gsap";
 import SplitType from "split-type";
 import MagneticButton from "../components/MagneticButton";
+import SEOHead, { getBreadcrumbSchema } from "../components/SEOHead";
 
 const services = [
   {
@@ -161,6 +162,16 @@ export default function ServicesPage() {
 
   return (
     <div className="min-h-screen bg-white grainy-overlay">
+      <SEOHead
+        title="Car Services — EV Charging, Repairs, Painting & Detailing"
+        description="Premium automotive services in Abuja, Nigeria. EV charging stations, mechanical & electrical diagnostics, oven-baked auto painting, car washing & detailing, and after-sales warranty support at BEE TEE Automobile."
+        canonicalUrl="/services"
+        keywords="car servicing Abuja, EV charging station Nigeria, auto painting Abuja, car detailing Nigeria, car repair Abuja, electric vehicle servicing, luxury car maintenance Nigeria, car wash Abuja, vehicle diagnostics FCT"
+        structuredData={getBreadcrumbSchema([
+          { name: "Home", url: "/" },
+          { name: "Services", url: "/services" },
+        ])}
+      />
       {/* Hero Section with Parallax */}
       <motion.section
         ref={heroRef}
@@ -272,7 +283,7 @@ export default function ServicesPage() {
                   <div className="aspect-[4/3] rounded-[3rem] overflow-hidden relative">
                     <motion.img
                       src={service.image}
-                      alt={service.title}
+                      alt={`${service.title} — ${service.subtitle} at BEE TEE Automobile Abuja Nigeria`}
                       className="w-full h-full object-cover"
                       animate={{
                         scale: activeService === service.id ? 1.05 : 1,

@@ -14,6 +14,7 @@ import MagneticButton from "../components/MagneticButton";
 import ContactOptions from "../components/ContactOptions";
 
 import { inventory } from "../data/inventory";
+import SEOHead, { getBreadcrumbSchema } from "../components/SEOHead";
 
 type Vehicle = (typeof inventory)[0];
 
@@ -42,8 +43,20 @@ export default function InventoryPage() {
       ? inventory
       : inventory.filter((v) => v.make === activeFilter);
 
+  const inventoryBrands = [...new Set(inventory.map(v => v.make))].join(", ");
+
   return (
     <div className="min-h-screen bg-white pt-48 pb-24 grainy-overlay">
+      <SEOHead
+        title="Luxury & Electric Cars for Sale in Nigeria"
+        description={`Browse our curated collection of luxury and electric vehicles available in Abuja, Nigeria. Featuring ${inventoryBrands} — brand new and foreign used. Price on request. Visit our Jahi showroom today.`}
+        canonicalUrl="/inventory"
+        keywords="buy luxury cars Nigeria, electric cars for sale Abuja, Tesla for sale Nigeria, Range Rover Nigeria, buy BYD Nigeria, luxury SUV Abuja, foreign used cars Nigeria, car dealership Abuja, buy Lexus Nigeria, Porsche Nigeria"
+        structuredData={getBreadcrumbSchema([
+          { name: "Home", url: "/" },
+          { name: "Inventory", url: "/inventory" },
+        ])}
+      />
       <div className="container mx-auto max-w-[1600px] px-6 md:px-12">
         {/* Header */}
         <div className="flex flex-col md:flex-row justify-between items-end mb-24 gap-12">
@@ -150,7 +163,7 @@ export default function InventoryPage() {
                     <div className="aspect-4/3 rounded-[2.5rem] overflow-hidden bg-f5f5f7 mb-8 relative group-hover:shadow-[0_20px_50px_rgba(0,0,0,0.1)] transition-all duration-700">
                       <img
                         src={vehicle.image}
-                        alt={vehicle.model}
+                        alt={`${vehicle.year} ${vehicle.make} ${vehicle.model} for sale at BEE TEE Automobile Abuja Nigeria`}
                         className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
                       />
                       
@@ -247,7 +260,7 @@ export default function InventoryPage() {
               <div className="w-full md:w-3/5 relative bg-f5f5f7 h-1/2 md:h-full overflow-hidden">
                 <img
                   src={selectedVehicle.image}
-                  alt={selectedVehicle.model}
+                  alt={`${selectedVehicle.year} ${selectedVehicle.make} ${selectedVehicle.model} — interior and exterior view at BEE TEE Automobile Abuja`}
                   className="w-full h-full object-cover"
                 />
                 <div className="absolute bottom-12 left-12 flex gap-4">

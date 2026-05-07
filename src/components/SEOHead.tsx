@@ -7,12 +7,12 @@ interface SEOHeadProps {
   ogImage?: string;
   ogType?: string;
   keywords?: string;
-  structuredData?: object;
+  structuredData?: object | object[];
   noindex?: boolean;
 }
 
 const SITE_NAME = "BEE TEE Automobile";
-const BASE_URL = "https://www.beeteeautomobile.com";
+const BASE_URL = "https://beeteeautos.beeteeautosinventory.live";
 const DEFAULT_OG_IMAGE = `${BASE_URL}/logo.png`;
 
 export default function SEOHead({
@@ -63,9 +63,17 @@ export default function SEOHead({
 
       {/* Structured Data (JSON-LD) */}
       {structuredData && (
-        <script type="application/ld+json">
-          {JSON.stringify(structuredData)}
-        </script>
+        Array.isArray(structuredData)
+          ? structuredData.map((data, i) => (
+              <script key={i} type="application/ld+json">
+                {JSON.stringify(data)}
+              </script>
+            ))
+          : (
+              <script type="application/ld+json">
+                {JSON.stringify(structuredData)}
+              </script>
+            )
       )}
     </Helmet>
   );

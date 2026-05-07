@@ -4,7 +4,6 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import SplitType from "split-type";
 import { motion } from "framer-motion";
 import { 
-  ArrowUpRight, 
   Award, 
   Heart, 
   ShieldCheck, 
@@ -15,7 +14,6 @@ import {
   Rocket,
   Battery,
   Leaf,
-  Car
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import SEOHead, { getOrganizationSchema, getBreadcrumbSchema, getFAQSchema } from "../components/SEOHead";
@@ -151,7 +149,7 @@ export default function AboutPage() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-24 items-start">
             <div className="space-y-12">
-              <p className="text-2xl md:text-4xl font-syne font-bold text-apple-black leading-[1.1] reveal-on-scroll">
+              <p className="text-2xl md:text-3xl font-syne font-bold text-apple-black leading-[1.1] reveal-on-scroll">
                 BEE TEE Automobiles Ltd is Nigeria's premier destination for electric vehicles 
                 and luxury cars — bringing the future of motoring to Abuja and beyond.
               </p>
@@ -216,31 +214,31 @@ export default function AboutPage() {
         {/* Strategy Section */}
         <section className="mb-48">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="bg-apple-black text-white p-16 rounded-[4rem] flex flex-col justify-between aspect-square md:aspect-auto">
+            <div className="relative bg-apple-black text-white p-16 rounded-[4rem] flex flex-col justify-between aspect-square md:aspect-auto">
               <Target size={48} className="text-bt-blue mb-8" />
               <div>
-                <h3 className="text-[10px] font-bold tracking-widest uppercase opacity-40 mb-4">Purpose</h3>
-                <p className="text-3xl font-syne font-bold leading-tight">
+                <h3 className="absolute left-16 top-30 text-[10px] text-white font-bold tracking-widest uppercase opacity-40">Purpose</h3>
+                <p className="text-3xl font-semibold leading-tight mt-6">
                   To be Nigeria's leading electric and luxury car dealership, providing 
                   personalized services and driving the EV revolution across West Africa.
                 </p>
               </div>
             </div>
-            <div className="bg-bt-blue text-white p-16 rounded-[4rem] flex flex-col justify-between aspect-square md:aspect-auto">
+            <div className="relative bg-bt-blue text-white p-16 rounded-[4rem] flex flex-col justify-between aspect-square md:aspect-auto">
               <Eye size={48} className="text-white/40 mb-8" />
               <div>
-                <h3 className="text-[10px] font-bold tracking-widest uppercase opacity-60 mb-4">Vision</h3>
-                <p className="text-3xl font-syne font-bold leading-tight">
+                <h3 className="text-[10px] absolute left-16 top-30 font-bold tracking-widest uppercase opacity-60 mb-4">Vision</h3>
+                <p className="text-3xl mt-6 font-semibold leading-tight">
                   To lead the future of sustainable, electric, and luxury automotive 
                   care in Nigeria — where innovation meets elegance through technology.
                 </p>
               </div>
             </div>
-            <div className="bg-f5f5f7 p-16 rounded-[4rem] flex flex-col justify-between aspect-square md:aspect-auto">
+            <div className="bg-gray-200 relative p-16 rounded-[4rem] flex flex-col justify-between aspect-square md:aspect-auto">
               <Rocket size={48} className="text-bt-blue mb-8" />
               <div>
-                <h3 className="text-[10px] font-bold tracking-widest uppercase text-silver mb-4">Mission</h3>
-                <p className="text-3xl font-syne font-bold leading-tight text-apple-black">
+                <h3 className="text-[10px] absolute left-16 top-30 font-bold tracking-widest uppercase text-silver mb-4">Mission</h3>
+                <p className="text-3xl font-semibold leading-tight text-apple-black">
                   To deliver premium electric and luxury vehicles, world-class repair services, 
                   and reliable car care solutions to customers across Nigeria.
                 </p>
@@ -403,16 +401,82 @@ export default function AboutPage() {
           <TeamMember 
             name="Alh. Muhammed Isyaku Lawan"
             role="Chairman and Chief Executive Officer"
-            image="/chairman.jpg"
+            image="/muhammed.jpeg"
             desc="An entrepreneur with vast experience in the automobile sales industry. Bold and enthusiastic, Alh. Lawan has a passion for detail and is a proven leader in managing and motivating teams to achieve excellence. He is the Founder of Bee Tee Automobile."
           />
           
           <TeamMember 
             name="Ms. Deborah Nwachukwu"
             role="Human Relations Manager / Ag. General Manager"
-            image="/gm.jpg"
+            image="/deborah.jpeg"
             desc="Highly organized and detail-oriented with extensive experience in project management. As the hub of the company, Ms. Nwachukwu coordinates corporate procedures and is a passionate communicator vital to the administrative success of Bee Tee Automobile."
           />
+        </section>
+
+        {/* Electric Vehicles in Nigeria Section — SEO-rich content block */}
+        <section className="mb-48">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-24 items-start">
+            <div>
+              <p className="text-[10px] font-bold tracking-[0.5em] uppercase text-silver mb-4">The Future Is Electric</p>
+              <h2 className="text-5xl md:text-6xl font-syne font-bold tracking-tighter mb-8">
+                Electric Vehicles <br /><span className="italic text-bt-blue">in Nigeria.</span>
+              </h2>
+              <div className="space-y-6 text-silver leading-relaxed text-lg">
+                <p>
+                  As Nigeria's pioneering electric vehicle dealership, BEE TEE Automobile is at the 
+                  forefront of the EV revolution in West Africa. We supply brand-new <strong>Tesla Model S</strong>, 
+                  <strong> Tesla Model 3</strong>, <strong>Tesla Model Y</strong>, and the revolutionary 
+                  <strong> Tesla Cybertruck</strong> — making us the go-to Tesla dealership in Abuja and Nigeria.
+                </p>
+                <p>
+                  Beyond Tesla, we stock a growing selection of Chinese electric vehicles including 
+                  the <strong>BYD Atto 3</strong>, <strong>XPeng G9</strong>, and <strong>Avatr 12</strong>. 
+                  These next-generation EVs offer exceptional range, cutting-edge technology, and 
+                  zero-emission driving — perfect for Nigeria's environmentally conscious consumers.
+                </p>
+                <p>
+                  Our dedicated <strong>EV Service Center in Abuja</strong> provides fast charging stations, 
+                  battery diagnostics, electric motor servicing, and comprehensive maintenance for all 
+                  electric vehicle brands. Whether you're transitioning from petrol to electric or 
+                  adding to your EV fleet, BEE TEE Automobile makes buying an electric car in Nigeria 
+                  seamless and affordable.
+                </p>
+              </div>
+            </div>
+            <div className="space-y-8">
+              <div className="bg-f5f5f7 rounded-[3rem] p-10">
+                <h3 className="text-2xl font-syne font-bold mb-6">Why Go Electric in Nigeria?</h3>
+                <ul className="space-y-5">
+                  {[
+                    { title: "Lower Running Costs", desc: "Electric vehicles cost up to 70% less to run than petrol cars — saving you millions of naira annually on fuel." },
+                    { title: "Zero Emissions", desc: "Contribute to cleaner air in Abuja and Lagos. EVs produce zero tailpipe emissions, reducing your carbon footprint." },
+                    { title: "Government Incentives", desc: "Nigeria's growing support for electric mobility includes reduced import duties on EVs and green energy initiatives." },
+                    { title: "Cutting-Edge Technology", desc: "From autopilot capabilities to over-the-air updates, electric cars offer the most advanced driving experience available." },
+                    { title: "Premium EV Support", desc: "BEE TEE provides end-to-end EV ownership support — from purchase and charging infrastructure to servicing and warranty." },
+                  ].map((item, i) => (
+                    <li key={i} className="flex gap-4">
+                      <span className="text-bt-blue font-bold text-lg mt-0.5">✓</span>
+                      <div>
+                        <p className="font-bold text-apple-black text-sm">{item.title}</p>
+                        <p className="text-silver text-sm">{item.desc}</p>
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div className="bg-bt-blue text-white rounded-[3rem] p-10">
+                <h3 className="text-xl font-syne font-bold mb-3">Available Electric Car Brands</h3>
+                <p className="text-white/70 text-sm mb-6">We import and sell the following EV brands in Nigeria:</p>
+                <div className="flex flex-wrap gap-3">
+                  {["Tesla", "BYD", "XPeng", "Avatr", "Mercedes EQ", "BMW iX", "Porsche Taycan"].map((brand) => (
+                    <span key={brand} className="px-4 py-2 bg-white/10 rounded-full text-xs font-bold tracking-wider uppercase">
+                      {brand}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
         </section>
 
         {/* Visit Section */}

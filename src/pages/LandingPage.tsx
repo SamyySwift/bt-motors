@@ -20,6 +20,7 @@ import SectionHeading from "../components/SectionHeading";
 import MagneticButton from "../components/MagneticButton";
 import WhyBT from "../components/WhyBT";
 import { useMobile } from "../hooks/useMobile";
+import SEOHead, { getLocalBusinessSchema, getWebsiteSchema } from "../components/SEOHead";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -224,6 +225,13 @@ export default function LandingPage() {
 
   return (
     <div ref={containerRef} className="bg-white grainy-overlay">
+      <SEOHead
+        title="Nigeria's Premier Electric & Luxury Car Dealership"
+        description="BEE TEE Automobile — Abuja's leading dealership for electric cars (Tesla, BYD, XPeng), luxury SUVs (Range Rover, Lexus, Land Cruiser), and premium car servicing. Buy electric vehicles in Nigeria today."
+        canonicalUrl="/"
+        keywords="electric cars Nigeria, Tesla Nigeria, luxury cars Abuja, buy electric vehicle Nigeria, BYD Nigeria, Range Rover Abuja, car dealership Abuja, luxury SUV Nigeria, EV charging Nigeria, buy Tesla Abuja"
+        structuredData={[getLocalBusinessSchema(), getWebsiteSchema()]}
+      />
       {/* Hero Content Section */}
       <section
         ref={heroRef}

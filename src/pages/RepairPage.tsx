@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { ArrowRight, Settings, Shield, Zap } from "lucide-react";
 import gsap from "gsap";
 import SplitType from "split-type";
+import SEOHead, { getBreadcrumbSchema } from "../components/SEOHead";
 
 const pricingTiers = [
   {
@@ -74,6 +75,16 @@ export default function RepairPage() {
 
   return (
     <div className="min-h-screen pt-40 pb-32 bg-white text-apple-black overflow-hidden">
+      <SEOHead
+        title="Expert Car Repair & Diagnostics in Abuja"
+        description="State-of-the-art car repair, mechanical diagnostics, oven-baked spraying, and bodywork restoration at BEE TEE Automobile, Jahi Abuja. Luxury and electric vehicle specialists. Custom quotes available."
+        canonicalUrl="/repair"
+        keywords="car repair Abuja, auto mechanic Nigeria, car diagnostics Abuja, oven baked spraying Nigeria, body work repair Abuja, luxury car repair, electric car mechanic Nigeria, dent repair Abuja, car painting FCT"
+        structuredData={getBreadcrumbSchema([
+          { name: "Home", url: "/" },
+          { name: "Repair & Diagnostics", url: "/repair" },
+        ])}
+      />
       {/* Hero Section */}
       <section className="px-6 md:px-12 mb-20 md:mb-32">
         <div className="max-w-7xl mx-auto">
