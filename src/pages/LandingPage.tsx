@@ -215,7 +215,7 @@ export default function LandingPage() {
           </p>
           <h1 className="text-[clamp(2.5rem,11vw,10rem)] text-white font-syne font-bold tracking-tighter leading-[0.85] mb-8 md:mb-16 select-none reveal-text">
             Electric <br />
-            <span className="text-white/60">Vehicles In</span> <br className="md:hidden" />
+            <span>Vehicles In</span> <br className="md:hidden" />
             <span className="text-white">Nigeria</span>.
           </h1>
 
