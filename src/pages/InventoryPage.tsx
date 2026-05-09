@@ -63,7 +63,7 @@ export default function InventoryPage() {
         title="Luxury & Electric Cars for Sale in Nigeria"
         description={`Browse our curated collection of luxury and electric vehicles available in Abuja, Nigeria. Featuring ${inventoryBrands} — brand new and foreign used. Price on request. Visit our Jahi showroom today.`}
         canonicalUrl="/inventory"
-        keywords="buy luxury cars Nigeria, electric cars for sale Abuja, Tesla for sale Nigeria, Range Rover Nigeria, buy BYD Nigeria, luxury SUV Abuja, foreign used cars Nigeria, car dealership Abuja, buy Lexus Nigeria, Porsche Nigeria"
+        keywords="electric vehicles in nigeria, electric vehicle dealership, buy luxury cars Nigeria, electric cars for sale Abuja, Tesla for sale Nigeria, Range Rover Nigeria, buy BYD Nigeria, luxury SUV Abuja, foreign used cars Nigeria, car dealership Abuja, buy Lexus Nigeria, Porsche Nigeria"
         structuredData={getBreadcrumbSchema([
           { name: "Home", url: "/" },
           { name: "Inventory", url: "/inventory" },

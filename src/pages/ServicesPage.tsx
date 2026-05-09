@@ -166,7 +166,7 @@ export default function ServicesPage() {
         title="Car Services — EV Charging, Repairs, Painting & Detailing"
         description="Premium automotive services in Abuja, Nigeria. EV charging stations, mechanical & electrical diagnostics, oven-baked auto painting, car washing & detailing, and after-sales warranty support at BEE TEE Automobile."
         canonicalUrl="/services"
-        keywords="car servicing Abuja, EV charging station Nigeria, auto painting Abuja, car detailing Nigeria, car repair Abuja, electric vehicle servicing, luxury car maintenance Nigeria, car wash Abuja, vehicle diagnostics FCT"
+        keywords="electric vehicles in nigeria, electric vehicle dealership, car servicing Abuja, EV charging station Nigeria, auto painting Abuja, car detailing Nigeria, car repair Abuja, electric vehicle servicing, luxury car maintenance Nigeria, car wash Abuja, vehicle diagnostics FCT"
         structuredData={getBreadcrumbSchema([
           { name: "Home", url: "/" },
           { name: "Services", url: "/services" },

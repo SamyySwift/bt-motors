@@ -115,7 +115,7 @@ export default function AboutPage() {
         title="About Us - Nigeria's Leading Electric & Luxury Car Dealer"
         description="BEE TEE Automobile is Nigeria's premier electric and luxury car dealership in Abuja. We sell Tesla, Range Rover, Lexus, BYD, XPeng & Avatr EVs. Expert car repair, servicing & detailing since 2020."
         canonicalUrl="/about"
-        keywords="about BEE TEE Automobile, electric cars Nigeria, luxury car dealer Abuja, buy Tesla Nigeria, electric vehicle dealer Nigeria, EV cars Abuja, luxury SUV Nigeria, car dealership Abuja Nigeria, buy electric car in Nigeria, Range Rover dealer Nigeria, Lexus dealer Abuja"
+        keywords="electric vehicles in nigeria, electric vehicle dealership, about BEE TEE Automobile, electric cars Nigeria, luxury car dealer Abuja, buy Tesla Nigeria, electric vehicle dealer Nigeria, EV cars Abuja, luxury SUV Nigeria, car dealership Abuja Nigeria, buy electric car in Nigeria, Range Rover dealer Nigeria, Lexus dealer Abuja"
         structuredData={{
           "@context": "https://schema.org",
           "@graph": [
@@ -141,7 +141,7 @@ export default function AboutPage() {
           </p>
           <h1
             ref={heroHeadingRef}
-            className="text-7xl md:text-[8vw] font-syne font-bold tracking-tighter leading-[0.85] text-center md:text-left mb-24"
+            className="text-5xl md:text-[6vw] font-syne font-bold tracking-tighter leading-[0.85] text-center md:text-left mb-24"
           >
             Electric &amp; Luxury <br />
             <span className="italic">Redefined.</span>
@@ -395,7 +395,7 @@ export default function AboutPage() {
         <section className="mb-48">
           <div className="mb-24">
             <p className="text-[10px] font-bold tracking-[0.5em] uppercase text-silver mb-4">Leadership</p>
-            <h2 className="text-6xl md:text-8xl font-syne font-bold tracking-tighter">Management.</h2>
+            <h2 className="text-5xl md:text-8xl font-syne font-bold tracking-tighter">Management.</h2>
           </div>
           
           <TeamMember 

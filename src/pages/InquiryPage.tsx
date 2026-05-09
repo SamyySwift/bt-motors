@@ -44,7 +44,7 @@ export default function InquiryPage() {
         title="Contact Us — Inquire About Electric & Luxury Cars"
         description="Get in touch with BEE TEE Automobile's private sales advisors. Inquire about Tesla, Range Rover, Lexus, BYD, and other luxury & electric vehicles. Visit our showroom at Plot 36, Wole Soyinka Way, Jahi, Abuja."
         canonicalUrl="/inquiry"
-        keywords="contact car dealer Abuja, buy car Nigeria inquiry, Tesla price Nigeria, luxury car quote Abuja, electric vehicle inquiry Nigeria, car showroom Abuja contact, BEE TEE Automobile phone number"
+        keywords="electric vehicles in nigeria, electric vehicle dealership, contact car dealer Abuja, buy car Nigeria inquiry, Tesla price Nigeria, luxury car quote Abuja, electric vehicle inquiry Nigeria, car showroom Abuja contact, BEE TEE Automobile phone number"
         structuredData={getBreadcrumbSchema([
           { name: "Home", url: "/" },
           { name: "Contact & Inquiry", url: "/inquiry" },

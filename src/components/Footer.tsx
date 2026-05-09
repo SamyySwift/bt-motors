@@ -131,7 +131,7 @@ const Footer = () => {
           </div>
 
           {/* Right: Navigation & Contact */}
-          <div className="lg:col-span-7 grid grid-cols-2 md:grid-cols-3 gap-12 lg:pl-12">
+          <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-12 lg:pl-12">
             <div>
               <h4 className="text-[10px] font-bold tracking-[0.3em] uppercase text-white/30 mb-8">
                 Discovery
@@ -188,7 +188,7 @@ const Footer = () => {
               </div>
             </div>
 
-            <div className="col-span-2 md:col-span-1">
+            <div className="sm:col-span-2 md:col-span-1">
               <h4 className="text-[10px] font-bold tracking-[0.3em] uppercase text-white/30 mb-8">
                 Follow Us
               </h4>
@@ -227,11 +227,11 @@ const Footer = () => {
           </motion.div>
 
           <div className="flex flex-col md:flex-row justify-between items-center gap-6 mt-10">
-            <p className="text-white/30 text-[10px] tracking-widest uppercase font-bold">
+            <p className="text-white/30 text-[10px] tracking-widest uppercase font-bold text-center md:text-left">
               &copy; {new Date().getFullYear()} BEE TEE AUTOMOBILE. All rights
               reserved.
             </p>
-            <div className="flex gap-12">
+            <div className="flex flex-col sm:flex-row items-center gap-6 sm:gap-12">
               <Link
                 to="#"
                 className="text-white/30 hover:text-white text-[10px] tracking-widest uppercase font-bold transition-colors"

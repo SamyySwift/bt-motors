@@ -170,10 +170,10 @@ export default function LandingPage() {
   return (
     <div ref={containerRef} className="bg-white grainy-overlay">
       <SEOHead
-        title="Nigeria's Premier Electric & Luxury Car Dealership"
-        description="BEE TEE Automobile — Abuja's leading dealership for electric cars (Tesla, BYD, XPeng), luxury SUVs (Range Rover, Lexus, Land Cruiser), and premium car servicing. Buy electric vehicles in Nigeria today."
+        title="Electric Vehicle Dealership in Nigeria | BEE TEE Automobile"
+        description="Looking for an Electric Vehicle dealership in Nigeria? BEE TEE Automobile is the premier dealer for electric vehicles in Nigeria. Buy Tesla, BYD, XPeng, Avatr & more."
         canonicalUrl="/"
-        keywords="electric cars Nigeria, Tesla Nigeria, luxury cars Abuja, buy electric vehicle Nigeria, BYD Nigeria, Range Rover Abuja, car dealership Abuja, luxury SUV Nigeria, EV charging Nigeria, buy Tesla Abuja"
+        keywords="electric vehicles in nigeria, electric vehicle dealership, electric vehicle dealership in nigeria, electric cars in nigeria, buy electric vehicles nigeria, ev dealership nigeria, tesla dealership nigeria, byd dealership nigeria"
         structuredData={[getLocalBusinessSchema(), getWebsiteSchema()]}
       />
       {/* Hero Content Section */}
@@ -210,9 +210,13 @@ export default function LandingPage() {
         </motion.div>
 
         <div className="container mx-auto z-10 text-center px-6 pt-24 md:pt-0">
+          <p className="text-[9px] md:text-[11px] font-bold tracking-[0.5em] uppercase text-silver/80 mb-6 reveal-text">
+            Nigeria's Premier Electric Vehicle Dealership
+          </p>
           <h1 className="text-[clamp(2.5rem,11vw,10rem)] text-white font-syne font-bold tracking-tighter leading-[0.85] mb-8 md:mb-16 select-none reveal-text">
-            Crafting the <br />
-            <span className="text-white">Ultimate</span> Standard.
+            Electric <br />
+            <span className="text-white/60">Vehicles In</span> <br className="md:hidden" />
+            <span className="text-white">Nigeria</span>.
           </h1>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-6 md:gap-10">
@@ -312,7 +316,7 @@ export default function LandingPage() {
               />
 
               <CharacterReveal
-                text={`Our mission is to deliver top-notch automobiles, exceptional repair, detailing services, and reliable car care solutions. We are committed to enhancing customer satisfaction through professionalism and integrity.`}
+                text={`As the premier electric vehicle dealership in Nigeria, our mission is to deliver top-notch automobiles, exceptional repair, detailing services, and reliable car care solutions. We are committed to driving the adoption of electric vehicles in Nigeria through professionalism and integrity.`}
                 className="text-base md:text-lg text-silver leading-relaxed font-medium max-w-lg"
               />
 
@@ -554,8 +558,8 @@ function ServicesSection({ containerRef }: { containerRef: RefObject<HTMLDivElem
 
   const services = [
     {
-      title: "Premium Sales & Imports",
-      desc: "Brand New, Foreign Used, and Electric Cars sourced to your exact specifications with absolute transparency."
+      title: "Electric Vehicle Dealership & Imports",
+      desc: "The leading electric vehicle dealership in Nigeria. Brand New, Foreign Used, and Electric Cars sourced to your exact specifications with absolute transparency."
     },
     {
       title: "Expert Servicing & Repairs",
@@ -596,7 +600,7 @@ function ServicesSection({ containerRef }: { containerRef: RefObject<HTMLDivElem
           transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
           className="text-4xl md:text-9xl font-bold mb-48 tracking-tighter text-center md:text-left font-syne"
         >
-          WORLD-CLASS <br/> <span className="text-gray-700">SERVICES.</span>
+          WORLD-CLASS <br/> <span className="text-gray-500">SERVICES</span>
         </motion.h2>
 
         <div className="flex flex-col gap-32">

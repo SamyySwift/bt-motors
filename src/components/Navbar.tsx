@@ -48,16 +48,23 @@ export default function Navbar() {
         animate={{ y: visible ? 0 : -100 }}
         transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
         className={cn(
-          "fixed top-0 left-0 right-0 z-50",
+          "fixed top-0 left-0 right-0 z-50 transition-all duration-500",
           scrolled
             ? "py-4 bg-white/70 backdrop-blur-md border-b border-black/[0.03]"
             : "py-8",
+          !scrolled && location.pathname === "/" && !menuOpen && "bg-gradient-to-b from-black/60 via-black/20 to-transparent"
         )}
       >
         <div className="container mx-auto px-8 md:px-16 flex justify-between items-center">
           {/* Logo */}
           <Link to="/" className="flex items-center z-50">
-            <img src="/logo.png" alt="BEE TEE AUTOMOBILE" className="h-12 w-auto" />
+            <img 
+              src="/logo.png" 
+              alt="BEE TEE AUTOMOBILE" 
+              className={cn("h-12 w-auto transition-all duration-300", 
+                 !scrolled && location.pathname === '/' && !menuOpen ? "brightness-0 invert opacity-90 drop-shadow-lg" : ""
+              )} 
+            />
           </Link>
 
           {/* Desktop Nav */}
@@ -70,7 +77,7 @@ export default function Navbar() {
                   "text-[11px] tracking-[0.05em] font-medium transition-colors hover:text-bt-blue",
                   location.pathname === navItem.path
                     ? "text-bt-blue"
-                    : "text-black",
+                    : (!scrolled && location.pathname === "/" && !menuOpen ? "text-white drop-shadow-md" : "text-black"),
                 )}
               >
                 {navItem.name}
@@ -78,16 +85,21 @@ export default function Navbar() {
             ))}
           </div>
 
-          {/* Right Actions */}
           <div className="hidden md:flex items-center">
-            <button className="p-2 text-apple-black/40 hover:text-apple-black transition-all">
+            <button className={cn(
+              "p-2 transition-all hover:opacity-100",
+              !scrolled && location.pathname === "/" && !menuOpen ? "text-white/80 drop-shadow-md hover:text-white" : "text-apple-black/40 hover:text-apple-black"
+            )}>
               <Search size={18} />
             </button>
           </div>
 
           {/* Mobile Menu Toggle */}
           <button
-            className="md:hidden z-50 text-apple-black relative"
+            className={cn(
+              "md:hidden z-50 relative transition-colors",
+              !scrolled && location.pathname === "/" && !menuOpen ? "text-white drop-shadow-md" : "text-apple-black"
+            )}
             onClick={() => setMenuOpen(!menuOpen)}
           >
             {menuOpen ? <X size={24} /> : <Menu size={24} />}

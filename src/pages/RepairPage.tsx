@@ -74,52 +74,48 @@ export default function RepairPage() {
   }, []);
 
   return (
-    <div className="min-h-screen pt-40 pb-32 bg-white text-apple-black overflow-hidden">
+    <div className="min-h-screen bg-white text-apple-black overflow-hidden">
       <SEOHead
         title="Expert Car Repair & Diagnostics in Abuja"
         description="State-of-the-art car repair, mechanical diagnostics, oven-baked spraying, and bodywork restoration at BEE TEE Automobile, Jahi Abuja. Luxury and electric vehicle specialists. Custom quotes available."
         canonicalUrl="/repair"
-        keywords="car repair Abuja, auto mechanic Nigeria, car diagnostics Abuja, oven baked spraying Nigeria, body work repair Abuja, luxury car repair, electric car mechanic Nigeria, dent repair Abuja, car painting FCT"
+        keywords="electric vehicles in nigeria, electric vehicle dealership, car repair Abuja, auto mechanic Nigeria, car diagnostics Abuja, oven baked spraying Nigeria, body work repair Abuja, luxury car repair, electric car mechanic Nigeria, dent repair Abuja, car painting FCT"
         structuredData={getBreadcrumbSchema([
           { name: "Home", url: "/" },
           { name: "Repair & Diagnostics", url: "/repair" },
         ])}
       />
-      {/* Hero Section */}
-      <section className="px-6 md:px-12 mb-20 md:mb-32">
-        <div className="max-w-7xl mx-auto">
-          <span className="inline-block px-4 py-1.5 rounded-full bg-soft-gray text-apple-black text-xs font-bold tracking-widest uppercase mb-8">
+      {/* Hero Section with Video Background */}
+      <section className="relative h-screen flex items-center justify-center overflow-hidden mb-20 md:mb-32">
+        <div className="absolute inset-0 z-0">
+          <video
+            className="w-full h-full object-cover"
+            autoPlay
+            muted
+            loop
+            playsInline
+          >
+            <source src="/repair.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+          <div className="absolute inset-0 bg-black/50" />
+        </div>
+        
+        <div className="container mx-auto px-6 relative z-10 text-center flex flex-col items-center">
+          <span className="inline-block px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white text-xs font-bold tracking-widest uppercase mb-8">
             Technical Excellence
           </span>
           <h1
             ref={titleRef}
-            className="text-6xl md:text-9xl font-syne font-bold leading-[0.9] tracking-tight mb-12"
+            className="text-6xl md:text-[9vw] lg:text-[140px] font-syne font-bold leading-[0.9] tracking-tighter text-white mb-8"
           >
             Mechanical <br />
-            <span className="italic">Artistry.</span>
+            <span className="italic text-bt-blue">Artistry.</span>
           </h1>
-          <p className="text-xl md:text-2xl text-apple-black/60 max-w-2xl font-light leading-relaxed">
+          <p className="text-xl md:text-2xl text-white/80 max-w-2xl font-light leading-relaxed">
             A state-of-the-art facility dedicated to the preservation,
             restoration, and enhancement of automotive perfection.
           </p>
-        </div>
-      </section>
-
-      {/* Video Showcase Section */}
-      <section className="px-6 md:px-12 mb-32">
-        <div className="max-w-7xl mx-auto">
-          <div className="relative aspect-video rounded-[2rem] md:rounded-[40px] overflow-hidden bg-soft-gray shadow-2xl group border border-apple-black/5">
-            <video
-              className="w-full h-full object-cover"
-              autoPlay
-              muted
-              loop
-              playsInline
-            >
-              <source src="/repair.mp4" type="video/mp4" />
-              Your browser does not support the video tag.
-            </video>
-          </div>
         </div>
       </section>
 
