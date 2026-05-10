@@ -22,9 +22,17 @@ export default function InventoryPage() {
   const [selectedVehicle, setSelectedVehicle] = useState<Vehicle | null>(null);
   const [showInquiryOptions, setShowInquiryOptions] = useState(false);
   const [activeFilter, setActiveFilter] = useState("All");
+  const [searchQuery, setSearchQuery] = useState("");
+  const [activeFuel, setActiveFuel] = useState("All");
+  const [activeBody, setActiveBody] = useState("All");
+
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 6;
   const headingRef = useRef<HTMLHeadingElement>(null);
+
+  const uniqueMakes = ["All", ...new Set(inventory.map((v) => v.make))].sort();
+  const uniqueFuels = ["All", ...new Set(inventory.map((v) => v.fuel))].sort();
+  const uniqueBodies = ["All", ...new Set(inventory.map((v) => v.bodyStyle))].sort();
 
   useEffect(() => {
     if (headingRef.current) {
@@ -42,12 +50,17 @@ export default function InventoryPage() {
 
   useEffect(() => {
     setCurrentPage(1);
-  }, [activeFilter]);
+  }, [activeFilter, searchQuery, activeFuel, activeBody]);
 
-  const filteredInventory =
-    activeFilter === "All"
-      ? inventory
-      : inventory.filter((v) => v.make === activeFilter);
+  const filteredInventory = inventory.filter((v) => {
+    const matchesMake = activeFilter === "All" || v.make === activeFilter;
+    const matchesFuel = activeFuel === "All" || v.fuel === activeFuel;
+    const matchesBody = activeBody === "All" || v.bodyStyle === activeBody;
+    const matchesSearch =
+      v.model.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      v.make.toLowerCase().includes(searchQuery.toLowerCase());
+    return matchesMake && matchesFuel && matchesBody && matchesSearch;
+  });
 
   const totalPages = Math.ceil(filteredInventory.length / itemsPerPage);
   const paginatedInventory = filteredInventory.slice(
@@ -91,6 +104,8 @@ export default function InventoryPage() {
               <input
                 type="text"
                 placeholder="Search models..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
                 className="bg-transparent border-none outline-none text-sm font-medium w-full md:w-48"
               />
             </div>
@@ -100,47 +115,100 @@ export default function InventoryPage() {
         {/* Layout with Sidebar */}
         <div className="flex flex-col lg:flex-row gap-12">
           {/* Sidebar Filters */}
-          <aside className="w-full lg:w-72 shrink-0 lg:sticky lg:top-32 h-fit z-20">
-            <div className="bg-f5f5f7/50 backdrop-blur-sm rounded-[2rem] lg:rounded-4xl p-6 lg:p-8 border border-black/5">
-              <div className="flex items-center gap-3 mb-8">
-                <SlidersHorizontal size={20} className="text-bt-blue" />
-                <h3 className="text-sm font-bold tracking-widest uppercase">
-                  Filter By Make
-                </h3>
-              </div>
+          <aside className="w-full lg:w-80 shrink-0 lg:sticky lg:top-32 h-fit z-20">
+            <div className="bg-f5f5f7/50 backdrop-blur-sm rounded-[2rem] lg:rounded-4xl p-6 lg:p-8 border border-black/5 space-y-10">
+              {/* Make Filter */}
+              <section>
+                <div className="flex items-center gap-3 mb-6">
+                  <SlidersHorizontal size={18} className="text-bt-blue" />
+                  <h3 className="text-xs font-bold tracking-widest uppercase">
+                    Make
+                  </h3>
+                </div>
+                <div className="flex flex-row lg:flex-wrap gap-2 overflow-x-auto lg:overflow-x-visible pb-4 lg:pb-0 no-scrollbar">
+                  {uniqueMakes.map((make) => (
+                    <button
+                      key={make}
+                      onClick={() => setActiveFilter(make)}
+                      className={`whitespace-nowrap px-4 py-2 rounded-xl text-[10px] md:text-xs font-bold uppercase tracking-widest transition-all duration-500 ${
+                        activeFilter === make
+                          ? "bg-bt-blue text-white shadow-lg shadow-bt-blue/20"
+                          : "bg-white/50 text-apple-black hover:bg-white hover:shadow-md"
+                      }`}
+                    >
+                      {make}
+                    </button>
+                  ))}
+                </div>
+              </section>
 
-              <div className="space-y-3 flex flex-row lg:flex-col gap-3 overflow-x-auto lg:overflow-x-visible pb-4 lg:pb-0 no-scrollbar">
-                {[
-                  "All",
-                  "Porsche",
-                  "McLaren",
-                  "Ferrari",
-                  "Lamborghini",
-                  "Aston Martin",
-                  "Tesla",
-                ].map((make) => (
-                  <button
-                    key={make}
-                    onClick={() => setActiveFilter(make)}
-                    className={`whitespace-nowrap px-6 py-4 rounded-2xl text-sm font-medium transition-all duration-500 ${
-                      activeFilter === make
-                        ? "bg-bt-blue text-white shadow-lg scale-[1.02]"
-                        : "bg-white/50 text-apple-black hover:bg-white hover:shadow-md"
-                    }`}
-                  >
-                    {make}
-                    {activeFilter === make && (
-                      <span className="ml-2 inline-block w-2 h-2 bg-white rounded-full"></span>
-                    )}
-                  </button>
-                ))}
-              </div>
+              {/* Fuel Type Filter */}
+              <section>
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="w-1.5 h-1.5 rounded-full bg-bt-blue" />
+                  <h3 className="text-xs font-bold tracking-widest uppercase">
+                    Fuel Type
+                  </h3>
+                </div>
+                <div className="flex flex-row lg:flex-wrap gap-2 overflow-x-auto lg:overflow-x-visible pb-4 lg:pb-0 no-scrollbar">
+                  {uniqueFuels.map((fuel) => (
+                    <button
+                      key={fuel}
+                      onClick={() => setActiveFuel(fuel)}
+                      className={`whitespace-nowrap px-4 py-2 rounded-xl text-[10px] md:text-xs font-bold uppercase tracking-widest transition-all duration-500 ${
+                        activeFuel === fuel
+                          ? "bg-bt-blue text-white shadow-lg shadow-bt-blue/20"
+                          : "bg-white/50 text-apple-black hover:bg-white hover:shadow-md"
+                      }`}
+                    >
+                      {fuel}
+                    </button>
+                  ))}
+                </div>
+              </section>
 
-              <div className="mt-4 lg:mt-8 pt-4 lg:pt-8 border-t border-black/10">
-                <p className="text-xs text-silver font-medium">
-                  Showing {filteredInventory.length} of {inventory.length}{" "}
-                  vehicles
+              {/* Body Style Filter */}
+              <section>
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="w-1.5 h-1.5 rounded-full bg-bt-blue" />
+                  <h3 className="text-xs font-bold tracking-widest uppercase">
+                    Body Style
+                  </h3>
+                </div>
+                <div className="flex flex-row lg:flex-wrap gap-2 overflow-x-auto lg:overflow-x-visible pb-4 lg:pb-0 no-scrollbar">
+                  {uniqueBodies.map((body) => (
+                    <button
+                      key={body}
+                      onClick={() => setActiveBody(body)}
+                      className={`whitespace-nowrap px-4 py-2 rounded-xl text-[10px] md:text-xs font-bold uppercase tracking-widest transition-all duration-500 ${
+                        activeBody === body
+                          ? "bg-bt-blue text-white shadow-lg shadow-bt-blue/20"
+                          : "bg-white/50 text-apple-black hover:bg-white hover:shadow-md"
+                      }`}
+                    >
+                      {body}
+                    </button>
+                  ))}
+                </div>
+              </section>
+
+              <div className="pt-8 border-t border-black/10">
+                <p className="text-[10px] text-silver font-bold uppercase tracking-widest">
+                  {filteredInventory.length} of {inventory.length} vehicles found
                 </p>
+                {(activeFilter !== "All" || activeFuel !== "All" || activeBody !== "All" || searchQuery) && (
+                  <button 
+                    onClick={() => {
+                      setActiveFilter("All");
+                      setActiveFuel("All");
+                      setActiveBody("All");
+                      setSearchQuery("");
+                    }}
+                    className="mt-4 text-[9px] font-bold text-bt-blue uppercase tracking-widest hover:underline"
+                  >
+                    Clear All Filters
+                  </button>
+                )}
               </div>
             </div>
           </aside>
@@ -210,16 +278,16 @@ export default function InventoryPage() {
                     <div className="px-2">
                       <div className="flex justify-between items-end mb-4">
                         <div>
-                          <p className="text-[9px] font-bold tracking-[0.3em] uppercase text-silver mb-2">
+                          <p className="text-[12px] font-bold tracking-[0.3em] uppercase text-silver mb-2">
                             {vehicle.make}
                           </p>
-                          <h3 className="text-3xl font-syne font-bold tracking-tight text-apple-black">
+                          <h3 className="text-xl font-syne font-bold tracking-tight text-apple-black">
                             {vehicle.model}
                           </h3>
                         </div>
                         <div className="text-right">
                           <p className="text-[9px] font-bold tracking-widest uppercase text-silver mb-1">{vehicle.fuel}</p>
-                          <p className="text-lg font-syne font-bold text-bt-blue">
+                          <p className="text-sm font-syne font-bold text-bt-blue">
                             {vehicle.price}
                           </p>
                         </div>

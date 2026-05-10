@@ -73,6 +73,7 @@ export default function LandingPage() {
     { image: "/slide_3.jpg" },
     { image: "/slide_4.jpg" },
     { image: "/slide_5.jpg" },
+    { image: "/slide_6.jpeg" },
   ];
 
   const { scrollYProgress } = useScroll({
@@ -210,13 +211,13 @@ export default function LandingPage() {
         </motion.div>
 
         <div className="container mx-auto z-10 text-center px-6 pt-24 md:pt-0">
-          <p className="text-[9px] md:text-[11px] font-bold tracking-[0.5em] uppercase text-silver/80 mb-6 reveal-text">
+          <p className="text-[9px] md:text-[11px] font-bold tracking-[0.5em] uppercase text-white/70 mb-6 reveal-text">
             Nigeria's Premier Electric Vehicle Dealership
           </p>
           <h1 className="text-[clamp(2.5rem,11vw,10rem)] text-white font-syne font-bold tracking-tighter leading-[0.85] mb-8 md:mb-16 select-none reveal-text">
-            Electric <br />
-            <span>Vehicles In</span> <br className="md:hidden" />
-            <span className="text-white">Nigeria</span>.
+            BeeTee <br />
+            <span>Auto</span> <br className="md:hidden" />
+            <span className="text-white">Mobile</span>.
           </h1>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-6 md:gap-10">

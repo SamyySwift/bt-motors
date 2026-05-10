@@ -214,36 +214,77 @@ export default function AboutPage() {
         {/* Strategy Section */}
         <section className="mb-48">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="relative bg-apple-black text-white p-16 rounded-[4rem] flex flex-col justify-between aspect-square md:aspect-auto">
-              <Target size={48} className="text-bt-blue mb-8" />
-              <div>
-                <h3 className="absolute left-16 top-30 text-[10px] text-white font-bold tracking-widest uppercase opacity-40">Purpose</h3>
-                <p className="text-3xl font-semibold leading-tight mt-6">
-                  To be Nigeria's leading electric and luxury car dealership, providing 
-                  personalized services and driving the EV revolution across West Africa.
-                </p>
+            {/* Purpose Card */}
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+              className="group relative bg-[#0A0A0A] text-white p-12 md:p-16 rounded-[4rem] flex flex-col gap-12 transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl overflow-hidden min-h-[450px]"
+            >
+              <div className="absolute inset-0 bg-bt-blue/5 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+              <div className="space-y-8 relative z-10">
+                <div className="w-20 h-20 rounded-3xl bg-white/5 flex items-center justify-center transition-all duration-500 group-hover:bg-bt-blue/20 group-hover:scale-110">
+                  <Target size={40} className="text-bt-blue" />
+                </div>
+                <div className="space-y-2">
+                  <h3 className="text-[10px] md:text-xs font-bold tracking-[0.4em] uppercase text-white/40">Purpose</h3>
+                  <div className="w-8 h-px bg-bt-blue/30 group-hover:w-16 transition-all duration-500" />
+                </div>
               </div>
-            </div>
-            <div className="relative bg-bt-blue text-white p-16 rounded-[4rem] flex flex-col justify-between aspect-square md:aspect-auto">
-              <Eye size={48} className="text-white/40 mb-8" />
-              <div>
-                <h3 className="text-[10px] absolute left-16 top-30 font-bold tracking-widest uppercase opacity-60 mb-4">Vision</h3>
-                <p className="text-3xl mt-6 font-semibold leading-tight">
-                  To lead the future of sustainable, electric, and luxury automotive 
-                  care in Nigeria — where innovation meets elegance through technology.
-                </p>
+              <p className="text-2xl md:text-3xl font-syne font-bold leading-tight relative z-10">
+                To be Nigeria's leading electric and luxury car dealership, providing 
+                personalized services and driving the EV revolution across West Africa.
+              </p>
+            </motion.div>
+
+            {/* Vision Card */}
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 0.1 }}
+              className="group relative bg-bt-blue text-white p-12 md:p-16 rounded-[4rem] flex flex-col gap-12 transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl overflow-hidden min-h-[450px] shadow-xl shadow-bt-blue/20"
+            >
+              <div className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+              <div className="space-y-8 relative z-10">
+                <div className="w-20 h-20 rounded-3xl bg-white/10 flex items-center justify-center transition-all duration-500 group-hover:bg-white/20 group-hover:scale-110">
+                  <Eye size={40} className="text-white" />
+                </div>
+                <div className="space-y-2">
+                  <h3 className="text-[10px] md:text-xs font-bold tracking-[0.4em] uppercase text-white/60">Vision</h3>
+                  <div className="w-8 h-px bg-white/30 group-hover:w-16 transition-all duration-500" />
+                </div>
               </div>
-            </div>
-            <div className="bg-gray-200 relative p-16 rounded-[4rem] flex flex-col justify-between aspect-square md:aspect-auto">
-              <Rocket size={48} className="text-bt-blue mb-8" />
-              <div>
-                <h3 className="text-[10px] absolute left-16 top-30 font-bold tracking-widest uppercase text-silver mb-4">Mission</h3>
-                <p className="text-3xl font-semibold leading-tight text-apple-black">
-                  To deliver premium electric and luxury vehicles, world-class repair services, 
-                  and reliable car care solutions to customers across Nigeria.
-                </p>
+              <p className="text-2xl md:text-3xl font-syne font-bold leading-tight relative z-10">
+                To lead the future of sustainable, electric, and luxury automotive 
+                care in Nigeria — where innovation meets elegance through technology.
+              </p>
+            </motion.div>
+
+            {/* Mission Card */}
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="group relative bg-[#F5F5F7] text-apple-black p-12 md:p-16 rounded-[4rem] flex flex-col gap-12 transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl overflow-hidden min-h-[450px]"
+            >
+              <div className="absolute inset-0 bg-bt-blue/5 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+              <div className="space-y-8 relative z-10">
+                <div className="w-20 h-20 rounded-3xl bg-white flex items-center justify-center shadow-sm transition-all duration-500 group-hover:bg-bt-blue/10 group-hover:scale-110">
+                  <Rocket size={40} className="text-bt-blue" />
+                </div>
+                <div className="space-y-2">
+                  <h3 className="text-[10px] md:text-xs font-bold tracking-[0.4em] uppercase text-silver">Mission</h3>
+                  <div className="w-8 h-px bg-bt-blue/20 group-hover:w-16 transition-all duration-500" />
+                </div>
               </div>
-            </div>
+              <p className="text-2xl md:text-3xl font-syne font-bold leading-tight relative z-10">
+                To deliver premium electric and luxury vehicles, world-class repair services, 
+                and reliable car care solutions to customers across Nigeria.
+              </p>
+            </motion.div>
           </div>
         </section>
 
