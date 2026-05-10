@@ -82,7 +82,9 @@ export default function LandingPage() {
   });
 
   const heroOpacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
-  const heroScale = useTransform(scrollYProgress, [0, 1], [1, 0.9]);
+  const heroScale = useTransform(scrollYProgress, [0, 1], [1, 1.1]);
+  const heroY = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
+  const textY = useTransform(scrollYProgress, [0, 1], ["0%", "-20%"]);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -184,7 +186,7 @@ export default function LandingPage() {
       >
         <motion.div
           className="absolute inset-0 z-0 overflow-hidden"
-          style={{ opacity: heroOpacity, scale: heroScale }}
+          style={{ opacity: heroOpacity, scale: heroScale, y: heroY }}
         >
           <div className="absolute inset-0 bg-linear-to-t from-black/60 via-black/20 to-transparent z-10" />
           {HeroCarSlides.map((slide, index) => (
@@ -210,7 +212,10 @@ export default function LandingPage() {
           ))}
         </motion.div>
 
-        <div className="container mx-auto z-10 text-center px-6 pt-24 md:pt-0">
+        <motion.div 
+          style={{ y: textY }}
+          className="container mx-auto z-10 text-center px-6 pt-24 md:pt-0"
+        >
           <p className="text-[9px] md:text-[11px] font-bold tracking-[0.5em] uppercase text-white/70 mb-6 reveal-text">
             Nigeria's Premier Electric Vehicle Dealership
           </p>
@@ -244,7 +249,7 @@ export default function LandingPage() {
               </Link>
             </MagneticButton>
           </div>
-        </div>
+        </motion.div>
 
         <motion.div
           animate={{ y: [0, 15, 0] }}
