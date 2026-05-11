@@ -1,10 +1,11 @@
 import { useState, useEffect, useRef } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
-import { ArrowRight, Settings, Shield, Zap } from "lucide-react";
+import { ArrowRight, Settings, Shield, Zap, X } from "lucide-react";
 import gsap from "gsap";
 import SplitType from "split-type";
 import SEOHead, { getBreadcrumbSchema } from "../components/SEOHead";
+import ContactOptions from "../components/ContactOptions";
 
 const pricingTiers = [
   {
@@ -50,6 +51,7 @@ const diagnosticSlides = ["/repair_1.jpeg", "/repair_2.jpeg", "/repair_3.jpeg"];
 
 export default function RepairPage() {
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
+  const [showInquiryOptions, setShowInquiryOptions] = useState(false);
   const titleRef = useRef(null);
 
   useEffect(() => {
@@ -220,6 +222,7 @@ export default function RepairPage() {
                   ))}
                 </ul>
                 <button
+                  onClick={() => setShowInquiryOptions(true)}
                   className={`w-full py-5 rounded-full font-bold uppercase tracking-widest text-[10px] transition-all duration-500 ${
                     tier.highlighted
                       ? "bg-white text-bt-blue hover:bg-soft-gray"
@@ -252,6 +255,52 @@ export default function RepairPage() {
           </Link>
         </div>
       </section>
+
+      {/* Inquiry Options Modal */}
+      <AnimatePresence>
+        {showInquiryOptions && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[100] flex items-center justify-center p-6 bg-white/90 backdrop-blur-2xl"
+          >
+            <div
+              className="absolute inset-0"
+              onClick={() => setShowInquiryOptions(false)}
+            ></div>
+
+            <motion.div
+              initial={{ scale: 0.9, y: 50, opacity: 0 }}
+              animate={{ scale: 1, y: 0, opacity: 1 }}
+              exit={{ scale: 0.9, y: 50, opacity: 0 }}
+              transition={{ type: "spring", damping: 25, stiffness: 300 }}
+              className="bg-white w-full max-w-xl rounded-[2rem] md:rounded-[3rem] p-8 md:p-12 relative z-10 border border-black/3 shadow-2xl text-center"
+            >
+              <button
+                onClick={() => setShowInquiryOptions(false)}
+                className="absolute top-8 right-8 text-apple-black hover:bg-bt-blue hover:text-white transition-all z-20 bg-f5f5f7 p-2.5 rounded-full"
+              >
+                <X size={20} />
+              </button>
+
+              <div className="mb-10">
+                <span className="inline-block px-4 py-1.5 rounded-full bg-soft-gray text-apple-black text-[10px] font-bold tracking-widest uppercase mb-6">
+                  Service Inquiry
+                </span>
+                <h2 className="text-4xl font-syne font-bold text-apple-black mb-4 tracking-tighter">
+                  Expert Support.
+                </h2>
+                <p className="text-silver text-sm font-medium">
+                  Select your preferred method to discuss your vehicle requirements with our technical team.
+                </p>
+              </div>
+
+              <ContactOptions />
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
