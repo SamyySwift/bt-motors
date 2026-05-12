@@ -47,7 +47,7 @@ const pricingTiers = [
   },
 ];
 
-const diagnosticSlides = ["/repair_1.jpeg", "/repair_2.jpeg", "/repair_3.jpeg"];
+const diagnosticSlides = ["optimized/repair_1.webp", "optimized/repair_2.webp", "optimized/repair_3.webp"];
 
 export default function RepairPage() {
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
@@ -56,13 +56,12 @@ export default function RepairPage() {
 
   useEffect(() => {
     if (titleRef.current) {
-      const split = new SplitType(titleRef.current, { types: "chars" });
-      gsap.from(split.chars, {
+      const split = new SplitType(titleRef.current, { types: "words" });
+      gsap.from(split.words, {
         opacity: 0,
-        y: 20,
-        rotateX: -90,
-        stagger: 0.02,
-        duration: 1,
+        y: 30,
+        stagger: 0.1,
+        duration: 0.8,
         ease: "power4.out",
       });
     }
@@ -151,6 +150,8 @@ export default function RepairPage() {
                   src={slide}
                   alt={`Diagnostic Process ${index + 1}`}
                   className="w-full h-full object-cover rounded-[32px]"
+                  loading="lazy"
+                  decoding="async"
                   animate={{
                     scale: currentSlideIndex === index ? 1 : 1.05,
                   }}

@@ -21,7 +21,7 @@ const services = [
       "Expert Advisory",
     ],
     icon: <Globe size={28} />,
-    image: "/garage.jpg",
+    image: "optimized/garage.webp",
   },
   {
     id: 2,
@@ -36,7 +36,7 @@ const services = [
       "General Diagnostics",
     ],
     icon: <ShieldCheck size={28} />,
-    image: "/servicing.jpeg",
+    image: "optimized/servicing.webp",
   },
   {
     id: 3,
@@ -51,7 +51,7 @@ const services = [
       "Protective Clear Coats",
     ],
     icon: <Shield size={28} />,
-    image: "/repair_3.jpeg",
+    image: "optimized/repair_3.webp",
   },
   {
     id: 4,
@@ -66,7 +66,7 @@ const services = [
       "ECU Diagnostics",
     ],
     icon: <Zap size={28} />,
-    image: "/repair_1.jpeg",
+    image: "optimized/repair_1.webp",
   },
   {
     id: 5,
@@ -81,7 +81,7 @@ const services = [
       "Safe Operations",
     ],
     icon: <Zap size={28} />,
-    image: "/repair_3.jpeg",
+    image: "optimized/repair_3.webp",
   },
   {
     id: 6,
@@ -96,7 +96,7 @@ const services = [
       "Showroom Standards",
     ],
     icon: <ShieldCheck size={28} />,
-    image: "/servicing.jpeg",
+    image: "optimized/autocare.webp",
   },
   {
     id: 7,
@@ -111,7 +111,7 @@ const services = [
       "Complimentary Checks",
     ],
     icon: <Shield size={28} />,
-    image: "/garage.jpg",
+    image: "optimized/waranty.webp",
   },
 ];
 
@@ -130,12 +130,12 @@ export default function ServicesPage() {
 
   useEffect(() => {
     if (headingRef.current) {
-      const text = new SplitType(headingRef.current, { types: "chars,words" });
-      gsap.from(text.chars, {
-        y: 60,
+      const text = new SplitType(headingRef.current, { types: "words" });
+      gsap.from(text.words, {
+        y: 40,
         opacity: 0,
-        duration: 1.2,
-        stagger: 0.03,
+        duration: 1,
+        stagger: 0.05,
         ease: "power4.out",
         delay: 0.2,
       });
@@ -285,6 +285,8 @@ export default function ServicesPage() {
                       src={service.image}
                       alt={`${service.title} — ${service.subtitle} at BEE TEE Automobile Abuja Nigeria`}
                       className="w-full h-full object-cover"
+                      loading="lazy"
+                      decoding="async"
                       animate={{
                         scale: activeService === service.id ? 1.05 : 1,
                       }}

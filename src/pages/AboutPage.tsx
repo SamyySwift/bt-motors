@@ -36,9 +36,11 @@ const TeamMember = ({ name, role, desc, image }: { name: string, role: string, d
   <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center mb-24 last:mb-0">
     <div className="aspect-square rounded-[3rem] overflow-hidden bg-f5f5f7">
       <img 
-        src={image || "/IMG_6374.jpg"} 
+        src={image || "/IMG_6374.webp"} 
         alt={name} 
         className="w-full h-full object-cover"
+        loading="lazy"
+        decoding="async"
       />
     </div>
     <div className="space-y-6">
@@ -59,13 +61,13 @@ export default function AboutPage() {
     const ctx = gsap.context(() => {
       if (heroHeadingRef.current) {
         const text = new SplitType(heroHeadingRef.current, {
-          types: "chars,words",
+          types: "words",
         });
-        gsap.from(text.chars, {
-          y: 80,
+        gsap.from(text.words, {
+          y: 60,
           opacity: 0,
-          duration: 1.5,
-          stagger: 0.02,
+          duration: 1.2,
+          stagger: 0.05,
           ease: "power4.out",
           delay: 0.5,
         });
@@ -73,7 +75,7 @@ export default function AboutPage() {
 
       const revealTargets = document.querySelectorAll(".reveal-on-scroll");
       revealTargets.forEach((target) => {
-        const text = new SplitType(target as HTMLElement, { types: "words,lines" });
+        const text = new SplitType(target as HTMLElement, { types: "words" });
         gsap.from(text.words, {
           scrollTrigger: {
             trigger: target,
@@ -97,7 +99,7 @@ export default function AboutPage() {
             trigger: img,
             start: "top bottom",
             end: "bottom top",
-            scrub: true,
+            scrub: 1,
           },
         });
       });
@@ -203,9 +205,11 @@ export default function AboutPage() {
 
             <div className="relative aspect-[4/5] rounded-[4rem] overflow-hidden shadow-2xl">
               <img
-                src="/IMG_6374.jpg"
+                src="optimized/tesla.webp"
                 alt="BEE TEE Automobile showroom displaying electric and luxury cars for sale in Abuja Nigeria"
                 className="w-full h-full object-cover parallax-about scale-110"
+                fetchPriority="high"
+                decoding="async"
               />
             </div>
           </div>
@@ -332,7 +336,7 @@ export default function AboutPage() {
         <section className="mb-48">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
             <div className="relative aspect-square rounded-[4rem] overflow-hidden">
-              <img src="/repair_3.jpeg" alt="Electric car repair and luxury vehicle servicing at BEE TEE Automobile Abuja" className="w-full h-full object-cover parallax-about" />
+              <img src="optimized/repair_3.webp" alt="Electric car repair and luxury vehicle servicing at BEE TEE Automobile Abuja" className="w-full h-full object-cover parallax-about" loading="lazy" decoding="async" />
             </div>
             <div className="space-y-12">
               <h2 className="text-6xl font-syne font-bold tracking-tighter">Our Goals.</h2>
@@ -442,14 +446,14 @@ export default function AboutPage() {
           <TeamMember 
             name="Alh. Muhammed Isyaku Lawan"
             role="Chairman and Chief Executive Officer"
-            image="/muhammed.jpeg"
+            image="optimized/muhammed.webp"
             desc="An entrepreneur with vast experience in the automobile sales industry. Bold and enthusiastic, Alh. Lawan has a passion for detail and is a proven leader in managing and motivating teams to achieve excellence. He is the Founder of Bee Tee Automobile."
           />
           
           <TeamMember 
             name="Ms. Deborah Nwachukwu"
             role="Human Relations Manager / Ag. General Manager"
-            image="/deborah.jpeg"
+            image="optimized/deborah.webp"
             desc="Highly organized and detail-oriented with extensive experience in project management. As the hub of the company, Ms. Nwachukwu coordinates corporate procedures and is a passionate communicator vital to the administrative success of Bee Tee Automobile."
           />
         </section>

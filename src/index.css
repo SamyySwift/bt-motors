@@ -78,6 +78,29 @@
   .hero-mask {
     mask-image: linear-gradient(to bottom, black 70%, transparent 100%);
   }
+
+  .parallax-img, .parallax-about, .parallax-repair, .parallax-services {
+    will-change: transform;
+    backface-visibility: hidden;
+    transform: translateZ(0);
+  }
+}
+
+img {
+  @apply antialiased;
+  content-visibility: auto;
+  image-rendering: -webkit-optimize-contrast;
+}
+
+.reveal-text, .reveal-on-scroll {
+  will-change: opacity, transform;
+}
+
+/* Optimize font rendering globally */
+html {
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 /* Custom Scrollbar */
@@ -94,28 +117,6 @@
 }
 ::-webkit-scrollbar-thumb:hover {
   background: var(--color-silver);
-}
-
-/* Lenis Recommended CSS */
-html.lenis,
-html.lenis body {
-  height: auto;
-}
-
-.lenis.lenis-smooth {
-  scroll-behavior: auto !important;
-}
-
-.lenis.lenis-smooth [data-lenis-prevent] {
-  overscroll-behavior: contain;
-}
-
-.lenis.lenis-stopped {
-  overflow: hidden;
-}
-
-.lenis.lenis-smooth iframe {
-  pointer-events: none;
 }
 
 /* Custom Animations */
@@ -135,4 +136,26 @@ html.lenis body {
 .no-scrollbar {
   -ms-overflow-style: none;
   scrollbar-width: none;
+}
+
+/* Ambient Background Animations — GPU-composited CSS instead of JS */
+@keyframes ambient-float-1 {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(50px, 30px); }
+}
+@keyframes ambient-float-2 {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(-40px, 50px); }
+}
+.animate-ambient-float-1 {
+  animation: ambient-float-1 20s linear infinite;
+}
+.animate-ambient-float-2 {
+  animation: ambient-float-2 25s linear infinite;
+}
+
+/* Feature items — avoid layout thrashing */
+.feature-item {
+  will-change: opacity, transform;
+  backface-visibility: hidden;
 }

@@ -36,12 +36,12 @@ export default function InventoryPage() {
 
   useEffect(() => {
     if (headingRef.current) {
-      const text = new SplitType(headingRef.current, { types: "chars,words" });
-      gsap.from(text.chars, {
+      const text = new SplitType(headingRef.current, { types: "words" });
+      gsap.from(text.words, {
         y: 50,
         opacity: 0,
         duration: 1,
-        stagger: 0.02,
+        stagger: 0.05,
         ease: "power4.out",
         delay: 0.2,
       });
@@ -244,7 +244,9 @@ export default function InventoryPage() {
                       <img
                         src={vehicle.image}
                         alt={`${vehicle.year} ${vehicle.make} ${vehicle.model} for sale at BEE TEE Automobile Abuja Nigeria`}
-                        className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
+                        loading="lazy"
+                        decoding="async"
+                        className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105 will-change-transform"
                       />
                       
                       {/* Condition Badge */}
@@ -386,6 +388,8 @@ export default function InventoryPage() {
                 <img
                   src={selectedVehicle.image}
                   alt={`${selectedVehicle.year} ${selectedVehicle.make} ${selectedVehicle.model} — interior and exterior view at BEE TEE Automobile Abuja`}
+                  loading="lazy"
+                  decoding="async"
                   className="w-full h-full object-cover"
                 />
                 <div className="absolute bottom-6 left-6 md:bottom-12 md:left-12 flex gap-3 md:gap-4">

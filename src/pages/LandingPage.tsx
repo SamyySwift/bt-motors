@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef, type RefObject } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { motion, useScroll, useTransform, useSpring } from "framer-motion";
+import { motion } from "framer-motion";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import SplitType from "split-type";
@@ -16,40 +16,22 @@ import {
 import { cn } from "../lib/utils";
 import SectionHeading from "../components/SectionHeading";
 import MagneticButton from "../components/MagneticButton";
-import WhyBT from "../components/WhyBT";
+// import WhyBT from "../components/WhyBT";
 import { useMobile } from "../hooks/useMobile";
 import SEOHead, { getLocalBusinessSchema, getWebsiteSchema } from "../components/SEOHead";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const CharacterReveal = ({
+const WordReveal = ({
   text,
   className = "",
 }: {
   text: string;
   className?: string;
 }) => {
-  const ref = useRef<HTMLParagraphElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start 0.8", "start 0.3"],
-  });
-
-  const characters = text.split("");
-
   return (
-    <p ref={ref} className={className}>
-      {characters.map((char, index) => {
-        const start = index / characters.length;
-        const end = start + 1 / characters.length;
-        const opacity = useTransform(scrollYProgress, [start, end], [0.2, 1]);
-
-        return (
-          <motion.span key={index} style={{ opacity }}>
-            {char}
-          </motion.span>
-        );
-      })}
+    <p className={cn("reveal-text", className)}>
+      {text}
     </p>
   );
 };
@@ -68,23 +50,18 @@ export default function LandingPage() {
   const navigate = useNavigate();
 
   const HeroCarSlides = [
-    { image: "/slide_1.jpg" },
-    { image: "/slide_2.jpg" },
-    { image: "/slide_3.jpg" },
-    { image: "/slide_4.jpg" },
-    { image: "/slide_5.jpg" },
-    { image: "/slide_6.jpeg" },
+    { image: "optimized/slide_1.webp" },
+    { image: "optimized/slide_2.webp" },
+    { image: "optimized/slide_3.webp" },
+    { image: "optimized/slide_4.webp" },
+    { image: "optimized/slide_5.webp" },
+    { image: "optimized/slide_6.webp" },
   ];
 
-  const { scrollYProgress } = useScroll({
-    target: heroRef,
-    offset: ["start start", "end start"],
-  });
-
-  const heroOpacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
-  const heroScale = useTransform(scrollYProgress, [0, 1], [1, 1.1]);
-  const heroY = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
-  const textY = useTransform(scrollYProgress, [0, 1], ["0%", "-20%"]);
+  const heroImageRef = useRef<HTMLDivElement>(null);
+  const heroTextRef = useRef<HTMLDivElement>(null);
+  const innovationContainerRef = useRef<HTMLDivElement>(null);
+  const innovationImgRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -93,44 +70,77 @@ export default function LandingPage() {
     return () => clearInterval(interval);
   }, []);
 
-  const { scrollYProgress: innovationProgress } = useScroll({
-    target: innovationRef,
-    offset: ["start end", "end start"],
-  });
-
-  const innovationImgY = useTransform(
-    innovationProgress,
-    [0, 1],
-    ["-20%", "20%"],
-  );
-  const innovationBorderRadius = useTransform(
-    innovationProgress,
-    [0, 0.5],
-    ["0rem", "5rem"],
-  );
-
   useEffect(() => {
     const ctx = gsap.context(() => {
       // Split Text Reveal
       const splitTargets = document.querySelectorAll(".reveal-text");
       splitTargets.forEach((target) => {
         const text = new SplitType(target as HTMLElement, {
-          types: "lines,words",
+          types: "words",
         });
+        
         gsap.from(text.words, {
           scrollTrigger: {
             trigger: target,
-            start: "top 85%",
-            end: "top 50%",
+            start: "top 95%",
+            end: "top 60%",
             scrub: false,
+            toggleActions: "play none none reverse",
           },
-          y: 60,
+          y: 20,
           opacity: 0,
-          duration: 1.2,
-          stagger: 0.04,
-          ease: "power3.out",
+          duration: 0.6,
+          stagger: 0.015,
+          ease: "power2.out",
+          force3D: true,
         });
       });
+
+      // Hero parallax — GSAP instead of Framer Motion
+      if (heroRef.current && heroImageRef.current && heroTextRef.current) {
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: heroRef.current,
+            start: "top top",
+            end: "bottom top",
+            scrub: true,
+          },
+        });
+        tl.to(heroImageRef.current, { yPercent: 20, scale: 1.1, opacity: 0, ease: "none", force3D: true }, 0);
+        tl.to(heroTextRef.current, { yPercent: -20, ease: "none", force3D: true }, 0);
+      }
+
+      // Innovation parallax — GSAP instead of Framer Motion
+      if (innovationRef.current && innovationContainerRef.current && innovationImgRef.current && !isMobile) {
+        gsap.fromTo(innovationImgRef.current, 
+          { yPercent: -10 }, 
+          {
+            yPercent: 10,
+            ease: "none",
+            force3D: true,
+            scrollTrigger: {
+              trigger: innovationRef.current,
+              start: "top bottom",
+              end: "bottom top",
+              scrub: true,
+            },
+          }
+        );
+        gsap.fromTo(innovationContainerRef.current, 
+          { borderTopLeftRadius: "0rem", borderTopRightRadius: "0rem" }, 
+          {
+            borderTopLeftRadius: "5rem",
+            borderTopRightRadius: "5rem",
+            ease: "none",
+            scrollTrigger: {
+              trigger: innovationRef.current,
+              start: "top bottom",
+              end: "center center",
+              scrub: true,
+            },
+          }
+        );
+      }
 
       // Horizontal Scroll for Boutique - Only on Desktop
       if (boutiqueRef.current && boutiqueContentRef.current && !isMobile) {
@@ -140,30 +150,18 @@ export default function LandingPage() {
         gsap.to(boutiqueContentRef.current, {
           x: -(boutiqueWidth - windowWidth + 100),
           ease: "none",
+          force3D: true,
           scrollTrigger: {
             trigger: boutiqueRef.current,
             start: "top top",
             end: () => `+=${boutiqueWidth}`,
-            scrub: 1,
+            scrub: true,
             pin: true,
+            anticipatePin: 1,
             invalidateOnRefresh: true,
           },
         });
       }
-
-      // Parallax for all images
-      gsap.utils.toArray(".parallax-img").forEach((img: any) => {
-        gsap.to(img, {
-          yPercent: -15,
-          ease: "none",
-          scrollTrigger: {
-            trigger: img,
-            start: "top bottom",
-            end: "bottom top",
-            scrub: true,
-          },
-        });
-      });
 
     });
 
@@ -184,9 +182,9 @@ export default function LandingPage() {
         ref={heroRef}
         className="relative min-h-screen flex items-center justify-center overflow-hidden bg-dark-charcoal"
       >
-        <motion.div
-          className="absolute inset-0 z-0 overflow-hidden"
-          style={{ opacity: heroOpacity, scale: heroScale, y: heroY }}
+        <div
+          ref={heroImageRef}
+          className="absolute inset-0 z-0 overflow-hidden will-change-transform"
         >
           <div className="absolute inset-0 bg-linear-to-t from-black/60 via-black/20 to-transparent z-10" />
           {HeroCarSlides.map((slide, index) => (
@@ -199,22 +197,22 @@ export default function LandingPage() {
               transition={{ duration: 1.5, ease: "easeInOut" }}
               className="absolute inset-0"
             >
-              <motion.img
+              <img
                 src={slide.image}
                 alt="Hero Slide"
                 className="w-full h-full object-cover object-[center_90%] md:object-bottom"
-                animate={{
-                  scale: currentCarIndex === index ? 1 : 1.05,
-                }}
-                transition={{ duration: 1.5, ease: "easeInOut" }}
+                loading={index === 0 ? "eager" : "lazy"}
+                decoding={index === 0 ? "sync" : "async"}
+                // @ts-ignore
+                fetchPriority={index === 0 ? "high" : "low"}
               />
             </motion.div>
           ))}
-        </motion.div>
+        </div>
 
-        <motion.div 
-          style={{ y: textY }}
-          className="container mx-auto z-10 text-center px-6 pt-24 md:pt-0"
+        <div 
+          ref={heroTextRef}
+          className="container mx-auto z-10 text-center px-6 pt-24 md:pt-0 will-change-transform"
         >
           <p className="text-[9px] md:text-[11px] font-bold tracking-[0.5em] uppercase text-white/70 mb-6 reveal-text">
             Nigeria's Premier Electric Vehicle Dealership
@@ -249,7 +247,7 @@ export default function LandingPage() {
               </Link>
             </MagneticButton>
           </div>
-        </motion.div>
+        </div>
 
         <motion.div
           animate={{ y: [0, 15, 0] }}
@@ -316,12 +314,12 @@ export default function LandingPage() {
                 />
               </motion.div>
 
-              <CharacterReveal
+              <WordReveal
                 text={`"To lead the future of smart, reliable and efficient automotive care where innovation meets elegance through technology, quality and customer-centric solutions."`}
                 className="text-2xl md:text-4xl font-syne font-bold text-apple-black leading-[1.1]"
               />
 
-              <CharacterReveal
+              <WordReveal
                 text={`As the premier electric vehicle dealership in Nigeria, our mission is to deliver top-notch automobiles, exceptional repair, detailing services, and reliable car care solutions. We are committed to driving the adoption of electric vehicles in Nigeria through professionalism and integrity.`}
                 className="text-base md:text-lg text-silver leading-relaxed font-medium max-w-lg"
               />
@@ -360,9 +358,11 @@ export default function LandingPage() {
               className="relative aspect-4/3 rounded-3xl overflow-hidden shadow-2xl"
             >
               <img
-                src="/garage.jpg"
+                src="/garage.webp"
                 alt="Craftsmanship"
-                className="w-full h-full object-cover scale-110"
+                loading="lazy"
+                decoding="async"
+                className="w-full h-full object-cover scale-110 will-change-transform"
               />
             </motion.div>
           </div>
@@ -419,7 +419,9 @@ export default function LandingPage() {
                   <img
                     src={car.image}
                     alt={car.model}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000"
+                    loading="lazy"
+                    decoding="async"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000 will-change-transform"
                   />
 
                   {/* Condition Badge */}
@@ -481,25 +483,25 @@ export default function LandingPage() {
         ref={innovationRef}
         className="relative h-[70vh] md:h-[120vh] overflow-hidden flex items-center justify-center w-full"
       >
-        <motion.div
-          style={{
-            borderTopLeftRadius: isMobile ? "2rem" : innovationBorderRadius,
-            borderTopRightRadius: isMobile ? "2rem" : innovationBorderRadius,
-          }}
+        <div
+          ref={innovationContainerRef}
+          style={isMobile ? { borderTopLeftRadius: "2rem", borderTopRightRadius: "2rem" } : undefined}
           className="absolute inset-0 bg-dark-charcoal overflow-hidden"
         >
-          <motion.div
-            style={{ y: isMobile ? 0 : innovationImgY }}
-            className="absolute inset-0 scale-125"
+          <div
+            ref={innovationImgRef}
+            className="absolute inset-0 scale-125 will-change-transform"
           >
             <img
-              src="/avatr2.jpg"
+              src="optimized/avatr2.webp"
               alt="Premium Automotive Detail"
+              loading="lazy"
+              decoding="async"
               className="w-full h-full object-cover brightness-[0.7]"
             />
             <div className="absolute inset-0 bg-linear-to-t from-black/90 via-black/30 to-transparent"></div>
-          </motion.div>
-        </motion.div>
+          </div>
+        </div>
 
         <div className="container mx-auto px-6 relative z-10 text-center">
           <div className="max-w-5xl mx-auto">
@@ -510,16 +512,19 @@ export default function LandingPage() {
             </h2>
 
             <MagneticButton>
-              <button className="px-8 py-5 md:px-16 md:py-8 bg-bt-blue text-white rounded-full font-bold text-[9px] md:text-xs tracking-widest uppercase transition-all hover:bg-bt-blue-dark interactive shadow-2xl shadow-bt-blue/30">
+              <Link to="/inventory">
+                <button className="px-8 py-5 md:px-16 md:py-8 bg-bt-blue text-white rounded-full font-bold text-[9px] md:text-xs tracking-widest uppercase transition-all hover:bg-bt-blue-dark interactive shadow-2xl shadow-bt-blue/30">
                 Explore Innovation
               </button>
+              </Link>
+            
             </MagneticButton>
           </div>
         </div>
       </section>
 
       {/* Philosophy Section */}
-      <WhyBT />
+      {/* <WhyBT /> */}
 
       
 
@@ -554,13 +559,70 @@ export default function LandingPage() {
 }
 
 function ServicesSection({ containerRef }: { containerRef: RefObject<HTMLDivElement | null> }) {
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start end", "end start"]
-  });
+  const bgTextRef = useRef<HTMLDivElement>(null);
 
-  const xParallax = useTransform(scrollYProgress, [0, 1], ["30%", "-30%"]);
-  const smoothX = useSpring(xParallax, { stiffness: 50, damping: 20 });
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      // Background text parallax via GSAP (replaces useScroll+useTransform+useSpring)
+      if (bgTextRef.current && containerRef?.current) {
+        gsap.fromTo(bgTextRef.current,
+          { xPercent: 10 },
+          {
+            xPercent: -10,
+            ease: "none",
+            force3D: true,
+            scrollTrigger: {
+              trigger: containerRef.current,
+              start: "top bottom",
+              end: "bottom top",
+              scrub: true,
+            },
+          }
+        );
+      }
+
+      // Batch animate all feature items with GSAP ScrollTrigger
+      gsap.utils.toArray<HTMLElement>(".feature-item").forEach((item) => {
+        gsap.fromTo(item,
+          { opacity: 0, y: 40, scale: 0.95 },
+          {
+            opacity: 1,
+            y: 0,
+            scale: 1,
+            duration: 0.8,
+            ease: "power2.out",
+            force3D: true,
+            scrollTrigger: {
+              trigger: item,
+              start: "top 90%",
+              end: "top 50%",
+              toggleActions: "play none none reverse",
+            },
+          }
+        );
+
+        // Animate the line accent
+        const line = item.querySelector(".line-accent");
+        if (line) {
+          gsap.fromTo(line,
+            { scaleX: 0 },
+            {
+              scaleX: 1,
+              ease: "power2.out",
+              scrollTrigger: {
+                trigger: item,
+                start: "top 80%",
+                end: "top 40%",
+                scrub: true,
+              },
+            }
+          );
+        }
+      });
+    });
+
+    return () => ctx.revert();
+  }, []);
 
   const services = [
     {
@@ -589,14 +651,14 @@ function ServicesSection({ containerRef }: { containerRef: RefObject<HTMLDivElem
     <section ref={containerRef} className="min-h-screen bg-[#050505] text-white py-40 px-6 md:px-12 relative overflow-hidden z-20">
       
       {/* Parallax Background Text */}
-      <motion.div 
-        style={{ x: smoothX }}
-        className="absolute top-1/2 left-0 -translate-y-1/2 whitespace-nowrap pointer-events-none opacity-[0.03] select-none"
+      <div 
+        ref={bgTextRef}
+        className="absolute top-1/2 left-0 -translate-y-1/2 whitespace-nowrap pointer-events-none opacity-[0.03] select-none will-change-transform"
       >
         <h2 className="text-[25vw] font-black tracking-tighter leading-none font-syne uppercase">
           Services Services Services
         </h2>
-      </motion.div>
+      </div>
 
       <div className="max-w-7xl mx-auto relative z-10">
         <motion.h2 
@@ -637,27 +699,9 @@ function ServicesSection({ containerRef }: { containerRef: RefObject<HTMLDivElem
 }
 
 function FeatureItem({ title, desc, index }: { title: string, desc: string, index: number }) {
-    const itemRef = useRef<HTMLDivElement>(null);
-    const { scrollYProgress } = useScroll({
-        target: itemRef,
-        offset: ["start end", "center center", "end start"]
-    });
-
-    const scale = useTransform(scrollYProgress, [0, 0.5, 1], [0.9, 1, 0.9]);
-    const opacity = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [0, 1, 1, 0]);
-    const ySkew = useTransform(scrollYProgress, [0, 1], [5, -5]);
-    const brightness = useTransform(scrollYProgress, [0, 0.5, 1], ["brightness(0.3)", "brightness(1)", "brightness(0.3)"]);
-
     return (
-        <motion.div 
-            ref={itemRef}
-            style={{ 
-                scale, 
-                opacity, 
-                filter: brightness,
-                rotateX: ySkew 
-            }}
-            className={`w-full max-w-4xl flex flex-col ${index % 2 === 0 ? 'ml-0' : 'ml-auto text-right'} group`}
+        <div 
+            className={`feature-item w-full max-w-4xl flex flex-col ${index % 2 === 0 ? 'ml-0' : 'ml-auto text-right'} group will-change-transform`}
         >
             <div className={`border-white/10 py-4 ${index % 2 === 0 ? 'border-l-2 pl-8' : 'border-r-2 pr-8 text-right'}`}>
                 <span className="text-xs font-bold tracking-[0.5em] text-gray-600 mb-4 block uppercase font-syne">
@@ -675,10 +719,10 @@ function FeatureItem({ title, desc, index }: { title: string, desc: string, inde
             </div>
             
             {/* Visual Line Accent */}
-            <motion.div 
-                className="h-px bg-linear-to-r from-transparent via-white/20 to-transparent w-full mt-8"
-                style={{ scaleX: scrollYProgress }}
+            <div 
+                className="line-accent h-px bg-linear-to-r from-transparent via-white/20 to-transparent w-full mt-8 origin-left"
             />
-        </motion.div>
+        </div>
     );
 }
+

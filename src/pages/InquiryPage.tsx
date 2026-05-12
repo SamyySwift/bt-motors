@@ -19,13 +19,12 @@ export default function InquiryPage() {
 
   useEffect(() => {
     if (titleRef.current) {
-      const split = new SplitType(titleRef.current, { types: "chars" });
-      gsap.from(split.chars, {
+      const split = new SplitType(titleRef.current, { types: "words" });
+      gsap.from(split.words, {
         opacity: 0,
         y: 20,
-        rotateX: -90,
-        stagger: 0.02,
-        duration: 1,
+        stagger: 0.1,
+        duration: 0.8,
         ease: "power4.out",
       });
     }

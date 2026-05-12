@@ -1,32 +1,16 @@
-import { useRef } from 'react';
-import { motion } from 'framer-motion';
-
 export default function AmbientBackground() {
-  const containerRef = useRef<HTMLDivElement>(null);
-  
   return (
     <div 
-      ref={containerRef} 
       className="fixed inset-0 z-[-1] overflow-hidden pointer-events-none bg-white"
     >
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-soft-gray/50 to-white/80"></div>
       
-      {/* Subtle floating orbs for depth */}
-      <motion.div 
-        animate={{ 
-          x: [0, 50, 0],
-          y: [0, 30, 0],
-        }}
-        transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-        className="absolute top-[-10%] right-[-10%] w-[60%] h-[60%] rounded-full bg-onyx mix-blend-multiply filter blur-[120px] opacity-20"
+      {/* Static orbs — CSS animation instead of Framer Motion for GPU compositing */}
+      <div 
+        className="absolute top-[-10%] right-[-10%] w-[60%] h-[60%] rounded-full bg-onyx filter blur-[80px] opacity-10 animate-ambient-float-1"
       />
-      <motion.div 
-        animate={{ 
-          x: [0, -40, 0],
-          y: [0, 50, 0],
-        }}
-        transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
-        className="absolute bottom-[-10%] left-[-10%] w-[50%] h-[50%] rounded-full bg-apple-black/5 mix-blend-multiply filter blur-[100px] opacity-10"
+      <div 
+        className="absolute bottom-[-10%] left-[-10%] w-[50%] h-[50%] rounded-full bg-apple-black/5 filter blur-[60px] opacity-10 animate-ambient-float-2"
       />
       
       {/* Noise Texture Overlay */}

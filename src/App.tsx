@@ -1,3 +1,4 @@
+import { lazy, Suspense } from "react";
 import {
   BrowserRouter as Router,
   Routes,
@@ -7,17 +8,25 @@ import {
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect } from "react";
 
-// import LenisProvider from "./components/LenisProvider";
+
 import AmbientBackground from "./components/AmbientBackground";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 
-import LandingPage from "./pages/LandingPage";
-import AboutPage from "./pages/AboutPage";
-import ServicesPage from "./pages/ServicesPage";
-import RepairPage from "./pages/RepairPage";
-import InventoryPage from "./pages/InventoryPage";
-import InquiryPage from "./pages/InquiryPage";
+// Lazy load pages
+const LandingPage = lazy(() => import("./pages/LandingPage"));
+const AboutPage = lazy(() => import("./pages/AboutPage"));
+const ServicesPage = lazy(() => import("./pages/ServicesPage"));
+const RepairPage = lazy(() => import("./pages/RepairPage"));
+const InventoryPage = lazy(() => import("./pages/InventoryPage"));
+const InquiryPage = lazy(() => import("./pages/InquiryPage"));
+
+// Loading component
+const PageLoader = () => (
+  <div className="min-h-screen flex items-center justify-center bg-white">
+    <div className="w-12 h-12 border-4 border-bt-blue/20 border-t-bt-blue rounded-full animate-spin"></div>
+  </div>
+);
 
 function AnimatedRoutes() {
   const location = useLocation();
@@ -36,14 +45,16 @@ function AnimatedRoutes() {
         transition={{ duration: 0.5, ease: "easeInOut" }}
         className="flex-grow"
       >
-        <Routes location={location}>
-          <Route path="/" element={<LandingPage />} />
-          <Route path="/about" element={<AboutPage />} />
-          <Route path="/services" element={<ServicesPage />} />
-          <Route path="/repair" element={<RepairPage />} />
-          <Route path="/inventory" element={<InventoryPage />} />
-          <Route path="/inquiry" element={<InquiryPage />} />
-        </Routes>
+        <Suspense fallback={<PageLoader />}>
+          <Routes location={location}>
+            <Route path="/" element={<LandingPage />} />
+            <Route path="/about" element={<AboutPage />} />
+            <Route path="/services" element={<ServicesPage />} />
+            <Route path="/repair" element={<RepairPage />} />
+            <Route path="/inventory" element={<InventoryPage />} />
+            <Route path="/inquiry" element={<InquiryPage />} />
+          </Routes>
+        </Suspense>
       </motion.div>
     </AnimatePresence>
   );
