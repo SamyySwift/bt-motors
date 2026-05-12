@@ -398,7 +398,7 @@ export default function LandingPage() {
               isMobile ? "flex-col gap-10" : "flex-row gap-12 cursor-grab active:cursor-grabbing",
             )}
           >
-            {(isMobile ? inventory.slice(0, 6) : inventory).map((car) => (
+            {inventory.slice(0, 5).map((car) => (
               <button
                 type="button"
                 key={car.id}
