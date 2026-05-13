@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+
+  <!-- Homepage Images -->
+  <url>
+    <loc>https://beeteeautomobile.com/</loc>
+    <image:image>
+      <image:loc>https://beeteeautomobile.com/optimized/slide_1.webp</image:loc>
+      <image:title>BEE TEE Automobile Luxury Showroom</image:title>
+      <image:caption>Premium luxury and electric vehicles in Abuja, Nigeria.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://beeteeautomobile.com/optimized/tesla.webp</image:loc>
+      <image:title>Tesla Electric Vehicles Nigeria</image:title>
+      <image:caption>The leading electric vehicle dealership in Nigeria.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://beeteeautomobile.com/optimized/mercedes_amg.webp</image:loc>
+      <image:title>Mercedes-Benz AMG G 63</image:title>
+    </image:image>
+  </url>
+
+  <!-- Inventory Page Images -->
+  <url>
+    <loc>https://beeteeautomobile.com/inventory</loc>
+    <image:image>
+      <image:loc>https://beeteeautomobile.com/optimized/range_rover.webp</image:loc>
+      <image:title>Range Rover Autobiography for Sale</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://beeteeautomobile.com/optimized/lx600.webp</image:loc>
+      <image:title>Lexus LX 600 Luxury SUV</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://beeteeautomobile.com/optimized/cybertruck.webp</image:loc>
+      <image:title>Tesla Cybertruck in Nigeria</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://beeteeautomobile.com/optimized/byd.webp</image:loc>
+      <image:title>BYD Seal Electric Sedan</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://beeteeautomobile.com/optimized/land-vxr.webp</image:loc>
+      <image:title>Toyota Land Cruiser LC300 VXR</image:title>
+    </image:image>
+  </url>
+
+  <!-- About Page Images -->
+  <url>
+    <loc>https://beeteeautomobile.com/about</loc>
+    <image:image>
+      <image:loc>https://beeteeautomobile.com/optimized/garage.webp</image:loc>
+      <image:title>BEE TEE Automobile Workshop</image:title>
+      <image:caption>State-of-the-art car repair and maintenance facility in Abuja.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://beeteeautomobile.com/optimized/muhammed.webp</image:loc>
+      <image:title>CEO Muhammed Isyaku Lawan</image:title>
+    </image:image>
+  </url>
+
+  <!-- Repair & Services Page Images -->
+  <url>
+    <loc>https://beeteeautomobile.com/repair</loc>
+    <image:image>
+      <image:loc>https://beeteeautomobile.com/optimized/repair_3.webp</image:loc>
+      <image:title>Professional Car Painting and Bodywork</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://beeteeautomobile.com/optimized/autocare.webp</image:loc>
+      <image:title>Advanced Engine Diagnostics</image:title>
+    </image:image>
+  </url>
+
+</urlset>

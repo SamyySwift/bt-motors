@@ -59,7 +59,7 @@ export default function Navbar() {
           {/* Logo */}
           <Link to="/" className="flex items-center z-50">
             <img 
-              src="/logo.png" 
+              src="/optimized/logo.png" 
               alt="BEE TEE AUTOMOBILE" 
               className={cn("h-12 w-auto transition-all duration-300", 
                  !scrolled && location.pathname === '/' && !menuOpen ? "brightness-0 invert opacity-90 drop-shadow-lg" : ""
@@ -74,7 +74,7 @@ export default function Navbar() {
                 key={navItem.name}
                 to={navItem.path}
                 className={cn(
-                  "text-[11px] tracking-[0.05em] font-medium transition-colors hover:text-bt-blue",
+                  "text-[13px] tracking-[0.05em] font-medium transition-colors hover:text-bt-blue",
                   location.pathname === navItem.path
                     ? "text-bt-blue"
                     : (!scrolled && location.pathname === "/" && !menuOpen ? "text-white drop-shadow-md" : "text-black"),
