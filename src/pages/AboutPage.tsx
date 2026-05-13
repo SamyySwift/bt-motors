@@ -207,7 +207,7 @@ export default function AboutPage() {
               <img
                 src="optimized/tesla.webp"
                 alt="BEE TEE Automobile showroom displaying electric and luxury cars for sale in Abuja Nigeria"
-                className="w-full h-full object-cover parallax-about scale-110"
+                className="w-full h-full object-cover scale-110"
                 fetchPriority="high"
                 decoding="async"
               />
