@@ -4,7 +4,7 @@
 
   <!-- Homepage -->
   <url>
-    <loc>https://beeteeautos.beeteeautosinventory.live/</loc>
+    <loc>https://beeteeautomobile.com/</loc>
     <lastmod>2026-05-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
@@ -12,7 +12,7 @@
 
   <!-- About Page - Electric & Luxury Cars in Nigeria -->
   <url>
-    <loc>https://beeteeautos.beeteeautosinventory.live/about</loc>
+    <loc>https://beeteeautomobile.com/about</loc>
     <lastmod>2026-05-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
@@ -20,7 +20,7 @@
 
   <!-- Inventory - Buy Electric & Luxury Cars -->
   <url>
-    <loc>https://beeteeautos.beeteeautosinventory.live/inventory</loc>
+    <loc>https://beeteeautomobile.com/inventory</loc>
     <lastmod>2026-05-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.95</priority>
@@ -28,7 +28,7 @@
 
   <!-- Services -->
   <url>
-    <loc>https://beeteeautos.beeteeautosinventory.live/services</loc>
+    <loc>https://beeteeautomobile.com/services</loc>
     <lastmod>2026-05-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -36,7 +36,7 @@
 
   <!-- Car Repair & Servicing -->
   <url>
-    <loc>https://beeteeautos.beeteeautosinventory.live/repair</loc>
+    <loc>https://beeteeautomobile.com/repair</loc>
     <lastmod>2026-05-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -44,7 +44,7 @@
 
   <!-- Contact / Inquiry -->
   <url>
-    <loc>https://beeteeautos.beeteeautosinventory.live/inquiry</loc>
+    <loc>https://beeteeautomobile.com/inquiry</loc>
     <lastmod>2026-05-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>

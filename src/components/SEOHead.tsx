@@ -12,7 +12,7 @@ interface SEOHeadProps {
 }
 
 const SITE_NAME = "BEE TEE Automobile";
-const BASE_URL = "https://beeteeautos.beeteeautosinventory.live";
+const BASE_URL = "https://beeteeautomobile.com";
 const DEFAULT_OG_IMAGE = `${BASE_URL}/logo.png`;
 
 export default function SEOHead({

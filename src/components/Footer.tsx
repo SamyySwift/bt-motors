@@ -102,7 +102,7 @@ const Footer = () => {
       {/* Background Decorative Element */}
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-white/5 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/2 pointer-events-none" />
 
-      <div className="container mx-auto px-6 relative z-10">
+      <div className="container mx-auto px-6 md:px-4 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-8 items-start mb-32">
           {/* Left: Brand Intro */}
           <div className="lg:col-span-5">
@@ -133,7 +133,7 @@ const Footer = () => {
           {/* Right: Navigation & Contact */}
           <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-12 lg:pl-12">
             <div>
-              <h4 className="text-[10px] font-bold tracking-[0.3em] uppercase text-white/30 mb-8">
+              <h4 className="text-[10px] font-bold tracking-[0.3em] uppercase text-white/70 mb-8">
                 Discovery
               </h4>
               <ul className="space-y-4">
@@ -152,14 +152,14 @@ const Footer = () => {
             </div>
 
             <div>
-              <h4 className="text-[10px] font-bold tracking-[0.3em] uppercase text-white/30 mb-8">
+              <h4 className="text-[10px] font-bold tracking-[0.3em] uppercase text-white/70 mb-8">
                 Location
               </h4>
               <p className="text-lg font-medium text-white/70 leading-relaxed max-w-[280px]">
                 Plot 36, Wole Soyinka Way, Cadastral Zone B15, Jahi, Abuja - FCT
               </p>
               <div className="mt-8">
-                <h4 className="text-[10px] font-bold tracking-[0.3em] uppercase text-white/30 mb-4">
+                <h4 className="text-[10px] font-bold tracking-[0.3em] uppercase text-white/70 mb-4">
                   Inquiries
                 </h4>
                 <div className="flex flex-col gap-2">
@@ -189,7 +189,7 @@ const Footer = () => {
             </div>
 
             <div className="sm:col-span-2 md:col-span-1">
-              <h4 className="text-[10px] font-bold tracking-[0.3em] uppercase text-white/30 mb-8">
+              <h4 className="text-[10px] font-bold tracking-[0.3em] uppercase text-white/70 mb-8">
                 Follow Us
               </h4>
               <div className="flex flex-wrap gap-4">
@@ -227,24 +227,24 @@ const Footer = () => {
           </motion.div>
 
           <div className="flex flex-col md:flex-row justify-between items-center gap-6 mt-10">
-            <p className="text-white/30 text-[10px] tracking-widest uppercase font-bold text-center md:text-left">
+            <p className="text-white/70 text-[10px] tracking-widest uppercase font-bold text-center md:text-left">
               &copy; {new Date().getFullYear()} BEE TEE AUTOMOBILE. All rights
               reserved.
             </p>
             <div className="flex flex-col sm:flex-row items-center gap-6 sm:gap-12">
               <Link
                 to="#"
-                className="text-white/30 hover:text-white text-[10px] tracking-widest uppercase font-bold transition-colors"
+                className="text-white/70 hover:text-white text-[10px] tracking-widest uppercase font-bold transition-colors"
               >
                 Privacy Policy
               </Link>
               <Link
                 to="#"
-                className="text-white/30 hover:text-white text-[10px] tracking-widest uppercase font-bold transition-colors"
+                className="text-white/70 hover:text-white text-[10px] tracking-widest uppercase font-bold transition-colors"
               >
                 Terms of Service
               </Link>
-              <div className="text-white/30 text-[10px] tracking-widest uppercase font-bold flex items-center gap-2">
+              <div className="text-white/70 text-[10px] tracking-widest uppercase font-bold flex items-center gap-2">
                 <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
                 Showroom Open
               </div>

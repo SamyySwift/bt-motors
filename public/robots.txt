@@ -1,5 +1,5 @@
 # BEE TEE Automobile - Robots.txt
-# https://beeteeautos.beeteeautosinventory.live
+# https://beeteeautomobile.com
 
 User-agent: *
 Allow: /
@@ -7,8 +7,8 @@ Disallow: /api/
 Disallow: /admin/
 
 # Sitemaps
-Sitemap: https://beeteeautos.beeteeautosinventory.live/sitemap.xml
-Sitemap: https://beeteeautos.beeteeautosinventory.live/sitemap-images.xml
+Sitemap: https://beeteeautomobile.com/sitemap.xml
+Sitemap: https://beeteeautomobile.com/sitemap-images.xml
 
 # Crawl-delay for polite crawling
 Crawl-delay: 1

@@ -34,7 +34,7 @@ const CoreValue = ({ icon, title, desc }: { icon: any, title: string, desc: stri
 
 const TeamMember = ({ name, role, desc, image }: { name: string, role: string, desc: string, image?: string }) => (
   <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center mb-24 last:mb-0">
-    <div className="aspect-square rounded-[3rem] overflow-hidden bg-f5f5f7">
+    <div className=" rounded-[3rem] overflow-hidden bg-f5f5f7">
       <img 
         src={image || "/IMG_6374.webp"} 
         alt={name} 

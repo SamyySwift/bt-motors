@@ -51,11 +51,17 @@ export default function LandingPage() {
 
   const HeroCarSlides = [
     { image: "optimized/slide_1.webp" },
+    { image: "optimized/range_rover.webp" },
+    { image: "optimized/byd.webp" },
     { image: "optimized/slide_2.webp" },
+    { image: "optimized/toyota-hilux.webp" },
+    { image: "optimized/mercedes_amg.webp" },
     { image: "optimized/slide_3.webp" },
+    { image: "optimized/escalade.webp" },
     { image: "optimized/slide_4.webp" },
-    { image: "optimized/slide_5.webp" },
+    { image: "optimized/cybertruck.webp" },
     { image: "optimized/slide_6.webp" },
+    { image: "optimized/slide_7.webp" },
   ];
 
   const heroImageRef = useRef<HTMLDivElement>(null);
@@ -355,10 +361,10 @@ export default function LandingPage() {
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: false, amount: 0.3 }}
               transition={{ duration: 1, ease: "easeOut" }}
-              className="relative aspect-4/3 rounded-3xl overflow-hidden shadow-2xl"
+              className="relative  rounded-3xl overflow-hidden shadow-2xl"
             >
               <img
-                src="/garage.webp"
+                src="optimized/garage.webp"
                 alt="Craftsmanship"
                 loading="lazy"
                 decoding="async"
