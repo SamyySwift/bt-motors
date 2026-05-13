@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X, Search } from "lucide-react";
 import { cn } from "../lib/utils";
@@ -98,7 +98,7 @@ export default function Navbar() {
           <button
             className={cn(
               "md:hidden z-50 relative transition-colors",
-              !scrolled && location.pathname === "/" && !menuOpen ? "text-white drop-shadow-md" : "text-apple-black"
+              (menuOpen || (!scrolled && location.pathname === "/")) ? "text-white drop-shadow-md" : "text-apple-black"
             )}
             onClick={() => setMenuOpen(!menuOpen)}
           >
@@ -107,33 +107,86 @@ export default function Navbar() {
         </div>
       </motion.nav>
 
-      {/* Mobile Menu */}
-      <div
-        className={cn(
-          "fixed inset-0 z-40 bg-white/98 backdrop-blur-2xl flex flex-col items-center justify-center space-y-10 transition-all duration-500",
-          menuOpen
-            ? "opacity-100 visible"
-            : "opacity-0 invisible pointer-events-none",
-        )}
-      >
-        {navLinks.map((navItem) => (
-          <Link
-            key={navItem.name}
-            to={navItem.path}
-            onClick={() => setMenuOpen(false)}
-            className="text-[clamp(2rem,10vw,3.5rem)] font-syne font-bold tracking-tighter text-apple-black hover:text-bt-blue transition-all"
+      <AnimatePresence>
+        {menuOpen && (
+          <motion.div
+            initial={{ opacity: 0, x: "100%" }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: "100%" }}
+            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+            className="fixed inset-0 z-40 bg-apple-black flex flex-col p-8 md:p-16 grainy-overlay"
           >
-            {navItem.name}
-          </Link>
-        ))}
-        <Link
-          to="/inquiry"
-          onClick={() => setMenuOpen(false)}
-          className="mt-8 px-10 py-4 rounded-full text-sm font-bold bg-bt-blue text-white hover:bg-bt-blue-dark transition-all"
-        >
-          Book Inspection
-        </Link>
-      </div>
+            {/* Background Texture/Accent */}
+            <div className="absolute top-[-10%] right-[-10%] w-[50%] h-[50%] bg-bt-blue/10 rounded-full blur-[120px] pointer-events-none" />
+            <div className="absolute bottom-[-10%] left-[-10%] w-[40%] h-[40%] bg-white/5 rounded-full blur-[100px] pointer-events-none" />
+
+            <div className="flex flex-col h-full justify-between pt-24">
+              <div className="flex flex-col space-y-4">
+                <motion.p 
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.3 }}
+                  className="text-white/30 text-[10px] tracking-[0.4em] font-bold uppercase mb-4"
+                >
+                  Navigation
+                </motion.p>
+                {navLinks.map((navItem, index) => (
+                  <motion.div
+                    key={navItem.name}
+                    initial={{ opacity: 0, y: 30 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.4 + index * 0.1, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+                  >
+                    <Link
+                      to={navItem.path}
+                      onClick={() => setMenuOpen(false)}
+                      className={cn(
+                        "text-[clamp(2.5rem,12vw,3rem)] font-syne font-bold tracking-tighter transition-all block py-1",
+                        location.pathname === navItem.path ? "text-bt-blue" : "text-white/90 hover:text-bt-blue"
+                      )}
+                    >
+                      {navItem.name}
+                    </Link>
+                  </motion.div>
+                ))}
+              </div>
+
+              <div className="grid grid-cols-1 gap-12 pb-10">
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 0.9 }}
+                >
+                  <p className="text-white/30 text-[10px] tracking-[0.4em] font-bold uppercase mb-6">
+                    Connect
+                  </p>
+                  <div className="flex flex-col space-y-4">
+                    <a href="tel:+2349077777211" className="text-white/70 hover:text-white text-lg font-medium transition-colors">
+                      +234 907 777 7211
+                    </a>
+                    <a href="mailto:beeteeautomobile@gmail.com" className="text-white/70 hover:text-white text-lg font-medium transition-colors">
+                      beeteeautomobile@gmail.com
+                    </a>
+                  </div>
+                </motion.div>
+
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 1.0 }}
+                  className="flex gap-6"
+                >
+                  {["Instagram", "Twitter", "Facebook"].map((platform) => (
+                    <a key={platform} href="#" className="text-white/40 hover:text-white text-[10px] tracking-widest uppercase font-bold transition-colors">
+                      {platform}
+                    </a>
+                  ))}
+                </motion.div>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   );
 }
